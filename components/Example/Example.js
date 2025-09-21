@@ -5,7 +5,7 @@ class Example extends BaseComponent{
   // CSS file must have the exact same name as the component.
   constructor() {
     super();
-    
+  
     this.count = 0; // Assign instance variable
   }
 
