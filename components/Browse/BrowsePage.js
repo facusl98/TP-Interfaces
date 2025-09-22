@@ -1,20 +1,25 @@
 import { BaseComponent } from "../BaseComponent.js";
+import { gameService } from "../../services/GameService.js";
 
 class BrowsePage extends BaseComponent {
   constructor() {
     super();
   }
 
-  connectedCallback() {
+  async connectedCallback() {
+    await import("./CarouselBody/CarouselBody.js");
     this.render();
+
+    let games = await fetch('https://vj.interfaces.jima.com.ar/api')
+      .then(res => res.json()); 
+    gameService.setGames(games);
   }
 
   async render() {
     await this._attachCSS(import.meta.url);
     this.shadowRoot.innerHTML += `
-      <div>
-        
-      </div>
+      <carousel-body type="trending"></carousel-body>
+      <carousel-body type="recent"></carousel-body>
     `;
   }
 }
