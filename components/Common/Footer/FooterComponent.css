@@ -2,6 +2,134 @@
     padding: 10px;
     margin-top: 20px;
     display: flex;
+    justify-content: space-between;
     background-color: var(--dark-1);
     border-top: 1px solid var(--purple-2);
 }
+
+
+.column {
+    display: flex;
+    flex-direction: column;
+
+    margin: 6, 10, 10, 10;
+    gap: 20px; 
+}
+
+/*Column left*/
+
+.listSocials {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+    padding: 0;
+    margin: 5px;
+}
+
+.listSocials li a img{
+    width: fit-content;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.listSocials li a img:hover {
+    transform: scale(1.5);
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* espacio entre elementos */
+  color: var(--white);
+  font-family: sans-serif;
+}
+
+.email-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid var(--purple-2); 
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--white);
+  background: var(--dark-4);
+  transition: background 0.2s, transform 0.2s;
+  width: fit-content;
+}
+
+.email-btn:hover {
+  background: var(--purple-1); 
+  transform: scale(1.05);
+}
+
+.email-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.location link-location img {
+  width: 25px;
+  height: 25px;
+}
+.link-location:hover {
+    transform: scale(1.05);
+}
+
+.location a {
+  color: var(--white);
+  text-decoration: underline;
+}
+
+.newsletter {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;            
+  max-width: 250px;     
+  font-family: sans-serif;
+  color: var(--white);
+}
+
+.newsletter h2 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+}
+
+.newsletter input {
+  padding: 10px;
+  border: 1px solid var(--purple-2);
+  border-radius: 6px;
+  outline: none;
+  font-size: 14px;
+}
+
+.subs-btn {
+  padding: 10px;
+  background: transparent;
+  border: 1px solid var(--purple-2);
+  background: var(--dark-4);
+  border-radius: 6px;
+  color: var(--white);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  width: fit-content;
+}
+
+.subs-btn:hover {
+    background: var(--purple-1); 
+    transform: scale(1.05);
+}
+
+/*Column center*/
+
+

@@ -1,9 +1,18 @@
 :host {
     font-family: var(--title-font);
-    font-size: 24px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
 }
 
 h3 {
+    margin: 0px;
+    font-size: 24px;
     font-weight: 500;
-    margin-bottom: 5px;
+}
+
+img {
+    height: 25px;
+    width: 25px;
+    margin-right: 10px;
 }

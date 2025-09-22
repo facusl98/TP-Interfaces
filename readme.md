@@ -1,7 +1,7 @@
 2da parte del TPE de Interfaces.
 Grupo 13
 Ayudante : 
-    Martin
+    Cristian
 integrantes:
     Leonardo Kessy
     Facundo Castro

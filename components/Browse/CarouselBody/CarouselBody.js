@@ -10,12 +10,12 @@ class CarouselBody extends BaseComponent {
 
     this._types = {
       trending: {
-        icon: "IconPath",
+        icon: "../../../assets/icons/common/Trending.svg",
         text: "Trending Games",
         import: () => gameService.getTrending(),
       },
       recent: {
-        icon: "IconPath",
+        icon: "../../../assets/icons/common/New.svg",
         text: "Newly Added",
         import: () => gameService.getNewest(),
       }

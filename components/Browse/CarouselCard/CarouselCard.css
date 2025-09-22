@@ -13,7 +13,7 @@
     margin-right: 10px;
 }
 
-img {
+.game_image {
     box-sizing: border-box;
     width: 200px;
     height: 119px;
@@ -42,4 +42,18 @@ p {
 
 .rating {
     font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.rating > p {
+    width: fit-content;
+    font-weight: 400;
+    margin-right: 5px;
+}
+
+.rating > img {
+    width: 18px;
+    height: 18px; 
+    margin-left: 5px
 }
