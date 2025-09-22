@@ -23,7 +23,7 @@ class CarouselBody extends BaseComponent {
   }
 
   async connectedCallback() {
-    await import("../SectionTittle/SectionTitle.js");
+    await import("../SectionTitle/SectionTitle.js");
     await import("../CarouselCard/CarouselCard.js");
     this._type = this.getAttribute("type");
 
