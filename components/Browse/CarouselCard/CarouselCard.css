@@ -1,0 +1,45 @@
+:host {
+    height: 176px;
+    width: 220px;
+    background-color: var(--dark-2);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+:host:not(:last-child) {
+    margin-right: 10px;
+}
+
+img {
+    box-sizing: border-box;
+    width: 200px;
+    height: 119px;
+    border: 1px solid var(--pale);
+    border-radius: 5px;
+}
+
+.info {
+    height: 27px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    font-family: var(--text-font);
+    font-size: 18px;
+}
+
+p {
+    width: 140px;
+    margin: 0px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+    overflow: hidden;
+}
+
+.rating {
+    font-size: 14px;
+}

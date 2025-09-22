@@ -1,5 +1,6 @@
 :host {
     padding: 10px;
+    margin-bottom: 20px;
     background-color: var(--dark-1);
     border-bottom: 1px solid var(--purple-2);
 }

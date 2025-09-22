@@ -1,0 +1,26 @@
+:host {
+    padding: 10px 25px 15px 25px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+carousel-card:not(:last-child) {
+  margin-right: 10px;
+}
+
+.outer {
+    overflow-y: hidden;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.outer::-webkit-scrollbar {
+  display: none;
+}
+
+.inner {
+    display: flex;
+    align-items: center;
+}
