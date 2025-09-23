@@ -2,32 +2,39 @@
 class GameService extends EventTarget {
   constructor() {
     super();
+
+    this.fetchGames();
+
     let iconsRoute = "/assets/icons/genres/"
     this._genres = {
-      action: iconsRoute + "Action.svg",
-      rpg: iconsRoute + "Rpg.svg",
-      shooter: iconsRoute + "Shooter.svg",
-      puzzle: iconsRoute + "Puzzle.svg",
-      adventure: iconsRoute + "Adventure.svg",
-      indie: iconsRoute + "Indie.svg",
-      platformer: iconsRoute + "Platformer.svg",
-      mmo: iconsRoute + "Mmo.svg",
-      sports: iconsRoute + "Sports.svg",
-      racing: iconsRoute + "Racing.svg",
-      simulation: iconsRoute + "Simulation.svg",
-      arcade: iconsRoute + "Arcade.svg",
-      casual: iconsRoute + "Casual.svg",
-      strategy: iconsRoute + "Strategy.svg",
-      fighting: iconsRoute + "Fighting.svg",
+      Action: iconsRoute + "Action.svg",
+      RPG: iconsRoute + "Rpg.svg",
+      Shooter: iconsRoute + "Shooter.svg",
+      Puzzle: iconsRoute + "Puzzle.svg",
+      Adventure: iconsRoute + "Adventure.svg",
+      Indie: iconsRoute + "Indie.svg",
+      Platformer: iconsRoute + "Platformer.svg",
+      MMO: iconsRoute + "Mmo.svg",
+      Sports: iconsRoute + "Sports.svg",
+      Racing: iconsRoute + "Racing.svg",
+      Simulation: iconsRoute + "Simulation.svg",
+      Arcade: iconsRoute + "Arcade.svg",
+      Casual: iconsRoute + "Casual.svg",
+      Strategy: iconsRoute + "Strategy.svg",
+      Fighting: iconsRoute + "Fighting.svg",
     }
 
     this._games = [];
   }
 
-  setGames(games) {
+  async fetchGames() {
+    let games = await fetch('https://vj.interfaces.jima.com.ar/api')
+      .then(res => res.json());
+
     games.map((game) => {
       game.rating = parseInt(game.rating * 1015 );
     });
+
     this._games = games;
     this.dispatchEvent(new Event("change"));
   }
@@ -52,6 +59,24 @@ class GameService extends EventTarget {
 
   getGenres() {
     return this._genres;
+  }
+
+  getBy(searchName, searchGenre) {
+    let result = []
+    this._games.forEach((game) => {
+      if (game.name.includes(searchName)) {
+        if (!searchGenre) { 
+          result.push(game);
+        } else {
+          let genres = game.genres;
+          genres.forEach((g) => {
+            if (g.name == searchGenre)
+              result.push(game);
+          })
+        }
+      }
+    });
+    return result;
   }
 }
 

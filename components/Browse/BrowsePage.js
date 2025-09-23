@@ -1,5 +1,4 @@
 import { BaseComponent } from "../BaseComponent.js";
-import { gameService } from "../../services/GameService.js";
 
 class BrowsePage extends BaseComponent {
   constructor() {
@@ -11,9 +10,6 @@ class BrowsePage extends BaseComponent {
     await import("./FilterBody/FilterBody.js");
     this.render();
 
-    let games = await fetch('https://vj.interfaces.jima.com.ar/api')
-      .then(res => res.json()); 
-    gameService.setGames(games);
   }
 
   async render() {

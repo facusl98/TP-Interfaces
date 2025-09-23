@@ -72,7 +72,8 @@ class CustomButton extends BaseComponent {
         }
 
         p {
-          padding: 0px
+          max-width: 100%;
+          padding: 0px;
           text-wrap: nowrap;
           overflow:hidden;
           text-overflow: ellipsis;        
