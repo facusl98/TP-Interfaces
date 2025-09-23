@@ -36,7 +36,7 @@ class CarouselCard extends BaseComponent {
             firstIcon="../../../assets/icons/common/FavoriteEmpty.svg"
             secondIcon="../../../assets/icons/common/FavoriteFull.svg"
             alt="Favorite"
-            size="18"
+            size="18px"
           ></changeable-icon>
         </div>
       </div>

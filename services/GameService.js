@@ -2,6 +2,25 @@
 class GameService extends EventTarget {
   constructor() {
     super();
+    let iconsRoute = "/assets/icons/genres/"
+    this._genres = {
+      action: iconsRoute + "Action.svg",
+      rpg: iconsRoute + "Rpg.svg",
+      shooter: iconsRoute + "Shooter.svg",
+      puzzle: iconsRoute + "Puzzle.svg",
+      adventure: iconsRoute + "Adventure.svg",
+      indie: iconsRoute + "Indie.svg",
+      platformer: iconsRoute + "Platformer.svg",
+      mmo: iconsRoute + "Mmo.svg",
+      sports: iconsRoute + "Sports.svg",
+      racing: iconsRoute + "Racing.svg",
+      simulation: iconsRoute + "Simulation.svg",
+      arcade: iconsRoute + "Arcade.svg",
+      casual: iconsRoute + "Casual.svg",
+      strategy: iconsRoute + "Strategy.svg",
+      fighting: iconsRoute + "Fighting.svg",
+    }
+
     this._games = [];
   }
 
@@ -29,6 +48,10 @@ class GameService extends EventTarget {
       return new Date(b.released) - new Date(a.released);
     });
     return sorted.slice(0, 15);
+  }
+
+  getGenres() {
+    return this._genres;
   }
 }
 

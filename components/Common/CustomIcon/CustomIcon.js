@@ -22,7 +22,7 @@ class CustomIcon extends BaseComponent {
           align-items: center;
           ${
             this._size ?
-            `width: ${this._size}px; height: ${this._size}px;` : 
+            `width: ${this._size}; height: ${this._size};` : 
             "width: 20px; height: 20px"
           }
         }

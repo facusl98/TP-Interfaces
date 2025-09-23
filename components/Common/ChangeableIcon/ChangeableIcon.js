@@ -37,10 +37,10 @@ class ChangeableIcon extends BaseComponent {
       <style>
         :host { display: flex; align-items: center }
         img {
-          width: ${this._size}px;
-          height: ${this._size}px;
+          width: ${this._size};
+          height: ${this._size};
+          cursor: pointer;
         }
-        img:hover { cursor: pointer; }
       </style>
       <img src="${this._active}" alt="${this._alt}"></img>
     `;
