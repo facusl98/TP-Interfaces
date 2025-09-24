@@ -10,14 +10,39 @@ class CarouselBody extends BaseComponent {
 
     this._types = {
       trending: {
-        icon: "../../../assets/icons/common/Trending.svg",
+        icon: "/assets/icons/common/Trending.svg",
         text: "Trending Games",
-        import: () => gameService.getTrending(),
+        import: () => gameService.getTrending()
       },
       recent: {
-        icon: "../../../assets/icons/common/New.svg",
+        icon: "/assets/icons/common/New.svg",
         text: "Newly Added",
-        import: () => gameService.getNewest(),
+        import: () => gameService.getNewest()
+      }, 
+      platformers: {
+        icon: "/assets/icons/genres/Platformer.svg",
+        text: "Platformer",
+        import: () => gameService.getRandom(15)
+      },
+      arcade: {
+        icon: "/assets/icons/genres/Arcade.svg",
+        text: "Arcade",
+        import: () => gameService.getRandom(15)
+      }, 
+      rpg: {
+        icon: "/assets/icons/genres/RPG.svg",
+        text: "RPG",
+        import: () => gameService.getRandom(15)
+      }, 
+      puzzle: {
+        icon: "/assets/icons/genres/puzzle.svg",
+        text: "puzzle",
+        import: () => gameService.getRandom(15)
+      }, 
+      fighting: {
+        icon: "/assets/icons/genres/Fighting.svg",
+        text: "Fighting",
+        import: () => gameService.getRandom(15)
       }
     };
   }

@@ -1,4 +1,3 @@
-
 class GameService extends EventTarget {
   constructor() {
     super();
@@ -32,7 +31,7 @@ class GameService extends EventTarget {
       .then(res => res.json());
 
     games.map((game) => {
-      game.rating = parseInt(game.rating * 1015 );
+      game.rating = parseInt(game.rating * 1015);
     });
 
     this._games = games;
@@ -41,6 +40,16 @@ class GameService extends EventTarget {
 
   getGames() {
     return this._games;
+  }
+
+  getRandom(count) {
+    let games = [];
+    while(games.length < count) {
+      let game = this._games[Math.floor(Math.random() * this._games.length)];
+      if (!games.includes(game))
+        games.push(game);
+    }
+    return games;
   }
 
   getTrending() {
@@ -62,7 +71,7 @@ class GameService extends EventTarget {
   }
 
   getBy(searchName, searchGenre) {
-    let result = []
+    let result = [];
     this._games.forEach((game) => {
       if (game.name.includes(searchName)) {
         if (!searchGenre) { 
