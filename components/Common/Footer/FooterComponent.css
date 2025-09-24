@@ -6,23 +6,152 @@
     justify-content: space-between;
     background-color: var(--dark-1);
     border-top: 1px solid var(--purple-2);
+    color: var(--white);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 15px;
+    border-radius: 8px;
 }
 
 .footer-containers-rows {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 32px 16px 32px;
+}
+
+.footer-containers-rows div {
+  margin-right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+
+.footer-containers-rows h2 {
+    font-size: 1.1em;
+    margin-bottom: 8px;
+    color: var(--white);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.footer-containers-rows a {
+display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--white);
+  margin-bottom: 6px;
+  font-size: 0.98em;
+  transition: color 0.2s;
+}
+
+.footer-containers-rows a:hover {   
+    color: var(--blue-0);
+}
+
+.column-left div a {
+  margin-bottom: 4px;
+}
+
+input[type="mail"] {
+  background: var(--black);
+  border: 2px solid var(--purple-2);
+  border-radius: 5px;
+  color: var(--white);
+  padding: 8px 12px;
+  margin-right: 8px;
+  width: 180px;
+  font-size: 1em;
+  outline: none;
+}
+
+button {
+  background: var(--dark-4);
+  color: var(--white);
+  border: 2px solid var(--purple-2);
+  border-radius: 5px;
+  padding: 8px 0;
+  width: 120px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: var(--blue-1);
+}
+
+.column-center-right div a {
+  margin-bottom: 4px;
+}
+
+.games-today {
+  display: flex;
+  flex-direction: column;
+}
+
+.column-center-right img {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  margin-right: 8px;
+  vertical-align: middle;
+  background: #23242a;
+  border: 1px solid #23242a;
+}
+
+.game {
+  align-items: stretch;
+  margin-bottom: 4px;
+}
+
+.column-center-right p {
+  margin: 0;
+  font-size: 0.97em;
+}
+
+.column-right iframe {
+  width: 300px;
+  height: 300px;
+  border-radius: 8px;
+  border: none;
+  margin-top: 8px;
+}
+
+.column-right p {
+  margin: 8px 0 4px 0;
+  font-size: 0.95em;
+  color: #bdbdbd;
+}
+
+.column-right a {
+  margin-right: 12px;
+  font-size: 0.97em;
 }
 
 .us {
   display: flex;
-  flex-direction: row;
-  gap: 20px;
-  width: 100vw;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 32px 10px 32px;
 }
 
-iframe {
-    width: 300px;
-    height: 200px;
-    border: none;
+.us h2 {
+  font-size: 1.1em;
+  margin-bottom: 6px;
+  color: var(--white);
+  font-weight: 600;
+}
+
+.us p {
+  margin: 0;
+  color: var(--white);
+  font-size: 1em;
+}
+
+.us img {
+  height: 48px;
+  margin-left: 24px;
 }

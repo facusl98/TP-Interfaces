@@ -42,11 +42,11 @@ class FooterComponent extends BaseComponent {
                     </a>
                     <a href="">
                     <custom-icon icon="${this._linkedin}" size="20px"></custom-icon>
-                    @StimGames
+                    StimGames
                     </a>
                     <a href="">
                     <custom-icon icon="${this._youtube}" size="20px"></custom-icon>
-                    @StimGames
+                    StimGames
                     </a>
                 </div>
                 <div>
@@ -91,7 +91,7 @@ class FooterComponent extends BaseComponent {
             </div>
             <div class="column-center-right">
                 <h2>Popular Genres</h2>
-                <div>
+                <div class="popular-genres">
                     <a href="#">
                     <custom-icon icon="/assets/icons/genres/Platformer.svg" size="20px"></custom-icon>
                     Platformers
@@ -113,20 +113,20 @@ class FooterComponent extends BaseComponent {
                     Fighting
                     </a>
                 </div>
-                <div>
+                <div class="popular-today">
                     <h2>Popular Today</h2>
-                    <div>
-                        <div>
-                            <img src="/assets/images/PegSolitarie.svg" alt="Peg-Solitaire">
-                            <p>Peg Solitaire</p>
+                    <div class = "games-today">
+                        <div class ="game">
+                            <a href = "#"><img src="/assets/images/PegSolitarie.svg" alt="Peg-Solitaire">
+                            Peg Solitaire</a>
                         </div>
-                        <div>
-                            <img src="/assets/images/RedDeadRedemption.svg" alt="Red-Dead-Redemption-2">
-                            <p>Red Dead Redemption 2</p>
+                        <div class ="game">
+                            <a href = "#"><img src="/assets/images/RedDeadRedemption.svg" alt="Red-Dead-Redemption-2">
+                            Red Dead Redemption 2</a>
                         </div>
-                        <div>
-                            <img src="/assets/images/TheWitcher.svg" alt="The-Witcher-3">
-                            <p>The Witcher 3: Wild Hunt</p>
+                        <div class ="game">
+                            <a href = "#"><img src="/assets/images/TheWitcher.svg" alt="The-Witcher-3">
+                            The Witcher 3: Wild Hunt</a>
                         </div>
                     </div>
                 </div>
