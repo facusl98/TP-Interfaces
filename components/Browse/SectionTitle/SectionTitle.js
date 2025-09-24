@@ -19,7 +19,7 @@ class SectionTitle extends BaseComponent {
     await this._attachCSS(import.meta.url);
     this.shadowRoot.innerHTML += `
       <img src="${this._icon}" alt="${this._text}"></img>
-      <h3>${this.getAttribute("text")}</h3>
+      <h3>${this._text}</h3>
     `;
   }
 

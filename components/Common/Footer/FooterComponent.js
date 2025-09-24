@@ -9,7 +9,7 @@ class FooterComponent extends BaseComponent {
     this._linkedin = "/assets/icons/socials/Linkedin.svg";
     this._twitter = "/assets/icons/socials/Twitter.svg";
     this._youtube = "/assets/icons/socials/Youtube.svg";
-    this._peg = "/assets/images/PegSolitarie.svg";
+    this._peg = "/assets/images/PegSolitaire.svg";
     this.mail = "/assets/icons/common/Gmail.svg";
 
   }
@@ -117,7 +117,7 @@ class FooterComponent extends BaseComponent {
                     <h2>Popular Today</h2>
                     <div class = "games-today">
                         <div class ="game">
-                            <a href = "#"><img src="/assets/images/PegSolitarie.svg" alt="Peg-Solitaire">
+                            <a href = "#"><img src="/assets/images/PegSolitaire.svg" alt="Peg-Solitaire">
                             Peg Solitaire</a>
                         </div>
                         <div class ="game">

@@ -1,38 +1,30 @@
 :host {
     height: 176px;
-    width: 220px;
+    width: fit-content;
+    min-width: fit-content;
     background-color: var(--dark-2);
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
     padding: 10px;
     border-radius: 5px;
+    overflow: hidden;
 }
 
 :host:not(:last-child) {
     margin-right: 10px;
 }
 
-.game_image {
-    box-sizing: border-box;
-    width: 200px;
-    height: 119px;
-    border: 1px solid var(--pale);
-    border-radius: 5px;
-}
-
 .info {
-    height: 27px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-top: 10px;
     font-family: var(--text-font);
-    font-size: 18px;
 }
 
-p {
-    width: 140px;
+.name {
     margin: 0px;
     font-weight: 600;
     text-overflow: ellipsis;
@@ -41,19 +33,31 @@ p {
 }
 
 .rating {
+    width: fit-content;
     font-size: 14px;
     display: flex;
     align-items: center;
+    gap: 5px;
+    font-weight: 500;
 }
 
 .rating > p {
-    width: fit-content;
-    font-weight: 400;
-    margin-right: 5px;
+    margin: 0px;
 }
 
 .rating > img {
     width: 18px;
     height: 18px; 
     margin-left: 5px
+}
+
+
+:host(.default) .name {
+    width: 140px;
+    font-size: 18px;
+}
+
+:host(.small) .name {
+    width: 100px;
+    font-size: 14px;
 }

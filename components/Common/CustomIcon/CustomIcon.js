@@ -14,21 +14,19 @@ class CustomIcon extends BaseComponent {
     this.render()
   }
 
-  render() {
-    this.shadowRoot.innerHTML = `
-      <style>
-        :host, img {
-          display:flex;
-          align-items: center;
-          ${
-            this._size ?
-            `width: ${this._size}; height: ${this._size};` : 
-            "width: 20px; height: 20px"
-          }
-        }
-      </style>
+  async render() {
+    await this._attachCSS(import.meta.url);
+    this.shadowRoot.innerHTML += `
       <img src="${this._icon}" alt="Custom Icon"></img>
     `;
+
+    if (this._size) {
+      const img = this.shadowRoot.querySelector("img");
+      img.style.width = this._size;
+      img.style.height = this._size;
+      this.style.height = this._size;
+      this.style.width = this._size;
+    }
   }
 
   static get observedAttributes() {

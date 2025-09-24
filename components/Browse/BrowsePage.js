@@ -8,21 +8,23 @@ class BrowsePage extends BaseComponent {
   async connectedCallback() {
     await import("./CarouselBody/CarouselBody.js");
     await import("./FilterBody/FilterBody.js");
-    this.render();
+    await import("./HeroCard/HeroCard.js");
 
+    this.render();
   }
 
   async render() {
     await this._attachCSS(import.meta.url);
     this.shadowRoot.innerHTML += `
+      <hero-card></hero-card>
+      <carousel-body type="featured"></carousel-body>
       <carousel-body type="trending"></carousel-body>
       <carousel-body type="recent"></carousel-body>
-      <carousel-body type="platformers"></carousel-body>
-      <carousel-body type="arcade"></carousel-body>
-      <carousel-body type="rpg"></carousel-body>
-      <carousel-body type="puzzle"></carousel-body>
-      <carousel-body type="fighting"></carousel-body>
-      <filter-body></filter-body>
+      <carousel-body type="platformers" class="small"></carousel-body>
+      <carousel-body type="arcade" class="small"></carousel-body>
+      <carousel-body type="rpg" class="small"></carousel-body>
+      <carousel-body type="puzzle" class="small"></carousel-body>
+      <carousel-body type="fighting" class="small"></carousel-body>
     `;
   }
 }

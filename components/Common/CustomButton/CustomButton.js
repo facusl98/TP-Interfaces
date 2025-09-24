@@ -51,59 +51,8 @@ class CustomButton extends BaseComponent {
   }
 
   async render() {
+    await this._attachCSS(import.meta.url);
     this.shadowRoot.innerHTML += `
-      <style>
-        :host {
-          font-family: var(--text-font);
-          border-radius: 5px;
-          ${this._height ?
-            `height: ${this._height};` : "height: 30px;"
-          }
-          ${this._width ?
-            `width: ${this._width};` : "width: 100%;"
-          }
-          box-sizing: border-box;
-          padding: 5px 10px;
-          font-size: 18px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          cursor: pointer;
-        }
-
-        p {
-          max-width: 100%;
-          padding: 0px;
-          text-wrap: nowrap;
-          overflow:hidden;
-          text-overflow: ellipsis;        
-        }
-        
-        :host(.default) {
-          background-color: var(--dark-4);
-          border: 1px solid var(--purple-2);
-        }
-        
-        :host(.default-selected) {
-          background-color: var(--purple-1);
-          border: 1px solid var(--purple-2);
-        }
-
-        :host(.secondary) {
-          background-color: var(--dark-4);
-          border: 1px solid var(--blue-1);
-        }
-        
-        :host(.secondary-selected) {
-          background-color: var(--blue-0);
-          border: 1px solid var(--blue-1);
-        }
-
-        custom-icon {
-          margin-right: 5px
-        }
-      </style>
-
       ${this._icon ?
         `<custom-icon
           icon="${this._icon}"
@@ -115,16 +64,14 @@ class CustomButton extends BaseComponent {
         `<p>${this._text}</p>` : ""
       }
     `;
+
+    this._width && (this.style.width = this._width);
+    this._height && (this.style.height = this._height);
   }
 
-  attributeChangedCallback(name, oldVal, newVal) {
-    if (name === "style") {
-      this.className = newVal || "";
-    }
-  }
 
   static get observedAttributes() {
-    return ["icon", "iconSize", "text", "width", "height", "funcName", "funcValue", "style"];
+    return ["icon", "iconSize", "text", "width", "height", "funcName", "funcValue"];
   }
 }
 

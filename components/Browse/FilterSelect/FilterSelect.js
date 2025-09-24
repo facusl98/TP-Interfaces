@@ -81,7 +81,7 @@ class FilterSelect extends BaseComponent {
           height="34px"
           funcName="toggle-genres"
           iconSize="15px"
-          style="default"
+          class="default"
         ></custom-button>`
         :                         // Genre Selected
         `<custom-button
@@ -90,7 +90,7 @@ class FilterSelect extends BaseComponent {
           width="300px"
           height="34px"
           funcName="deselect-genre"
-          style="default-selected"
+          class="default-selected"
         ></custom-button>`
         }  
       </div>  
@@ -107,7 +107,7 @@ class FilterSelect extends BaseComponent {
                 height="30px"
                 funcName="select-genre"
                 funcValue="${k[0]}"
-                style="secondary"
+                class="secondary"
               ></custom-button>
             `
           }).join("")}

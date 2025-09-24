@@ -10,10 +10,11 @@ carousel-card:not(:last-child) {
 }
 
 .outer {
-    overflow-y: hidden;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .outer::-webkit-scrollbar {
@@ -21,6 +22,7 @@ carousel-card:not(:last-child) {
 }
 
 .inner {
-    display: flex;
-    align-items: center;
+  width: max-content;
+  display: flex;
+  align-items: center;
 }

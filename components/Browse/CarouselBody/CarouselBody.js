@@ -7,8 +7,14 @@ class CarouselBody extends BaseComponent {
 
     this._type = "trending"; // Default
     this._games = [];
+    this._class = "default"; // Default
 
     this._types = {
+      featured: {
+        icon: "/assets/icons/common/Featured.svg",
+        text: "Featured Picks",
+        import: () => gameService.getRandom(15)
+      },
       trending: {
         icon: "/assets/icons/common/Trending.svg",
         text: "Trending Games",
@@ -50,6 +56,8 @@ class CarouselBody extends BaseComponent {
   async connectedCallback() {
     await import("../SectionTitle/SectionTitle.js");
     await import("../CarouselCard/CarouselCard.js");
+
+    this._class = this.getAttribute("class") || "default";
     this._type = this.getAttribute("type");
 
     gameService.addEventListener("change", () => {
@@ -65,8 +73,9 @@ class CarouselBody extends BaseComponent {
     this.shadowRoot.innerHTML += `
       <section-title 
         text="${this._types[this._type].text}"
-        icon="${this._types[this._type].icon}">
-      </section-title>
+        icon="${this._types[this._type].icon}"
+        class="${this._class}"
+        ></section-title>
       <div class="outer">
         <div class="inner">
         ${this._games.map((game) => {
@@ -75,6 +84,7 @@ class CarouselBody extends BaseComponent {
             name="${game.name}"
             image="${game.background_image}"  
             rating="${game.rating}"
+            class="${this._class}"
           ></carousel-card>`;
         }).join("")}
         </div>
@@ -83,7 +93,7 @@ class CarouselBody extends BaseComponent {
   }
 
   static get observedAttributes() {
-    return ["type"];
+    return ["type", "class"];
   }
 }
 

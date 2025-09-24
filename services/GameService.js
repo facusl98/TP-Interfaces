@@ -85,7 +85,7 @@ class GameService extends EventTarget {
         }
       }
     });
-    return result;
+    return result.slice(0, 15);;
   }
 }
 

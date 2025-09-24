@@ -13,8 +13,16 @@ class HeaderComponent extends BaseComponent {
     await this._attachCSS(import.meta.url);
     this.shadowRoot.innerHTML += `
       <div>
-        Header
+        <img src= "/assets/images/logo.src" alt= "Logo"></img>
       </div>
+      <div>
+        <input class = "search-header">
+        <custom-icon icon="/assets/icons/common/Search.svg" size="20px">
+      </div>
+      <div>
+        <button class= "user-btn"><img src="/assets/images/UserIcon.svg"></img></button>
+      </div>
+
     `;
   }
 }

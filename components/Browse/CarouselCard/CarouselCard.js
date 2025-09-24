@@ -7,13 +7,18 @@ class CarouselCard extends BaseComponent {
     this._name = "";
     this._image = "";
     this._rating = "";
+    this._class = "default";
   }
 
   async connectedCallback() {
     await import ("../../Common/ChangeableIcon/ChangeableIcon.js");
+    await import ("../../Common/GamePicture/GamePicture.js");
+
     this._name = this.getAttribute("name");
     this._image = this.getAttribute("image");
+    this._class = this.getAttribute("class");
     const rating = this.getAttribute("rating");
+    
     if (rating > 1000) {
       const stringRating = rating.toString();
       this._rating = stringRating.charAt(0) + "." + stringRating.charAt(1) + "k";
@@ -27,9 +32,13 @@ class CarouselCard extends BaseComponent {
   async render() {
     await this._attachCSS(import.meta.url);
     this.shadowRoot.innerHTML += `
-      <img class="game_image" src="${this._image}" alt="${this._name}"></img>
+      <game-picture 
+        src="${this._image}" 
+        alt="${this._name}"
+        class="${this._class}"
+      ></game-picture>
       <div class="info">
-        <p>${this._name}</p>
+        <p class="name">${this._name}</p>
         <div class="rating">
           <p>${this._rating}</p> 
           <changeable-icon 
@@ -44,7 +53,7 @@ class CarouselCard extends BaseComponent {
   }
 
   static get observedAttributes() {
-    return ["name", "image", "rating"];
+    return ["name", "image", "rating", "class"];
   }
 }
 
