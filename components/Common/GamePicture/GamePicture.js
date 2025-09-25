@@ -29,12 +29,14 @@ class GamePicture extends BaseComponent {
     await this._attachCSS(import.meta.url);
     this.shadowRoot.innerHTML += `
       <img src="${this._src}" alt="${this._alt}"/>
-      <div class="overlay">
-        <custom-icon 
-        icon="/assets/icons/common/Play.svg"
-        size="${this._iconSize}"
-        ></custom-icon>
-      </div>
+      <a href="#game">
+        <div class="overlay">
+          <custom-icon 
+          icon="/assets/icons/common/Play.svg"
+          size="${this._iconSize}"
+          ></custom-icon>
+        </div>
+      </a>
     `;
   }
 

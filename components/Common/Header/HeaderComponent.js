@@ -13,7 +13,9 @@ class HeaderComponent extends BaseComponent {
     await this._attachCSS(import.meta.url);
     this.shadowRoot.innerHTML += `
       <div>
+        <a href="#browse">
         <img src= "/assets/images/logo.src" alt= "Logo"></img>
+        </a>
       </div>
       <div>
         <input class = "search-header">

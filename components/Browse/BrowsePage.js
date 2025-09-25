@@ -29,4 +29,4 @@ class BrowsePage extends BaseComponent {
   }
 }
 
-BrowsePage.define("browse-page")
+BrowsePage.define("browse-page");
