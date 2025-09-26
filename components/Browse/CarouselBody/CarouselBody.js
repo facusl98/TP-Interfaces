@@ -17,7 +17,7 @@ class CarouselBody extends BaseComponent {
       featured: {
         icon: "/assets/icons/common/Featured.svg",
         text: "Featured Picks",
-        import: () => gameService.getRandom(3)
+        import: () => gameService.getRandom(15)
       },
       trending: {
         icon: "/assets/icons/common/Trending.svg",
@@ -32,27 +32,27 @@ class CarouselBody extends BaseComponent {
       platformers: {
         icon: "/assets/icons/genres/Platformer.svg",
         text: "Platformer",
-        import: () => gameService.getRandom(3)
+        import: () => gameService.getRandom(15)
       },
       arcade: {
         icon: "/assets/icons/genres/Arcade.svg",
         text: "Arcade",
-        import: () => gameService.getRandom(3)
+        import: () => gameService.getRandom(15)
       }, 
       rpg: {
         icon: "/assets/icons/genres/RPG.svg",
         text: "RPG",
-        import: () => gameService.getRandom(3)
+        import: () => gameService.getRandom(15)
       }, 
       puzzle: {
         icon: "/assets/icons/genres/puzzle.svg",
         text: "puzzle",
-        import: () => gameService.getRandom(3)
+        import: () => gameService.getRandom(15)
       }, 
       fighting: {
         icon: "/assets/icons/genres/Fighting.svg",
         text: "Fighting",
-        import: () => gameService.getRandom(3)
+        import: () => gameService.getRandom(15)
       }
     };
   }
@@ -116,7 +116,7 @@ class CarouselBody extends BaseComponent {
         return `
         <carousel-card 
           name="${game.name}"
-          image="${game.background_image}"  
+          image="${this._placeholder /* game.background_image */}"  
           rating="${game.rating}"
           class="${this._class}"
         ></carousel-card>`;}).join("");

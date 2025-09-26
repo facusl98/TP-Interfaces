@@ -5,7 +5,7 @@ class AppRoot extends BaseComponent {
   constructor() {
     super()
 
-    this._page = "";
+    this._route = [];
     this._pageComponent = null;
 
     window.addEventListener("hashchange", async () => {
@@ -18,18 +18,19 @@ class AppRoot extends BaseComponent {
   
   readRoute() {
     const hash = window.location.hash.slice(1).toLowerCase();
-    this._page = hash || "browse";
+    this._route = hash.split("/")
+    console.log(this._route)
   }
 
   async importPageComponent() {
-    switch (this._page) {
-      case "browse": 
-        await import('./components/Browse/BrowsePage.js');
-        this._pageComponent = '<browse-page></browse-page>';
-        break;
+    switch (this._route[0]) {
       case "game":
         await import('./components/Game/GamePage.js');
         this._pageComponent = '<game-page></game-page>';
+        break;
+      default:
+        await import('./components/Browse/BrowsePage.js');
+        this._pageComponent = '<browse-page></browse-page>';
         break;
     }
   }
