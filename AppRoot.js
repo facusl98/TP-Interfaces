@@ -19,7 +19,6 @@ class AppRoot extends BaseComponent {
   readRoute() {
     const hash = window.location.hash.slice(1).toLowerCase();
     this._route = hash.split("/")
-    console.log(this._route)
   }
 
   async importPageComponent() {
@@ -27,6 +26,18 @@ class AppRoot extends BaseComponent {
       case "game":
         await import('./components/Game/GamePage.js');
         this._pageComponent = '<game-page></game-page>';
+        break;
+      case "login":
+        await import('./components/Login/LoginPage.js');
+        this._pageComponent = '<login-page></login-page>';
+        break;
+      case"Register":
+        await import('./components/Register/RegisterPage.js');
+        this._pageComponent = '<register-page></register-page>';
+        break;
+      case"Search":
+        await import('./components/Search/SearchPage.js');
+        this._pageComponent = '<search-page></search-page>';
         break;
       default:
         await import('./components/Browse/BrowsePage.js');
