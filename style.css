@@ -9,6 +9,10 @@
     color: var(--white);
 }
 
+html, body {
+    scroll-behavior: smooth;
+}
+
 :root {
     --title-font: "Lexend", sans-serif;
     --text-font: "Hind Vadodara", sans-serif;

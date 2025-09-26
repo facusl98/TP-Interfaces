@@ -56,14 +56,14 @@ class GameService extends EventTarget {
     let sorted = this._games.sort((a, b) => {
       return b.rating - a.rating
     });
-    return sorted.slice(0, 15);
+    return sorted.slice(0, 3);
   }
 
   getNewest() {
     let sorted = this._games.sort((a, b) => {
       return new Date(b.released) - new Date(a.released);
     });
-    return sorted.slice(0, 15);
+    return sorted.slice(0, 3);
   }
 
   getGenres() {
@@ -85,7 +85,7 @@ class GameService extends EventTarget {
         }
       }
     });
-    return result.slice(0, 15);;
+    return result.slice(0, 7);;
   }
 }
 

@@ -1,8 +1,18 @@
 :host {
-    padding: 10px 25px 15px 25px;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
+  min-height: 226px;
+  padding: 10px 25px 15px 25px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+:host([placeholder]) {
+  opacity: 0;
+}
+
+:host(:not[placeholder]) {
+  opacity: 1;
+  transition: opacity 0.3s ease-in;
 }
 
 carousel-card:not(:last-child) {
@@ -25,4 +35,8 @@ carousel-card:not(:last-child) {
   width: max-content;
   display: flex;
   align-items: center;
+}
+
+:host(.default) {
+  min-height: 160px;
 }

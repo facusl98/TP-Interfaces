@@ -138,7 +138,7 @@ class FooterComponent extends BaseComponent {
                         <a href="#">
                         <custom-icon icon="/assets/icons/common/Ubication.svg" size = "20px"></custom-icon>
                         Unicen exactas</a>
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3172.8511587915314!2d-59.0848913233606!3d-37.32235320611474!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9590e0389a213c5d%3A0xcff9aea03c955932!2sUNICEN%20-%20Campus%20Universitario!5e0!3m2!1ses!2sar!4v1758691886482!5m2!1ses!2sar" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <img src="/assets/images/Maps.png" alt="Gooogle Maps Location">
                     </div>
                 </div>
                 <div>

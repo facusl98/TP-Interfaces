@@ -28,7 +28,7 @@ class GamePicture extends BaseComponent {
   async render() {
     await this._attachCSS(import.meta.url);
     this.shadowRoot.innerHTML += `
-      <img src="${this._src}" alt="${this._alt}"/>
+      <img src="${this._src}" alt="${this._alt}" loading="lazy"/>
       <a href="#game">
         <div class="overlay">
           <custom-icon 

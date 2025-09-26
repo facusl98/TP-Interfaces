@@ -17,7 +17,7 @@ class CustomIcon extends BaseComponent {
   async render() {
     await this._attachCSS(import.meta.url);
     this.shadowRoot.innerHTML += `
-      <img src="${this._icon}" alt="Custom Icon"></img>
+      <img src="${this._icon}" alt="Custom Icon" loading="lazy"></img>
     `;
 
     if (this._size) {
