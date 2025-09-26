@@ -17,6 +17,7 @@ class BrowsePage extends BaseComponent {
     await this._attachCSS(import.meta.url);
 
     this.shadowRoot.innerHTML += `
+      <hero-card></hero-card>
       <carousel-body type="featured"></carousel-body>
       <carousel-body type="trending"></carousel-body>
       <carousel-body type="recent"></carousel-body>

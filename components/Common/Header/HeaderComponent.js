@@ -14,7 +14,7 @@ class HeaderComponent extends BaseComponent {
     this.shadowRoot.innerHTML += `
       <div>
         <a href="#browse">
-        <img src= "/assets/images/logo.src" alt= "Logo"></img>
+        <img src= "/assets/images/Logo.svg" alt= "Logo"></img>
         </a>
       </div>
       <div>
