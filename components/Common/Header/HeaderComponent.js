@@ -14,12 +14,12 @@ class HeaderComponent extends BaseComponent {
     this.shadowRoot.innerHTML += `
       <div>
         <a href="#browse">
-        <img src= "/assets/images/logo.png" alt= "Logo"></img>
+        <img src="/assets/images/Logo.png" alt= "Logo"></img>
         </a>
       </div>
       <div>
         <input class = "search-header">
-        <custom-icon icon="/assets/icons/common/Search.png" size="20px">
+        <custom-icon icon="/assets/icons/common/Search.svg" size="20px">
       </div>
       <div>
         <button class= "user-btn"><img src="/assets/images/UserIcon.png"></img></button>

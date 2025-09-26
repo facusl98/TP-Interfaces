@@ -42,8 +42,8 @@ class CarouselCard extends BaseComponent {
         <div class="rating">
           <p>${this._rating}</p> 
           <changeable-icon 
-            firstIcon="../../../assets/icons/common/FavoriteEmpty.png"
-            secondIcon="../../../assets/icons/common/FavoriteFull.png"
+            firstIcon="../../../assets/icons/common/FavoriteEmpty.svg"
+            secondIcon="../../../assets/icons/common/FavoriteFull.svg"
             alt="Favorite"
             size="18px"
           ></changeable-icon>

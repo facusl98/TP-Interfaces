@@ -19,7 +19,7 @@ class FilterBody extends BaseComponent {
     await this._attachCSS(import.meta.url);
     this.shadowRoot.innerHTML += `
       <section-title
-        icon="../../../assets/icons/common/Search.png"
+        icon="../../../assets/icons/common/Search.svg"
         text="Browse"
       ></section-title>
       <filter-select></filter-select>
