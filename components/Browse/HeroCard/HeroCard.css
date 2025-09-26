@@ -38,3 +38,131 @@
 .dots .dot.active {
     background-color: var(--purple-3);
 }
+
+.arrow {
+    cursor: pointer;
+}
+
+.carousel {
+    width: 100%;
+    height: 350px;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.carousel .card {
+    border-radius: 5px;
+    box-shadow: 0 4px 4px var(--dark-1);
+    position: relative;
+    cursor: pointer;
+}
+
+.carousel .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--dark-translucent);
+}
+
+.carousel > div {
+    height: 100%;
+    position: absolute;
+    display: flex;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.carousel .card img {
+    width: 100%;
+    height: 100%;
+}
+
+
+.carousel .main {
+    z-index: 2;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    justify-content: center;
+}
+
+.carousel .main .card {
+    width: 500px;
+    height: 350px;
+}
+
+.carousel .secondary {
+    width: 800px;
+    z-index: 1;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    justify-content: space-between;
+    align-items: center;
+}
+
+.carousel .secondary .card {
+    width: 400px;
+    height: 300px;
+}
+
+.carousel .secondary .overlay {
+    opacity: 0.5;
+}
+
+.carousel .tertiary {
+    width: 1000px;
+    z-index: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    justify-content: space-between;
+    align-items: center;
+}
+
+.carousel .tertiary .card {
+    width: 300px;
+    height: 250px;
+}
+
+.carousel .tertiary .overlay {
+    opacity: 0.7;
+}
+
+.carousel .secondary .card:hover,
+.carousel .tertiary .card:hover {
+    transform: scale(1.05);
+}
+
+.main .card .info {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px 10px 10px 10px;
+    box-sizing: border-box;
+    background: linear-gradient(to top, var(--dark-translucent), rgba(0, 0, 0, 0));
+}
+
+.main .card .info h2 {
+    font-family: var(--title-font);
+    font-weight: 600;
+    font-size: 32px;
+    margin: 0px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.main .card .info p {
+    margin: 0px;
+    color: var(--light-dim);
+}
+
+.main .card .info p span:not(:first-child) {
+    margin-left: 3px;
+}
