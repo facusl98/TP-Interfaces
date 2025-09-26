@@ -9,7 +9,7 @@ class FooterComponent extends BaseComponent {
     this._linkedin = "/assets/icons/socials/Linkedin.svg";
     this._twitter = "/assets/icons/socials/Twitter.svg";
     this._youtube = "/assets/icons/socials/Youtube.svg";
-    this._peg = "/assets/images/PegSolitaire.svg";
+    this._peg = "/assets/images/PegSolitaire.png";
     this.mail = "/assets/icons/common/Gmail.svg";
 
   }
@@ -117,15 +117,15 @@ class FooterComponent extends BaseComponent {
                     <h2>Popular Today</h2>
                     <div class = "games-today">
                         <div class ="game">
-                            <a href = "#"><img src="/assets/images/PegSolitaire.svg" alt="Peg-Solitaire">
+                            <a href = "#"><img src="/assets/images/PegSolitaire.png" alt="Peg-Solitaire">
                             Peg Solitaire</a>
                         </div>
                         <div class ="game">
-                            <a href = "#"><img src="/assets/images/RedDeadRedemption.svg" alt="Red-Dead-Redemption-2">
+                            <a href = "#"><img src="/assets/images/RedDeadRedemption.png" alt="Red-Dead-Redemption-2">
                             Red Dead Redemption 2</a>
                         </div>
                         <div class ="game">
-                            <a href = "#"><img src="/assets/images/TheWitcher.svg" alt="The-Witcher-3">
+                            <a href = "#"><img src="/assets/images/TheWitcher.png" alt="The-Witcher-3">
                             The Witcher 3: Wild Hunt</a>
                         </div>
                     </div>
@@ -155,7 +155,7 @@ class FooterComponent extends BaseComponent {
                     <h2>About Us</h2>
                     <p>StimGames is a web made from gamer to gamer. Play your favorite games anytime, anywhere, for free.</p>
                 </div>
-                <img src="/assets/images/Logo.svg" alt="Logo">
+                <img src="/assets/images/Logo.png" alt="Logo">
         </div>
 
     `;
