@@ -15,42 +15,42 @@ class CarouselBody extends BaseComponent {
 
     this._types = {
       featured: {
-        icon: "/assets/icons/common/Featured.svg",
+        icon: "/assets/icons/common/Featured.png",
         text: "Featured Picks",
         import: () => gameService.getRandom(3)
       },
       trending: {
-        icon: "/assets/icons/common/Trending.svg",
+        icon: "/assets/icons/common/Trending.png",
         text: "Trending Games",
         import: () => gameService.getTrending()
       },
       recent: {
-        icon: "/assets/icons/common/New.svg",
+        icon: "/assets/icons/common/New.png",
         text: "Newly Added",
         import: () => gameService.getNewest()
       }, 
       platformers: {
-        icon: "/assets/icons/genres/Platformer.svg",
+        icon: "/assets/icons/genres/Platformer.png",
         text: "Platformer",
         import: () => gameService.getRandom(3)
       },
       arcade: {
-        icon: "/assets/icons/genres/Arcade.svg",
+        icon: "/assets/icons/genres/Arcade.png",
         text: "Arcade",
         import: () => gameService.getRandom(3)
       }, 
       rpg: {
-        icon: "/assets/icons/genres/RPG.svg",
+        icon: "/assets/icons/genres/RPG.png",
         text: "RPG",
         import: () => gameService.getRandom(3)
       }, 
       puzzle: {
-        icon: "/assets/icons/genres/puzzle.svg",
+        icon: "/assets/icons/genres/puzzle.png",
         text: "puzzle",
         import: () => gameService.getRandom(3)
       }, 
       fighting: {
-        icon: "/assets/icons/genres/Fighting.svg",
+        icon: "/assets/icons/genres/Fighting.png",
         text: "Fighting",
         import: () => gameService.getRandom(3)
       }

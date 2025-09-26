@@ -72,9 +72,9 @@ class FilterSelect extends BaseComponent {
         ${!this._selectedGenre ?  
         `<custom-button      
           ${this._genresOpen ?    // No Genre Selected
-            `icon="../../../assets/icons/common/ArrowUp.svg"`
+            `icon="../../../assets/icons/common/ArrowUp.png"`
           :
-            `icon="../../../assets/icons/common/Menu.svg"`
+            `icon="../../../assets/icons/common/Menu.png"`
           }
           text="Genres"
           width="300px"

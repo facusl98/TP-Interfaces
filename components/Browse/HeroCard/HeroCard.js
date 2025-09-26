@@ -26,11 +26,11 @@ class HeroCard extends BaseComponent {
 
         <nav>
           <custom-icon
-            src="/assets/icons/common/ArrowLeft.svg"
+            src="/assets/icons/common/ArrowLeft.png"
           ></custom-icon>
           
           <custom-icon
-            src="/assets/icons/common/ArrowRight.svg"
+            src="/assets/icons/common/ArrowRight.png"
           ></custom-icon>
         </nav>
     `;
