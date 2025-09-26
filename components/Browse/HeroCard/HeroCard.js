@@ -118,6 +118,18 @@ class HeroCard extends BaseComponent {
         this.render();
       });
     });
+
+    const arrows = this.shadowRoot.querySelectorAll(".arrow");
+    arrows[0].addEventListener(("click"), () => {
+      if (this._activeIndex > 0) this._activeIndex--;
+      else this._activeIndex = 6;
+      this.render();
+    });
+    arrows[1].addEventListener(("click"), () => {
+    if (this._activeIndex < 6) this._activeIndex++;
+      else this._activeIndex = 0;
+    this.render();
+    });
   }
 }
 
