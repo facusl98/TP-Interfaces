@@ -6,11 +6,12 @@ class GamePage extends BaseComponent {
   }
 
   connectedCallback() {
+    console.log("Eo")
     this.render();
   }
 
   async render() {
-    this._attachCSS(import.meta.url); 
+    await this._attachCSS(import.meta.url); 
     this.shadowRoot.innerHTML += `
       <h1>Game Page</h1>
     `;
