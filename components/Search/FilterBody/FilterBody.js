@@ -26,7 +26,7 @@ class FilterBody extends BaseComponent {
         icon="../../../assets/icons/common/Search.svg"
         text="Browse"
       ></section-title>
-      <filter-select></filter-select>
+      <filter-select class="paginated"></filter-select>
       <results-cont></results-cont>
     `;
   }

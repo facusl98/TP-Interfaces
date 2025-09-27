@@ -22,7 +22,6 @@ class ResultsCont extends BaseComponent {
   }
 
   async render() {
-    console.log("Rendered")
     await this._attachCSS(import.meta.url);
     this.shadowRoot.innerHTML += this._games.map((game) => {
 

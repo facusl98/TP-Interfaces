@@ -5,8 +5,18 @@
 }
 
 .filter-nav {
-    display: flex;
+    display: grid;
     margin-top: 10px;
+    grid-template-columns: 5fr 1fr 2fr;
+    gap: 15px;
+}
+
+:host(:not(.paginated)) .filter-nav {
+    grid-template-columns: 6fr 2fr;
+}
+
+:host(:not(.paginated)) .paginator {
+    display: none;
 }
 
 .filter-nav input {
@@ -33,4 +43,23 @@
     display: grid;
     grid-template-columns: repeat(8, minmax(0, 1fr));
     gap: 15px;
+}
+
+.paginator {
+    background-color: var(--dark-1);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.paginator p {
+    padding: 0px;
+    margin: 0px;
+    font-family: var(--text-font);
+}
+
+.paginator .arrow {
+    cursor: pointer;
 }

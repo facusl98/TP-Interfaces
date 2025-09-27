@@ -18,7 +18,7 @@ class AppRoot extends BaseComponent {
   
   readRoute() {
     const hash = window.location.hash.slice(1).toLowerCase();
-    this._route = hash.split("/")
+    this._route = hash.split("/");
   }
 
   async importPageComponent() {
