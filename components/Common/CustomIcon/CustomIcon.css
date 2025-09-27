@@ -4,3 +4,7 @@
     width: 20px; 
     height: 20px;
 }
+
+:host(.dark) img {
+    filter: invert(1);
+}

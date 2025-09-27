@@ -7,10 +7,9 @@ class BrowsePage extends BaseComponent {
 
   async connectedCallback() {
     await import("./CarouselBody/CarouselBody.js");
-    await import("./FilterBody/FilterBody.js");
     await import("./HeroCard/HeroCard.js");
 
-    this.render();
+   this.render();
   }
 
   async render() {

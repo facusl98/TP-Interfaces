@@ -6,11 +6,14 @@ class CustomIcon extends BaseComponent {
 
     this._icon = "";
     this._size = null;
+    this._style = "default";
   }
 
   connectedCallback() {
     this._icon = this.getAttribute("icon");
     if (this.getAttribute("size")) this._size = this.getAttribute("size");
+    if (this.getAttribute("style")) this._style = this.getAttribute("style");
+    if (this._style === "dark") this.classList.add("dark");
     this.render()
   }
 
@@ -30,7 +33,7 @@ class CustomIcon extends BaseComponent {
   }
 
   static get observedAttributes() {
-    return ["icon", "size"];
+    return ["icon", "size", "style"];
   }
 }
 
