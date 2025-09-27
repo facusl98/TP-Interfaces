@@ -35,7 +35,7 @@ class AppRoot extends BaseComponent {
         await import('./components/Register/RegisterPage.js');
         this._pageComponent = '<register-page></register-page>';
         break;
-      case "rearch":
+      case "search":
         await import('./components/Search/SearchPage.js');
         this._pageComponent = '<search-page></search-page>';
         break;

@@ -70,10 +70,11 @@ class GameService extends EventTarget {
     return this._genres;
   }
 
-  getBy(searchName, searchGenre) {
+  getBy(searchName, searchGenre, all = false) {
+    searchName = searchName.toLowerCase();
     let result = [];
     this._games.forEach((game) => {
-      if (game.name.includes(searchName)) {
+      if (game.name.toLowerCase().includes(searchName)) {
         if (!searchGenre) { 
           result.push(game);
         } else {
@@ -85,7 +86,10 @@ class GameService extends EventTarget {
         }
       }
     });
-    return result.slice(0, 15);;
+    if (!all)
+      return result.slice(0, 15);
+    else
+      return result;
   }
 }
 

@@ -1,19 +1,20 @@
-import {BaseComponent} from '../BaseComponent.js';
+import { BaseComponent } from "../BaseComponent.js";
 
-class SearchPage extends aseComponent {
-    constructor() {
-        super();
-    }
+class SearchPage extends BaseComponent {
+  constructor() {
+    super();
+  }
 
-    connectedCallback() {
-        this.render();
-    }
+  async connectedCallback() {
+    await import("./FilterBody/FilterBody.js");
+    this.render();
+  }
 
-    render() {
-        this._attachCSS(import.meta.url);
-        this.shadowRoot.innerHTML += `
-            <h1>Search Page</h1>
-        `;
-    }
+  async render() {
+    await this._attachCSS(import.meta.url);
+    this.shadowRoot.innerHTML += `
+      <filter-body></filter-body>
+    `;
+  }
 }
 SearchPage.define("search-page");

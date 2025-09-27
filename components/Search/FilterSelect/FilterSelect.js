@@ -27,7 +27,7 @@ class FilterSelect extends BaseComponent {
     await this.render();
 
     const input = this.shadowRoot.querySelector("input");
-    input.addEventListener("input", () => {
+    input.addEventListener("keyup", () => {
       this.inputText = input.value;
     })
 
@@ -52,14 +52,13 @@ class FilterSelect extends BaseComponent {
   }
 
   filter() {
-    const games = gameService.getBy(this._inputText, this._selectedGenre);
+    const filteredGames = gameService.getBy(this._inputText, this._selectedGenre, true);
     this.dispatchEvent(new CustomEvent("filter-change", {
       bubbles: true,
       composed: true,
       detail: {
-        games: games,
-      }
-    }))
+        games: filteredGames,
+      }}));
   }
 
   async render() {

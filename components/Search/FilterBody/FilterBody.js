@@ -6,13 +6,17 @@ class FilterBody extends BaseComponent {
   }
 
   async connectedCallback() {
-    await import("../SectionTitle/SectionTitle.js");
+    await import("../../Browse/SectionTitle/SectionTitle.js");
     await import("../FilterSelect/FilterSelect.js");
-    this.render();
+    await import("../ResultsCont/ResultsCont.js")
 
+    await this.render();
+
+    const result = this.shadowRoot.querySelector("results-cont");
     this.addEventListener("filter-change", (e) => {
-      console.log(e.detail)
-    })
+      result._games = e.detail.games;
+      result.render();
+    });
   }
 
   async render() {
@@ -23,6 +27,7 @@ class FilterBody extends BaseComponent {
         text="Browse"
       ></section-title>
       <filter-select></filter-select>
+      <results-cont></results-cont>
     `;
   }
 }
