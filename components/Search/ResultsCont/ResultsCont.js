@@ -9,15 +9,19 @@ class ResultsCont extends BaseComponent {
     this._games = [];
   }
 
+  set games(games) {
+    console.log("Before")
+    console.log(this._games)
+    this._games = games;
+    console.log("After")
+    console.log(this._games)
+  }
+
   async connectedCallback() {
     await import("../../Browse/CarouselCard/CarouselCard.js");
     this.render();
 
 
-    gameService.addEventListener("change", () => {
-      this._games = gameService.getGames().slice(0, 6 * 4 );
-      this.render();
-    });
 
   }
 
@@ -27,7 +31,7 @@ class ResultsCont extends BaseComponent {
 
       return `<carousel-card
       name="${game.name}"
-          image="${this._placeholder /* game.background_image */}"  
+          image="${game.background_image_low_res}"  
           rating="${game.rating}"
           class="small"
       ></carousel-card>`;

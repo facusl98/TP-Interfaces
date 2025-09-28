@@ -14,7 +14,7 @@ class FilterBody extends BaseComponent {
 
     const result = this.shadowRoot.querySelector("results-cont");
     this.addEventListener("filter-change", (e) => {
-      result._games = e.detail.games;
+      result.games = e.detail.games;
       result.render();
     });
   }

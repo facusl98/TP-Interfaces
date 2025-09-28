@@ -27,7 +27,7 @@ class GameService extends EventTarget {
   }
 
   async fetchGames() {
-    let games = await fetch('https://vj.interfaces.jima.com.ar/api')
+    let games = await fetch('https://vj.interfaces.jima.com.ar/api/v2')
       .then(res => res.json());
 
     games.map((game) => {

@@ -70,6 +70,7 @@ class CarouselBody extends BaseComponent {
 
     gameService.addEventListener("change", () => {
         this._games = this._types[this._type].import();
+        console.log(this._games)
         this.renderCards();
     });
 
@@ -116,7 +117,7 @@ class CarouselBody extends BaseComponent {
         return `
         <carousel-card 
           name="${game.name}"
-          image="${this._placeholder /* game.background_image */}"  
+          image="${game.background_image_low_res}"  
           rating="${game.rating}"
           class="${this._class}"
         ></carousel-card>`;}).join("");
