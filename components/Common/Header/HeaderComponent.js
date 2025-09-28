@@ -9,6 +9,7 @@ class HeaderComponent extends BaseComponent {
     this._input = null;
     this._cont = null;
     this._suggestions = document.createElement("div");
+    this._menu = document.createElement("div");
   }
 
   async connectedCallback() {
@@ -16,6 +17,7 @@ class HeaderComponent extends BaseComponent {
     await this.render();
     this._setupEvents();
     this._setupSuggestion();
+    this._setupMenu();
   }
 
   async render() {
@@ -36,7 +38,7 @@ class HeaderComponent extends BaseComponent {
         </div>
       </div>
       <div class="menu-container">
-        <button class="user-btn"><img src="/assets/icons/common/Menu.svg"></img></button>
+        <button class="menu-btn"><img src="/assets/icons/common/Menu.svg"></img></button>
       </div>
 
     `;
@@ -68,6 +70,74 @@ class HeaderComponent extends BaseComponent {
       }, 200)
       
     })
+  }
+
+  _setupMenu() {
+    const menu = this.shadowRoot.querySelector(".menu-btn");
+    this._menu.className = "menu";
+
+    this._menu.innerHTML = `
+      <div class="cont">
+        <div class="user">
+          <img src="/assets/images/UserIcon.png" alt="User Icon" />
+          <p>Random_User12</p>
+        </div>
+        <div class="links-cont">
+          <div class="top">
+            <a href="#browse">
+              <custom-icon icon="/assets/icons/common/Home.svg" size="24px">
+              </custom-icon>
+              <span>Browse</span>
+            </a>
+            <a href="#searc">
+              <custom-icon icon="/assets/icons/common/Search.svg" size="24px">
+              </custom-icon>
+              <span>Search</span>
+            </a>
+            <a href="#profile">
+              <custom-icon icon="/assets/icons/common/Profile.svg" size="24px">
+              </custom-icon>
+              <span>Profile</span>
+            </a>
+            <a href="#favorites">
+              <custom-icon icon="/assets/icons/common/FavoriteEmpty.svg" size="24px">
+              </custom-icon>
+              <span>Favorites</span>
+            </a>
+          </div>
+
+          <div class="bottom">
+            <a href="#login">
+              <custom-icon icon="/assets/icons/common/Logout.svg" size="24px">
+              </custom-icon>
+              <span>Logout</span>
+            </a>
+          </div>          
+        </div>
+      </div>
+    `;
+
+
+    menu.addEventListener("click", () => {
+      this._toggleMenu();
+    });
+
+    this._menu.addEventListener("click", () => {
+      setTimeout(() => {
+        this._toggleMenu();
+      }, 200)
+    });
+  }
+
+  _toggleMenu() {
+    const menu = document.body.querySelector(".menu");
+    if (menu == null) {
+      document.body.style.overflow = 'hidden';
+      document.body.appendChild(this._menu);
+    } else {
+      document.body.style.overflow = 'auto';
+      document.body.querySelector(".menu")?.remove();
+    }
   }
 
   _showSuggestions() {
