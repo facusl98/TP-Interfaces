@@ -70,7 +70,6 @@ class CarouselBody extends BaseComponent {
 
     gameService.addEventListener("change", () => {
         this._games = this._types[this._type].import();
-        console.log(this._games)
         this.renderCards();
     });
 

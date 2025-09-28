@@ -10,11 +10,7 @@ class ResultsCont extends BaseComponent {
   }
 
   set games(games) {
-    console.log("Before")
-    console.log(this._games)
     this._games = games;
-    console.log("After")
-    console.log(this._games)
   }
 
   async connectedCallback() {

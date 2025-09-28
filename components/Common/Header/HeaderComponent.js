@@ -5,12 +5,17 @@ class HeaderComponent extends BaseComponent {
   constructor() {
     super()
     this._games = [];
+    this._name = "";
+    this._input = null;
+    this._cont = null;
+    this._suggestions = document.createElement("div");
   }
 
   async connectedCallback() {
     await import("../CustomIcon/CustomIcon.js");
     await this.render();
     this._setupEvents();
+    this._setupSuggestion();
   }
 
   async render() {
@@ -35,42 +40,59 @@ class HeaderComponent extends BaseComponent {
       </div>
 
     `;
+
+  }
+
+
+  _setupSuggestion() {
+    this._cont = this.shadowRoot.querySelector("#search-container");
+    const rect = this._cont.getBoundingClientRect();
+    this._suggestions.className = "suggestions"
+    this._suggestions.style.top = rect.bottom + "px";
+    this._suggestions.style.left = rect.left + "px";
   }
 
   _setupEvents() {
-    const input = this.shadowRoot.querySelector("#search-input");
-    const searchContainer = this.shadowRoot.querySelector("#search-container");
-
-    input.addEventListener("keyup", () => {
-
-      if(input.value !== "") {
-        this._showSuggestions(input.value);
-      } else {
-        this.shadowRoot.querySelector("#suggestions").style.display = "none";
-      }
+    this._input = this.shadowRoot.querySelector("#search-input");
+    this._input.addEventListener("keyup", () => {
+      this._name = this._input.value;
+      if (this._input.value == "") 
+        this._removeSuggestions();
+      else
+        this._showSuggestions()
     });
 
-    /*searchContainer.addEventListener("click", () => {
-      if(searchContainer.contains(searchContainer.activeElement))
-        this.shadowRoot.querySelector("#suggestions").style.display = "none";
-    });*/
+    this._input.addEventListener("blur", () => {
+      setTimeout(() => {
+        this._removeSuggestions();
+      }, 200)
+      
+    })
   }
 
-  _showSuggestions(query) {
-    const suggestions = this.shadowRoot.querySelector("#suggestions");
-    this._games = gameService.getBy(query, "").slice(0, 3);
-    
+  _showSuggestions() {
+    this._removeSuggestions();
+    this._games = gameService.getBy(this._name).slice(0, 3)
 
-    suggestions.innerHTML = this._games.map(game => `
+    this._suggestions.innerHTML = this._games.map(game => `
       <a href="#game/${game.id}"><div class="suggestion-item">${game.name}</div></a>
     `).join("") + `
-    <div class= "suggestion-item advanced">
+    <div class="suggestion-item advanced">
     <a href="#search">
     <custom-icon icon="/assets/icons/common/Filter.svg" size="15px" style="dark"></custom-icon>
     Advanced Search</a>
     </div>
     `;
-    suggestions.style.display = "block";
+
+    document.body.appendChild(this._suggestions);
+
+    const rect = this._cont.getBoundingClientRect();
+    this._suggestions.style.left = rect.left + "px";
+    this._suggestions.style.top = rect.bottom + "px";
+  }
+
+  _removeSuggestions() {
+    document.body.querySelector(".suggestions")?.remove();
   }
 }
 
