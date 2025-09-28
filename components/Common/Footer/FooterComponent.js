@@ -28,23 +28,23 @@ class FooterComponent extends BaseComponent {
                 <h2>Follow Us</h2>
 
                 <div>
-                    <a href="">
+                    <a href="https://www.facebook.com/Exactas.UNICEN" target="_blank">
                     <custom-icon icon="${this._facebook}" size="20px"></custom-icon>
                     StimGames
                     </a>
-                    <a href="">
+                    <a href="https://www.instagram.com/fcex_unicen/" target="_blank">
                     <custom-icon icon="${this._instagram}" size="20px"></custom-icon>
                     @StimGames
                     </a>
-                    <a href="">
+                    <a href="https://x.com/FCEx_UNICEN" target="_blank">
                     <custom-icon icon="${this._twitter}" size="20px"></custom-icon>
                     @StimGames
                     </a>
-                    <a href="">
+                    <a href="https://www.linkedin.com/in/cristian-garc%C3%ADa-bauza-0b643728/" target="_blank">
                     <custom-icon icon="${this._linkedin}" size="20px"></custom-icon>
                     StimGames
                     </a>
-                    <a href="">
+                    <a href="https://www.youtube.com/@ExactasUNCPBA" target="_blank">
                     <custom-icon icon="${this._youtube}" size="20px"></custom-icon>
                     StimGames
                     </a>
@@ -52,7 +52,7 @@ class FooterComponent extends BaseComponent {
                 <div>
                     <h2>Contact Us</h2>
                     <div>
-                        <a href="#">
+                        <a href="https://groups.google.com/u/1/g/tudai-interfaces/c/UbVx44K8PA8>
                         <custom-icon icon="${this.mail}" size="20px"></custom-icon>
                         StimGames@gmail.com
                         </a>
@@ -63,26 +63,26 @@ class FooterComponent extends BaseComponent {
                 <div>
                     <h2>Quick Access</h2>
                     <div>
-                        <a href="#">
+                        <a href="#browse">
                         <custom-icon icon="/assets/icons/common/Home.svg" size="20px"></custom-icon>
                         Catalog
                         </a>
-                        <a href="#">
+                        <a href="#search">
                         <custom-icon icon="/assets/icons/common/Search.svg" size="20px"></custom-icon>
                         About Us</a>
-                        <a href="#">
+                        <a href="#browse">
                         <custom-icon icon="/assets/icons/common/Profile.svg" size="20px"></custom-icon>
                         Profile</a>
-                        <a href="#">
+                        <a href="#browse">
                         <custom-icon icon="/assets/icons/common/FavoriteEmpty.svg" size="20px"></custom-icon>
                         Favorites</a>
-                        <a href="#">
+                        <a href="#browse">
                         <custom-icon icon="/assets/icons/common/Faq.svg" size="20px"></custom-icon>
                         FAQs</a>
                     </div>
                     <div>
                         <h2>Our Newsletter</h2>
-                        <div>
+                        <div class="subscribe">
                             <input type="mail" name="Newsletter"  placeholder="Your Email here...">
                             <button>Subscribe</button>
                         </div>
@@ -92,23 +92,23 @@ class FooterComponent extends BaseComponent {
             <div class="column-center-right">
                 <h2>Popular Genres</h2>
                 <div class="popular-genres">
-                    <a href="#">
+                    <a href="#browse">
                     <custom-icon icon="/assets/icons/genres/Platformer.svg" size="20px"></custom-icon>
                     Platformers
                     </a>
-                    <a href="#">
+                    <a href="#browse">
                     <custom-icon icon="/assets/icons/genres/Arcade.svg" size="20px"></custom-icon>
                     Arcade
                     </a>
-                    <a href="#">
+                    <a href="#browse">
                     <custom-icon icon="/assets/icons/genres/Rpg.svg" size="20px"></custom-icon>
                     RPG
                     </a>
-                    <a href="#">
+                    <a href="#browse">
                     <custom-icon icon="/assets/icons/genres/Puzzle.svg" size="20px"></custom-icon>
                     Puzzle
                     </a>
-                    <a href="#">
+                    <a href="#browse">
                     <custom-icon icon="/assets/icons/genres/Fighting.svg" size="20px"></custom-icon>
                     Fighting
                     </a>
@@ -117,15 +117,15 @@ class FooterComponent extends BaseComponent {
                     <h2>Popular Today</h2>
                     <div class = "games-today">
                         <div class ="game">
-                            <a href = "#"><img src="/assets/images/PegSolitaire.png" alt="Peg-Solitaire">
+                            <a href ="#game"><img src="/assets/images/PegSolitaire.png" alt="Peg-Solitaire">
                             Peg Solitaire</a>
                         </div>
                         <div class ="game">
-                            <a href = "#"><img src="/assets/images/RedDeadRedemption.png" alt="Red-Dead-Redemption-2">
+                            <a href = "#game"><img src="/assets/images/RedDeadRedemption.png" alt="Red-Dead-Redemption-2">
                             Red Dead Redemption 2</a>
                         </div>
                         <div class ="game">
-                            <a href = "#"><img src="/assets/images/TheWitcher.png" alt="The-Witcher-3">
+                            <a href = "#game"><img src="/assets/images/TheWitcher.png" alt="The-Witcher-3">
                             The Witcher 3: Wild Hunt</a>
                         </div>
                     </div>
@@ -135,7 +135,7 @@ class FooterComponent extends BaseComponent {
                 <div>
                     <h2>Find Us</h2>
                     <div>
-                        <a href="#">
+                        <a href="https://www.google.com.ar/maps/place/Facultad+de+Ciencias+Exactas+Universidad+Nacional+del+Centro+de+la+Provincia+de+Buenos+Aires/@-37.3227478,-59.0848465,17z/data=!3m1!4b1!4m6!3m5!1s0x9590e0389448d6c1:0xeb198d152284b85d!8m2!3d-37.3227521!4d-59.0822716!16s%2Fg%2F11c0x8zspd?hl=es&entry=ttu&g_ep=EgoyMDI1MDkyNC4wIKXMDSoASAFQAw%3D%3D">
                         <custom-icon icon="/assets/icons/common/Ubication.svg" size = "20px"></custom-icon>
                         Unicen exactas</a>
                         <img src="/assets/images/Maps.png" alt="Gooogle Maps Location">
@@ -145,8 +145,8 @@ class FooterComponent extends BaseComponent {
                     <h2>Legal</h2>
 
                     <p>© 2010-2025 All rights reserved. </p>
-                    <a href="#">Terms of use</a>
-                    <a href="#">Privacy Policy</a>
+                    <a href="#browse">Terms of use</a>
+                    <a href="#browse">Privacy Policy</a>
                 </div>
             </div>
         </div>

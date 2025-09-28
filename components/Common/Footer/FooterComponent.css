@@ -12,6 +12,13 @@
     border-radius: 8px;
 }
 
+
+a, p {
+  font-family: var(--text-font);
+}
+h2 {
+  font-family: var(--title-font);
+}
 .footer-containers-rows {
   display: flex;
   flex-direction: row;
@@ -53,6 +60,14 @@ display: flex;
 .column-left div a {
   margin-bottom: 4px;
 }
+.subscribe {
+  gap: 6px;
+  margin-top: 8px;
+}
+.subscribe button, .subscribe input {
+  display: inline-block;
+  width: 100%;
+}
 
 input[type="mail"] {
   background: var(--black);
@@ -60,7 +75,6 @@ input[type="mail"] {
   border-radius: 5px;
   color: var(--white);
   padding: 8px 12px;
-  margin-right: 8px;
   width: 180px;
   font-size: 1em;
   outline: none;
