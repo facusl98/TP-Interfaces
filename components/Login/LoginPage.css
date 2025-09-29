@@ -1,7 +1,33 @@
 :host {
-    padding: 10px;
-    margin-bottom: 20px;
     display: flex;
-    background-color: var(--dark-1);
-    border-bottom: 1px solid var(--purple-2);
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    width: 700px;
+    margin-top: 20px;
+    padding: 50px 0px;
+    background-color: var(--dark-2);
+    border-radius: 5px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+.login-container h2 {
+    margin: 0px;
+    font-size: 32;
+    font-weight: 600;
+    font-family: var(--title-font);
+}
+
+#login-form {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
 }

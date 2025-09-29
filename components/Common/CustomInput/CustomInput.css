@@ -1,0 +1,30 @@
+:host {
+    color: var(--light);
+}
+
+p {
+    margin: 0px;
+    padding: 0px;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-family: var(--title-font);
+    font-size: 20px;
+}
+
+span {
+    color: var(--purple-3);
+}
+
+input {
+    height: 34px;
+    font-family: var(--text-font);
+    font-size: 16px;
+    padding: 5px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid var(--purple-2);
+}

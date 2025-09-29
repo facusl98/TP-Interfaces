@@ -5,45 +5,56 @@ class LoginPage extends BaseComponent {
     super();
   }
 
-  connectedCallback() {
+  async connectedCallback() {
+    await import("../Common/CustomInput/CustomInput.js");
+
     this.render();
   }
 
   async render() {
     await this._attachCSS(import.meta.url);
+
     this.shadowRoot.innerHTML += `
+      <script src="https://www.google.com/recaptcha/enterprise.js?render=6LcLg9grAAAAAGrCT2ySQmzEqaJwcJpD9lw0orx3"></script>
 
       <div class="login-container">
-        <h2>Welcome back</h2>
-        <form method="POST" id="login-form">
+      <h2>Welcome back</h2>
+      <form method="POST" id="login-form">
 
-          <label for="input-email">Email</label>
-          <input type="email" name="email" id="input-email" required>
+        <custom-input
+          label="Email"
+          name="email"
+          type="email"
+          required="true"
+        ></custom-input>
 
-          <label for="input-password">Password</label>
-          <input type="password" name="password" id="input-password" required>
+        <custom-input
+          label="Password"
+          name="password"
+          type="password"
+          required="true"
+        ></custom-input>
 
-          <div class="reCaptcha">
+        <a href="#register">First time here? Sign up</a>
+  
+        <button id="login-btn" 
+          data-sitekey="6LcLg9grAAAAAGrCT2ySQmzEqaJwcJpD9lw0orx3"
+          data-callback='onSubmit'
+          data-action='submit'>
+          <custom-icon icon="/assets/icons/common/Signin.svg" size="30px"></custom-icon>
+          Sign in
+        </button>
 
-          </div>
-          <a href="#register">First time here? Sign up</a>
-          <button id="login-btn" type="submit">
-            <custom-icon icon="/assets/icons/common/Signin.svg" size="30px"></custom-icon>
-            Sign in
-          </button>
+        <button id="google-btn" type="button">
+          <custom-icon icon="/assets/icons/socials/GoogleOriginal.svg" size="35px"></custom-icon>
+          Sign in with Google
+        </button>
 
-          <button id="google-btn" type="button">
-            <custom-icon icon="/assets/icons/socials/GoogleOriginal.svg" size="35px"></custom-icon>
-            Sign in with Google
-          </button>
-
-          <button id="fcb-btn" type="button">
-            <custom-icon icon="/assets/icons/socials/FacebookOriginal.svg" size="35px"></custom-icon>
-            Sign in with Facebook
-          </button>
-        </form>
-    </div>
-
+        <button id="fcb-btn" type="button">
+          <custom-icon icon="/assets/icons/socials/FacebookOriginal.svg" size="35px"></custom-icon>
+          Sign in with Facebook
+        </button>
+      </form>
     `;
 }
 }

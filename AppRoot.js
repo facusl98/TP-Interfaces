@@ -61,7 +61,8 @@ class AppRoot extends BaseComponent {
     this.shadowRoot.innerHTML += `
       <header-component></header-component>
       ${this._pageComponent}
-      <footer-component></footer-component>
+      ${(this._route[0] != "login" && this._route[0] != "register") ?
+      `<footer-component></footer-component>` : "" }
     `;
   }
 }
