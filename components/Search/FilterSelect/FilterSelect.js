@@ -150,6 +150,7 @@ class FilterSelect extends BaseComponent {
       }
     `;
 
+    this.isOverflowing();
   }
 
   isOverflowing() {
