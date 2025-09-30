@@ -5,57 +5,90 @@ class RegisterPage extends BaseComponent {
     super();
   }
 
-  connectedCallback() {
+  async connectedCallback() {
+    await import("../Common/CustomInput/CustomInput.js");
+    await import("../Common/ChangeableIcon/ChangeableIcon.js");
     this.render();
   }
 
-  render() {
-    this._attachCSS(import.meta.url);
+  async render() {
+    await this._attachCSS(import.meta.url);
     this.shadowRoot.innerHTML += `
+      <script src="https://www.google.com/recaptcha/enterprise.js?render=6LcLg9grAAAAAGrCT2ySQmzEqaJwcJpD9lw0orx3"></script>
+
       <div class="register-container">
+
         <h2>New here? Sign up</h2>
-        <form id="register-form" method="POST">
-          <label for="input-email">Email</label>
-          <input type="email" name="email" id="input-email" required>
 
-          <label for="input-name">Full name</label>
-          <input type="text" name="fullName" id="input-name" required>
+        <form class ="register-form" "id="register-form" method="POST">
 
-          <label for="input-age">Age</label>
-          <input type="number" name="age" id="input-age" required>
+          <custom-input
+            label="Email"
+            name="email"
+            type="email"
+            required="true"
+          ></custom-input>
+          
+          <custom-input
+            label="Fullname"
+            name="fullName"
+            type="text"
+            required="true"
+          ></custom-input>
+      
+          <custom-input
+            label="Age"
+            name="age"
+            type="number"
+            required="true"
+          ></custom-input>
+          
+          <custom-input 
+            label="Username"
+            name="username"
+            type="text"
+          ></custom-input>
 
-          <label for="input-username">Username</label>
-          <input type="text" name="username" id="input-username">
-
-          <label for="input-password">Password</label>
-          <input type="password" name="password" id="input-password" required>
-
-          <label for="input-repeatPass">Repeat password</label>
-          <input type="password" name="repeat-password" id="input-repeatPass" required>
-
-          <label for="bio">Bio</label>
-          <textarea name="bio" id="bio"></textarea>
-
-          <div class="reCaptcha">
-              
+          <custom-input 
+            label="Password"
+            name="password"
+            type="password"
+            required="true"
+          ></custom-input>
+  
+          <custom-input
+            label="Repeat password"
+            name="repeat-password"
+            type="password"
+            required="true"
+          ></custom-input>
+          
+          <div class="bio">
+            <label for="bio">Your description</label>
+            <textarea name="bio" id="bio"></textarea>
           </div>
 
-          <a href="#login">Already have an account? Sign in</a>
+          <a href="#login" class="login-link">Already have an account? Sign in</a>
 
-          <button type="submit" id="register-btn">
+          <button type="submit" id="register-btn"
+            data-sitekey="6LcLg9grAAAAAGrCT2ySQmzEqaJwcJpD9lw0orx3"
+            data-callback='onSubmit'
+            data-action='submit'>
             <custom-icon icon="/assets/icons/common/SignUp.svg" size="30px"></custom-icon>
             Sign up
           </button>
+          
+          <div class="signUp-with">
+            <button id="google-btn" type="button">
+              <custom-icon icon="/assets/icons/socials/GoogleOriginal.svg" size="35px"></custom-icon>
+              Sign up with Google
+            </button>
 
-          <button id="google-btn" type="button">
-            <custom-icon icon="/assets/icons/socials/GoogleOriginal.svg" size="35px"></custom-icon>
-            Sign up with Google
-          </button>
-
-          <button id="fcb-btn" type="button">
-            <custom-icon icon="/assets/icons/socials/FacebookOriginal.svg" size="35px"></custom-icon>
-            Sign up with Facebook
-          </button>
+            <button id="fcb-btn" type="button">
+              <custom-icon icon="/assets/icons/socials/FacebookOriginal.svg" size="35px"></custom-icon>
+              Sign up with Facebook
+            </button>
+          </div>
         </form>
       </div>
     `;

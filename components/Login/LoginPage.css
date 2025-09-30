@@ -1,4 +1,5 @@
 :host {
+    height: 91vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,4 +31,39 @@
     flex-direction: column;
     align-items: center;
     gap: 15px;
+}
+
+custom-input {
+    width: 100%;
+    font-family: var(--text-font);
+}
+
+.register-link {
+    color: var(--purple-3);
+    margin-bottom: 20px;
+    font-family: var(--text-font);
+    font-size: 18px;
+}
+
+
+button {
+    width: 250px;
+    height: 50px;
+    border: 1px solid var(--purple-2);
+    background-color: var(--dark-4);
+    color: var(--white);
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--text-font);
+    cursor: pointer;
+}
+
+
+.signIn-with {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 40px;
 }

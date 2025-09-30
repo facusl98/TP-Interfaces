@@ -35,9 +35,9 @@ class LoginPage extends BaseComponent {
           required="true"
         ></custom-input>
 
-        <a href="#register">First time here? Sign up</a>
+        <a href="#register" class="register-link">First time here? Sign up</a>
   
-        <button id="login-btn" 
+        <button id="login-btn class="login-btn" 
           data-sitekey="6LcLg9grAAAAAGrCT2ySQmzEqaJwcJpD9lw0orx3"
           data-callback='onSubmit'
           data-action='submit'>
@@ -45,6 +45,7 @@ class LoginPage extends BaseComponent {
           Sign in
         </button>
 
+        <div class="signIn-with">
         <button id="google-btn" type="button">
           <custom-icon icon="/assets/icons/socials/GoogleOriginal.svg" size="35px"></custom-icon>
           Sign in with Google
@@ -54,6 +55,7 @@ class LoginPage extends BaseComponent {
           <custom-icon icon="/assets/icons/socials/FacebookOriginal.svg" size="35px"></custom-icon>
           Sign in with Facebook
         </button>
+        </div>
       </form>
     `;
 }
