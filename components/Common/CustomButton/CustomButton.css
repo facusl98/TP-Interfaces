@@ -14,6 +14,7 @@
 
 p {
     max-width: 100%;
+    margin: 0px;
     padding: 0px;
     text-wrap: nowrap;
     overflow:hidden;
@@ -41,5 +42,5 @@ p {
 }
 
 custom-icon {
-    margin-right: 5px
+    margin-right: 10px;
 }

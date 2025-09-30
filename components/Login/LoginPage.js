@@ -6,7 +6,13 @@ class LoginPage extends BaseComponent {
   }
 
   async connectedCallback() {
+    await import("../Common/CustomButton/CustomButton.js");
     await import("../Common/CustomInput/CustomInput.js");
+
+
+    this.addEventListener("login", () => {
+      window.location.hash = "#browse"
+    });
 
     this.render();
   }
@@ -37,24 +43,36 @@ class LoginPage extends BaseComponent {
 
         <a href="#register" class="register-link">First time here? Sign up</a>
   
-        <button id="login-btn class="login-btn" 
-          data-sitekey="6LcLg9grAAAAAGrCT2ySQmzEqaJwcJpD9lw0orx3"
-          data-callback='onSubmit'
-          data-action='submit'>
-          <custom-icon icon="/assets/icons/common/Signin.svg" size="30px"></custom-icon>
-          Sign in
-        </button>
+        <custom-button
+          text="Sign in"
+          width="250px"
+          height="50px"
+          icon="/assets/icons/common/SignIn.svg"
+          iconSize="30px"
+          class="default"
+          funcName="login"
+        ></custom-button>
 
         <div class="signIn-with">
-        <button id="google-btn" type="button">
-          <custom-icon icon="/assets/icons/socials/GoogleOriginal.svg" size="35px"></custom-icon>
-          Sign in with Google
-        </button>
+          <custom-button
+            text="Sign in with Google"
+            width="250px"
+            height="50px"
+            icon="/assets/icons/socials/GoogleOriginal.svg"
+            iconSize="30px"
+            class="default"
+            funcName="login"
+          ></custom-button>
 
-        <button id="fcb-btn" type="button">
-          <custom-icon icon="/assets/icons/socials/FacebookOriginal.svg" size="35px"></custom-icon>
-          Sign in with Facebook
-        </button>
+          <custom-button
+            text="Sign in with Facebook"
+            width="250px"
+            height="50px"
+            icon="/assets/icons/socials/FacebookOriginal.svg"
+            iconSize="30px"
+            class="default"
+            funcName="login"
+          ></custom-button>
         </div>
       </form>
     `;

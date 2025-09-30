@@ -1,8 +1,8 @@
 :host {
-    height: 91vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-bottom: 60px;
 }
 
 .login-container {
@@ -45,20 +45,6 @@ custom-input {
     font-size: 18px;
 }
 
-
-button {
-    width: 250px;
-    height: 50px;
-    border: 1px solid var(--purple-2);
-    background-color: var(--dark-4);
-    color: var(--white);
-    display: flex;
-    gap: 6px;
-    justify-content: center;
-    align-items: center;
-    font-family: var(--text-font);
-    cursor: pointer;
-}
 
 
 .signIn-with {

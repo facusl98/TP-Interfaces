@@ -6,9 +6,16 @@ class RegisterPage extends BaseComponent {
   }
 
   async connectedCallback() {
+    await import("../Common/CustomButton/CustomButton.js");
     await import("../Common/CustomInput/CustomInput.js");
     await import("../Common/ChangeableIcon/ChangeableIcon.js");
+
     this.render();
+
+
+    this.addEventListener("register", () => {
+      window.location.hash = "#login"
+    });
   }
 
   async render() {
@@ -70,24 +77,36 @@ class RegisterPage extends BaseComponent {
 
           <a href="#login" class="login-link">Already have an account? Sign in</a>
 
-          <button type="submit" id="register-btn"
-            data-sitekey="6LcLg9grAAAAAGrCT2ySQmzEqaJwcJpD9lw0orx3"
-            data-callback='onSubmit'
-            data-action='submit'>
-            <custom-icon icon="/assets/icons/common/SignUp.svg" size="30px"></custom-icon>
-            Sign up
-          </button>
-          
-          <div class="signUp-with">
-            <button id="google-btn" type="button">
-              <custom-icon icon="/assets/icons/socials/GoogleOriginal.svg" size="35px"></custom-icon>
-              Sign up with Google
-            </button>
+          <custom-button
+            text="Sign up"
+            width="250px"
+            height="50px"
+            icon="/assets/icons/common/SignUp.svg"
+            iconSize="30px"
+            class="default"
+            funcName="register"
+          ></custom-button>
 
-            <button id="fcb-btn" type="button">
-              <custom-icon icon="/assets/icons/socials/FacebookOriginal.svg" size="35px"></custom-icon>
-              Sign up with Facebook
-            </button>
+          <div class="signUp-with">
+            <custom-button
+              text="Sign up with Google"
+              width="250px"
+              height="50px"
+              icon="/assets/icons/socials/GoogleOriginal.svg"
+              iconSize="30px"
+              class="default"
+              funcName="register"
+            ></custom-button>
+
+            <custom-button
+              text="Sign up with Facebook"
+              width="250px"
+              height="50px"
+              icon="/assets/icons/socials/FacebookOriginal.svg"
+              iconSize="30px"
+              class="default"
+              funcName="register"
+            ></custom-button>
           </div>
         </form>
       </div>
