@@ -89,7 +89,7 @@ class HeaderComponent extends BaseComponent {
               </custom-icon>
               <span>Browse</span>
             </a>
-            <a href="#searc">
+            <a href="#search">
               <custom-icon icon="/assets/icons/common/Search.svg" size="24px">
               </custom-icon>
               <span>Search</span>

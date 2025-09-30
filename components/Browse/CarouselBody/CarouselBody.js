@@ -17,7 +17,7 @@ class CarouselBody extends BaseComponent {
       featured: {
         icon: "/assets/icons/common/Featured.svg",
         text: "Featured Picks",
-        import: () => gameService.getRandom(15)
+        import: () => gameService.getRandom(10)
       },
       trending: {
         icon: "/assets/icons/common/Trending.svg",
@@ -32,27 +32,27 @@ class CarouselBody extends BaseComponent {
       platformers: {
         icon: "/assets/icons/genres/Platformer.svg",
         text: "Platformer",
-        import: () => gameService.getRandom(15)
+        import: () => gameService.getRandom(10)
       },
       arcade: {
         icon: "/assets/icons/genres/Arcade.svg",
         text: "Arcade",
-        import: () => gameService.getRandom(15)
+        import: () => gameService.getRandom(10)
       }, 
       rpg: {
         icon: "/assets/icons/genres/RPG.svg",
         text: "RPG",
-        import: () => gameService.getRandom(15)
+        import: () => gameService.getRandom(10)
       }, 
       puzzle: {
         icon: "/assets/icons/genres/puzzle.svg",
         text: "puzzle",
-        import: () => gameService.getRandom(15)
+        import: () => gameService.getRandom(10)
       }, 
       fighting: {
         icon: "/assets/icons/genres/Fighting.svg",
         text: "Fighting",
-        import: () => gameService.getRandom(15)
+        import: () => gameService.getRandom(10)
       }
     };
   }
@@ -68,9 +68,10 @@ class CarouselBody extends BaseComponent {
 
     this._inner = this.shadowRoot.querySelector(".inner");
 
+    if (gameService.ready) this.importGames();
+
     gameService.addEventListener("change", () => {
-        this._games = this._types[this._type].import();
-        this.renderCards();
+      this.importGames();
     });
 
     this._observer = new IntersectionObserver((entries) => {
@@ -88,6 +89,11 @@ class CarouselBody extends BaseComponent {
       this.toggleAttribute('placeholder', this._isPlaceholder);
     });
     this._observer.observe(this);
+  }
+
+  importGames() {
+    this._games = this._types[this._type].import();
+    this.renderCards();
   }
 
   disconnectedCallback() {

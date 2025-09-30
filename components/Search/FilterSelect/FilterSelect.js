@@ -40,6 +40,8 @@ class FilterSelect extends BaseComponent {
 
     await this.render();
 
+    if (gameService.ready) this.filter();;
+
     const input = this.shadowRoot.querySelector("input");
     input.addEventListener("keyup", () => {
       this.inputText = input.value;

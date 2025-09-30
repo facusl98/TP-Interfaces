@@ -11,12 +11,18 @@ class HeroCard extends BaseComponent {
 
   }
 
+  importGames() {
+    this._games = gameService.getRandom(7);
+    this.render();
+  }
+
   async connectedCallback() {
     await import("../../Common/CustomIcon/CustomIcon.js");
 
+    if (gameService.ready) this.importGames();
+
     gameService.addEventListener("change", () => {
-        this._games = gameService.getRandom(7);
-        this.render();
+      this.importGames();
     });
   }
 

@@ -3,6 +3,8 @@ class GameService extends EventTarget {
     super();
 
     this.fetchGames();
+  
+    this.ready = false;
 
     let iconsRoute = "/assets/icons/genres/"
     this._genres = {
@@ -35,6 +37,7 @@ class GameService extends EventTarget {
     });
 
     this._games = games;
+    this.ready = true;
     this.dispatchEvent(new Event("change"));
   }
 
@@ -56,14 +59,14 @@ class GameService extends EventTarget {
     let sorted = this._games.sort((a, b) => {
       return b.rating - a.rating
     });
-    return sorted.slice(0, 15);
+    return sorted.slice(0, 10);
   }
 
   getNewest() {
     let sorted = this._games.sort((a, b) => {
       return new Date(b.released) - new Date(a.released);
     });
-    return sorted.slice(0, 15);
+    return sorted.slice(0, 10);
   }
 
   getGenres() {
@@ -87,7 +90,7 @@ class GameService extends EventTarget {
       }
     });
     if (!all)
-      return result.slice(0, 15);
+      return result.slice(0, 10);
     else
       return result;
   }
