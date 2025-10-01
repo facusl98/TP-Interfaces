@@ -1,3 +1,4 @@
+import { gameService } from "../../services/GameService.js";
 import { BaseComponent } from "../BaseComponent.js";
 
 class GamePage extends BaseComponent {
@@ -5,9 +6,11 @@ class GamePage extends BaseComponent {
     super();
   }
 
-  connectedCallback() {
-    console.log("Eo")
-    this.render();
+  async connectedCallback() {
+    await import("../../services/GameService.js");
+    
+    await this.render();
+    this.similarGames();
   }
 
   async render() {
@@ -60,25 +63,16 @@ class GamePage extends BaseComponent {
         <div class="comments-section">
 
         </div>
-        <div class="right-column">
-          <div class="images-vids-container">
-            <img src="/assets/images/VideoPegSolitaire.png" alt="Game tutorial"></img>
-            <img src="/assets/images/EjPegSolitaire.png" alt="Game tutorial"></img>
-            <img src="/assets/images/EjPegSolitaire.png" alt="Game tutorial"></img> 
-          </div>
-          <div class="similar-games-container">
-            <h2>Similar Games</h2>
-            <div class="similar-games">
-              <img src="/assets/images/SimilarGame1.png" alt="Similar Game 1"></img>
-              <p>Mahjong</p>
+        <div id="right-column" class="right-column">
+            <div class="images-vids-container">
+              <img src="/assets/images/VideoPegSolitaire.png" alt="Game tutorial"></img>
+              <img src="/assets/images/EjPegSolitaire.png" alt="Game tutorial"></img>
+              <img src="/assets/images/EjPegSolitaire.png" alt="Game tutorial"></img> 
             </div>
-            <div class="similar-games">
-              <img src="/assets/images/SimilarGame2.png" alt="Similar Game 1"></img>
-              <p>Mahjong</p>
-            </div>
-            <div class="similar-games">
-              <img src="/assets/images/SimilarGame3.png" alt="Similar Game 1"></img>
-              <p>Mahjong</p>
+            <div class="similar-games-container">
+              <h2>Similar Games</h2>
+            <div id="similar-games" class="similar-games">
+              
             </div>
 
           </div>
@@ -86,6 +80,19 @@ class GamePage extends BaseComponent {
         </div>
       </div>
     `;
+  }
+  similarGames() {
+    const container = this.shadowRoot.getElementById("similar-games");
+
+    const games = gameService.getBy("","puzzle","").slice(0, 3);
+    
+    container.innerHTML = games.map(game => `
+      <div class ="game">
+        <img src="${game.background_image}" alt ="${game.name}">
+        <p>$${game.name}</p>
+      </div>
+      `).join("");
+
   }
 }
 
