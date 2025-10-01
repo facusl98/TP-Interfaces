@@ -70,3 +70,88 @@
     align-items: center;
     gap: 1px;
 }
+
+.game-bar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.game-bar-buttons{
+    display: flex;
+    gap: 10px;
+    margin-right: 20px;
+}
+
+.game-bar-buttons button{
+    background: var(--dark-4);
+    cursor: pointer;
+    border: solid 2px var(--purple-2);
+    color: var(--white);
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.game-bar-buttons img{
+    padding: 5px;
+    transform: scale(0.7);
+}
+
+.ad-container{
+    padding: 0 25px 0 25px;
+}
+
+.ad-image{
+    width: 100%;
+    
+}
+
+.game-content{
+    display: flex;
+}
+.genre-container{
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+}
+.genre-container p{
+    text-decoration: underline;
+    margin-left: 5px;
+}
+
+.left-column{
+    width: 60%;
+    margin-left: 20px;
+}
+
+.left-column h2{
+    font-family: var(--title-font);
+    font-weight: normal;
+    font-size: 20px;
+}
+.left-column p{
+    font-family: var(--text-font);
+    font-size: 16px;
+}
+
+.right-column{
+    width: 40%;
+}
+
+.ad-image-2{
+    width: 100%;
+    background-color: var(--dark-0);
+}
+
+.images-vids-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.images-vids-container img{
+    margin-top: 20px;
+    background-color: var(--dark-0);
+}
+
