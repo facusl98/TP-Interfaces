@@ -107,8 +107,6 @@ p {
 }
 
 custom-icon {
-    margin-right: 10px;
     z-index: 11;
     pointer-events: none;
-    margin-right: 10px;
 }

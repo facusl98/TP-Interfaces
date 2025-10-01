@@ -65,6 +65,8 @@ class CustomButton extends BaseComponent {
       }
     `;
 
+    const icon = this.shadowRoot.querySelector("custom-icon");
+    this._text && (icon.style.marginRight = "10px");
     this._width && (this.style.width = this._width);
     this._height && (this.style.height = this._height);
   }

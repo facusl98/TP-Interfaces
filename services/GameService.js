@@ -75,6 +75,7 @@ class GameService extends EventTarget {
 
   getBy(searchName, searchGenre, all = false) {
     searchName = searchName.toLowerCase();
+    searchGenre = searchGenre?.toLowerCase();
     let result = [];
     this._games.forEach((game) => {
       if (game.name.toLowerCase().includes(searchName)) {
@@ -83,7 +84,7 @@ class GameService extends EventTarget {
         } else {
           let genres = game.genres;
           genres.forEach((g) => {
-            if (g.name == searchGenre)
+            if (g.name.toLowerCase().includes(searchGenre))
               result.push(game);
           })
         }

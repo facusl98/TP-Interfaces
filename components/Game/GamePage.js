@@ -4,13 +4,22 @@ import { BaseComponent } from "../BaseComponent.js";
 class GamePage extends BaseComponent {
   constructor() {
     super();
+    this._games = [];
   }
 
   async connectedCallback() {
-    await import("../../services/GameService.js");
+
+    await import("../Common/CustomButton/CustomButton.js");
+
+    if (gameService.ready) this._games = gameService.getBy("", "Puzzle").slice(0, 3);
+
+    gameService.addEventListener("change", () => {
+      this._games = gameService.getBy("", "Puzzle").slice(0, 3);
+      this._similarGames();
+    });
     
     await this.render();
-    this.similarGames();
+    this._similarGames();
   }
 
   async render() {
@@ -19,8 +28,10 @@ class GamePage extends BaseComponent {
       <div class="game-container">
         <div class="breadcrumb-container">
           <div class="image-bread-container">
-            <img class="home-icon" src="/assets/icons/common/Home.svg" alt="Home Icon"></img>
-            <h1 class="breadcrumb">Home>>Tabletop>>Peg Soltaire</h1>
+            <a href="#browse" class="breadcrumb">
+            <custom-icon icon="/assets/icons/common/Home.svg" size = "15px"></custom-icon>
+            Home >> Tabletop >> Peg Soltaire
+            </a>
           </div>
         </div>
         <div class="game-area-container">
@@ -31,9 +42,27 @@ class GamePage extends BaseComponent {
         <div class="game-bar">
           <h1 class="game-name">Peg Soltaire</h1> 
           <div class="game-bar-buttons">
-            <button class="share-button"><img src="/assets/icons/common/Share.svg" alt="Share Button"></img></button>
-            <button class="like-button"><img src="/assets/icons/common/FavoriteEmpty.svg" alt="Like Button"></img></button>
-            <button class="fullscreen-button"><img src="/assets/icons/common/Maximize.svg" alt="Fullscreen Button"></img></button>
+           <custom-button
+           icon="/assets/icons/common/Share.svg"
+           width="65px"
+           height="45px"
+           class="default"
+           >
+           </custom-button>
+           <custom-button
+           icon="/assets/icons/common/FavoriteEmpty.svg"
+           width="65px"
+           height="45px"
+           class="default"
+           >
+           </custom-button>
+           <custom-button
+           icon="/assets/icons/common/Maximize.svg"
+           width="65px"
+           height="45px"
+           class="default"
+           >
+           </custom-button>
         </div>
       </div>
       <div class="ad-container">
@@ -64,34 +93,33 @@ class GamePage extends BaseComponent {
 
         </div>
         <div id="right-column" class="right-column">
-            <div class="images-vids-container">
-              <img src="/assets/images/VideoPegSolitaire.png" alt="Game tutorial"></img>
-              <img src="/assets/images/EjPegSolitaire.png" alt="Game tutorial"></img>
-              <img src="/assets/images/EjPegSolitaire.png" alt="Game tutorial"></img> 
-            </div>
-            <div class="similar-games-container">
-              <h2>Similar Games</h2>
-            <div id="similar-games" class="similar-games">
-              
-            </div>
-
+          <div class="images-vids-container">
+            <img src="/assets/images/VideoPegSolitaire.png" alt="Game tutorial"></img>
+            <img src="/assets/images/EjPegSolitaire.png" alt="Game tutorial"></img>
+            <img src="/assets/images/EjPegSolitaire.png" alt="Game tutorial"></img> 
           </div>
+          <div id="similar-games"class="similar-games-container">
+            <h2>Similar Games</h2>
+            
+            <div id="games">
+            </div>
+          </div>
+
+        </div>
             
         </div>
       </div>
     `;
   }
-  similarGames() {
-    const container = this.shadowRoot.getElementById("similar-games");
-
-    const games = gameService.getBy("","puzzle","").slice(0, 3);
+  _similarGames() {
+    const container = this.shadowRoot.getElementById("games");
     
-    container.innerHTML = games.map(game => `
+    container.innerHTML = this._games.map((game) => {return`
       <div class ="game">
         <img src="${game.background_image}" alt ="${game.name}">
-        <p>$${game.name}</p>
+        <p>${game.name}</p>
       </div>
-      `).join("");
+      `}).join("");
 
   }
 }

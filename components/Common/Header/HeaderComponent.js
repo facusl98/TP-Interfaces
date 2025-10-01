@@ -38,7 +38,7 @@ class HeaderComponent extends BaseComponent {
         </div>
       </div>
       <div class="menu-container">
-        <button class="menu-btn"><img src="/assets/icons/common/Menu.svg"></img></button>
+        <button class="menu-btn"><img src="/assets/images/UserIcon.png"></img></button>
       </div>
 
     `;
@@ -142,7 +142,7 @@ class HeaderComponent extends BaseComponent {
 
   _showSuggestions() {
     this._removeSuggestions();
-    this._games = gameService.getBy(this._name).slice(0, 3)
+    this._games = gameService.getBy(this._name).slice(0, 3);
 
     this._suggestions.innerHTML = this._games.map(game => `
       <a href="#game/${game.id}"><div class="suggestion-item">${game.name}</div></a>

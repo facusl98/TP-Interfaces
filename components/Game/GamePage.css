@@ -59,6 +59,22 @@
     justify-content: flex-start;
 }
 
+.breadcrumb-container a {
+    text-decoration: none;
+    font-family: var(--text-font);
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 10px;
+    gap: 5px;
+}
+
+.breadcrumb-container a:hover {
+    color: var(--purple-3);
+    transition: 0.7s;
+}
+
 .home-icon {
     transform: scale(0.7);
     fill: var(--white);
@@ -136,6 +152,9 @@
 
 .right-column{
     width: 40%;
+    display: flex; 
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .ad-image-2{
@@ -155,3 +174,35 @@
     background-color: var(--dark-0);
 }
 
+.similar-games {
+    display:flex; 
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.similar-games h2 {
+    font-family: var(--title-font);
+    width: 140px;
+    height: 25px;
+}
+.game {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    gap: 8px;
+    font-family: var(--text-font);
+     
+}
+.game img {
+    width: 45px;
+    height: 45px;
+}
+
+.game a {
+    color: var(--white);
+    text-decoration: none;
+}
