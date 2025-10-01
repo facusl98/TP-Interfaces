@@ -116,7 +116,7 @@ class CarouselBody extends BaseComponent {
       const currentScroll = this._outer.scrollLeft;
       const delta = currentScroll - this._lastScroll;
 
-      const skew = Math.max(-10, Math.min(10, delta * .3));
+      const skew = Math.max(-5, Math.min(5, delta * .3));
 
       this._inner.style.transform = `skew(${skew}deg)`;
 
