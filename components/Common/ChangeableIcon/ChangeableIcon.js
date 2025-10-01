@@ -32,18 +32,15 @@ class ChangeableIcon extends BaseComponent {
     });
   }
 
-  render() {
+  async render() {
+    await this._attachCSS(import.meta.url);
     this.shadowRoot.innerHTML = `
-      <style>
-        :host { display: flex; align-items: center }
-        img {
-          width: ${this._size};
-          height: ${this._size};
-          cursor: pointer;
-        }
-      </style>
       <img src="${this._active}" alt="${this._alt}"></img>
     `;
+
+    const img = this.shadowRoot.querySelector("img");
+    img.style.height = this._size;
+    img.style.width = this._size;
   }
 
   static get observedAttributes() {

@@ -16,23 +16,24 @@ html, body {
 :root {
     --title-font: "Lexend", sans-serif;
     --text-font: "Hind Vadodara", sans-serif;
-    --white: #F8FAFC;
-    --black: #060A0F;
-    --pale: #E9EAEA;
-    --light-dim: #f8fafcc9;
-    --disabled: #5F5F5F;
-    --error: #F14242;
-    --dark-translucent: #222831c2;
-    --dark-0: #0E1014;
-    --dark-1: #14181D;
-    --dark-2: #1B2027;
-    --dark-3: #222831;
-    --dark-4: #383E46;
-    --blue-0: #4D6F9A;
-    --blue-1: #608BC1;
-    --purple-1: #43478A;
-    --purple-2: #5459AC;
-    --purple-3: #767ABD;
+    --white: rgb(248, 250, 252);
+    --black: rgb(6, 10, 15);
+    --pale: rgb(233, 234, 234);
+    --light-dim: rgba(248, 250, 252, 0.788);
+    --disabled: rgb(95, 95, 95);
+    --error: rgb(241, 66, 66);
+    --dark-translucent: rgba(34, 40, 49, 0.761);
+    --dark-0: rgb(14, 16, 20);
+    --dark-1: rgb(20, 24, 29);
+    --dark-2: rgb(27, 32, 39);
+    --dark-3: rgb(34, 40, 49);
+    --dark-4: rgb(56, 62, 70);
+    --blue-0: rgb(77, 111, 154);
+    --blue-1: rgb(96, 139, 193);
+    --purple-1: rgb(67, 71, 138);
+    --purple-2: rgb(84, 89, 172);
+    --purple-3: rgb(118, 122, 189);
+    --purple-dim: rgba(118, 122, 189, 0.5);
 }
 
 
@@ -117,10 +118,17 @@ html, body {
     flex-direction: column;
     justify-content: space-between;
     padding: 10px 0px;
-    gap: 10px;
+    gap: 15px;
 } 
 
+.top, .bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 .links-cont a {
+    position: relative;
     width: 100%;
     display: flex;
     align-items: center;
@@ -130,4 +138,50 @@ html, body {
     text-decoration: none;
     gap: 10px;
     padding: 5px 10px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.links-cont a > * {
+    z-index: 2;
+}
+
+.links-cont a::before {
+    content: '';
+    position: absolute;
+    bottom: 50%;
+    left: 0px;
+    height: 0px;
+    width: 0px;
+    z-index: 1;
+    opacity: 1;
+    background-color: var(--purple-dim);
+    transform: rotate(45deg) translateY(70%);
+}
+
+.links-cont a:hover::before {
+    width: 500px;
+    height: 500px;
+    opacity: 1;
+    animation: rise .4s linear 0s;
+}
+
+@keyframes rise {
+    0% {
+        background: var(--purple-3);
+        width: 0px;
+        height: 0px;
+    }
+    40% {
+        width: 200px;
+        height: 200px;
+    }
+    60% {
+        background: var(--purple-3);
+    }
+    100% {
+        background: var(--purple-dim);
+        width: 500px;
+        height: 500px;
+    }
 }

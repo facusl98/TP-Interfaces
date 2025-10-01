@@ -171,13 +171,13 @@
 
 .dot:not(.active):hover {
     transform: scale(1.05);
-    animation: dot .5s linear;
+    animation: dot .3s linear;
     background-color: var(--purple-3);
 }
 
 @keyframes dot {
     0% {
-        background-color: var(--dark-3);
+        background-color: var(--dark-4);
     }
     100% {
         background-color: var(--purple-3);
