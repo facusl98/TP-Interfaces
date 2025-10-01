@@ -8,10 +8,21 @@ class CarouselBody extends BaseComponent {
     this._type = "trending"; // Default
     this._games = [];
     this._class = "default"; // Default
+
     this._placeholder = "/assets/images/Placeholder.png";
-    this._isPlaceholder = true;
-    this._inner = null;
+    this._isPlaceholder = true;  // For Placeholders
+
+    this._inner = null;   // To unload offscreen
     this._observer = null;
+
+    this._outer = null;
+    this._isMoving = false;
+    this._x = 0;    // To scroll on drag.
+    this._offset = 0;
+
+    this._lastScroll = 0;
+    this._ticking = false;
+
 
     this._types = {
       featured: {
@@ -67,12 +78,52 @@ class CarouselBody extends BaseComponent {
     await this.render();
 
     this._inner = this.shadowRoot.querySelector(".inner");
+    this._outer = this.shadowRoot.querySelector(".outer");
 
     if (gameService.ready) this.importGames();
 
     gameService.addEventListener("change", () => {
       this.importGames();
     });
+
+    this._outer.addEventListener("mousedown", (e) => {
+      this._isMoving = true;
+      const rect = this._outer.getBoundingClientRect();
+      this._x = e.clientX - rect.left;
+      this._offset = this._outer.scrollLeft;
+    });
+
+    this._outer.addEventListener('mouseleave', () => {
+      this._isMoving = false;
+      this._inner.style.transform = `skew(0deg)`;
+    });
+
+    this._outer.addEventListener('mouseup', () => {
+      this._inner.style.transform = `skew(0deg)`;
+    });
+
+    this._outer.addEventListener('mousemove', (e) => {
+      if (!this._isMoving) return;
+      e.preventDefault();
+      const rect = this._outer.getBoundingClientRect();
+      const relativeX = e.clientX - rect.left;
+      const move = (relativeX - this._x) * 1.5;
+
+      this._outer.scrollLeft = this._offset - move;
+    });
+
+    this._outer.addEventListener("scroll", () => {
+      const currentScroll = this._outer.scrollLeft;
+      const delta = currentScroll - this._lastScroll;
+
+      const skew = Math.max(-10, Math.min(10, delta * .3));
+
+      this._inner.style.transform = `skew(${skew}deg)`;
+
+      this._lastScroll = currentScroll;
+    })
+
+
 
     this._observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {

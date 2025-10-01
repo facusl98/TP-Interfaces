@@ -4,6 +4,7 @@
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
+  user-select: none;
 }
 
 :host([placeholder]) {

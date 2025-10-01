@@ -10,9 +10,11 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    margin-top: 20px;
 }
 
 .nav {
+    margin-top: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -34,7 +36,8 @@
 }
 
 .dots .dot.active {
-    background-color: var(--purple-3);
+    background-color: var(--purple-2);
+    transform: scale(1.1);
 }
 
 .arrow {
@@ -163,4 +166,20 @@
 
 .main .card .info p span:not(:first-child) {
     margin-left: 3px;
+}
+
+
+.dot:not(.active):hover {
+    transform: scale(1.05);
+    animation: dot .5s linear;
+    background-color: var(--purple-3);
+}
+
+@keyframes dot {
+    0% {
+        background-color: var(--dark-3);
+    }
+    100% {
+        background-color: var(--purple-3);
+    }
 }
