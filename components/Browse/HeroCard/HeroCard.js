@@ -6,6 +6,7 @@ class HeroCard extends BaseComponent {
     super();
 
     this._games = [];
+    this._shown = [];
     this._activeIndex = 3;
     this._carousel = null;
 
@@ -13,7 +14,17 @@ class HeroCard extends BaseComponent {
 
   importGames() {
     this._games = gameService.getRandom(7);
+    this._setShown();
     this.render();
+  }
+
+  _setShown() {
+    let result = [];
+    for (let offset = -2; offset <= 2; offset++) {
+      let pos = (this._activeIndex + offset + this._games.length) % this._games.length;
+      result.push(this._games[pos]);
+    }
+    this._shown = result;
   }
 
   async connectedCallback() {
@@ -41,7 +52,8 @@ class HeroCard extends BaseComponent {
           ></custom-icon>
           <div class="dots">
             ${this._games.map((_, i) => `
-            <div class="dot${i === this._activeIndex ? ' active' : ''}" data-index="${i}"></div>
+            <div class="dot${i === this._activeIndex ? ' active' : ''}" data-index="${i}"
+            tabindex="0"></div>
             `).join('')}
           </div>
           <custom-icon
@@ -58,70 +70,40 @@ class HeroCard extends BaseComponent {
   renderCarousel() {
     if (!this._carousel) return;
     this._carousel.innerHTML =  `
-      <div class="main">
-        <div class="card">
-          <img class="card-image" 
-            src="${this._games[this._activeIndex].background_image}" 
-            alt="${this._games[this._activeIndex].name}" />
-          <div class="info">
-            <h2>${this._games[this._activeIndex].name}</h2>
-            <p>${this._games[this._activeIndex].genres.map((genre) => {
-              return `<span>${genre.name}</span>`;
-            }).join(",  ")}</p>
-          </div>
+        ${this._shown.map((game, i) => {
+          let html = `
+            <div class="card card-${i}">
+              <img class="card-image" 
+                src="${game.background_image}" />
+              <div class="overlay"
+              data-index="${this._games.indexOf(game)}"></div>
+            </div>
+          `;
+          return html;
+        }).join("")}
+        <div class="info">
+          <h2>${this._games[this._activeIndex].name}</h2>
+          <p>${this._games[this._activeIndex].genres.map((genre) => {
+            return `<span>${genre.name}</span>`;
+          }).join(",  ")}</p>
         </div>
-      </div>
-
-      <div class="secondary">
-        <div class="card">
-          <img class="card-image" 
-            src="${this._games[this._activeIndex > 0 ? 
-              this._activeIndex - 1 : 6].background_image}" />
-          <div class="overlay"
-          data-index="${this._activeIndex > 0 ? this._activeIndex - 1 : 6}"></div>
-        </div>
-        <div class="card"">
-          <img class="card-image" 
-            src="${this._games[this._activeIndex < 6 ? 
-              this._activeIndex + 1 : 0].background_image}" />
-            <div class="overlay"
-            data-index="${this._activeIndex < 6 ? this._activeIndex + 1 : 0}"></div>
-          </div>
-      </div>
-
-      <div class="tertiary">
-        <div class="card">
-          <img class="card-image" 
-            src="${this._games[this._activeIndex > 1 ? 
-              this._activeIndex - 2 : 5].background_image}" />
-          <div class="overlay"
-          data-index="${this._activeIndex > 1 ? this._activeIndex - 2 : 5}">
-        </div>
-        </div>
-        <div class="card">
-          <img class="card-image" 
-            src="${this._games[this._activeIndex < 5 ? 
-              this._activeIndex + 2 : 1].background_image}" />
-          <div class="overlay"
-          data-index="${this._activeIndex < 5 ? this._activeIndex + 2 : 1}"></div>
-        </div>
-      </div>
     `;
+ 
     this.addEvents();
   }
 
+
+  
   addEvents() {
     this.shadowRoot.querySelectorAll(".dot").forEach((e) => {
       e.addEventListener("click", () => {
-        this._activeIndex = parseInt(e.dataset.index);
-        this.render();
+        this._selectNew(e);
       });
     });
     
     this.shadowRoot.querySelectorAll(".overlay").forEach((e) => {
       e.addEventListener("click", () => {
-        this._activeIndex = parseInt(e.dataset.index);
-        this.render();
+        this._selectNew(e);
       });
     });
 
@@ -129,12 +111,39 @@ class HeroCard extends BaseComponent {
     arrows[0].addEventListener(("click"), () => {
       if (this._activeIndex > 0) this._activeIndex--;
       else this._activeIndex = 6;
+      this._setShown();
       this.render();
     });
+
     arrows[1].addEventListener(("click"), () => {
     if (this._activeIndex < 6) this._activeIndex++;
-      else this._activeIndex = 0;
+    else this._activeIndex = 0;
+    this._setShown();
     this.render();
+    });
+  }
+
+  _selectNew(e) {
+    const info = this.shadowRoot.querySelector(".info");
+    info.style.opacity = 0;
+    this.shift(e.dataset.index - this._activeIndex);
+    setTimeout(() => {
+      this._activeIndex = parseInt(e.dataset.index);
+      this._setShown();
+      this.render();
+    }, 400) 
+  }
+
+  shift(offset) {
+    this.shadowRoot.querySelectorAll(".card").forEach((card, i) => {
+      card.className = card.className.replace(/card-\d/, "");
+
+      let newCard = i - offset;
+
+      if (newCard < 0) newCard = 0;
+      if (newCard > 4) newCard = 4;
+
+      card.classList.add(`card-${newCard}`);
     });
   }
 }
