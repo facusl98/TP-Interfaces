@@ -37,6 +37,51 @@ html, body {
 }
 
 
+
+/* Loading Screen */
+.loading {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--dark-2);
+    z-index: 100;
+}
+
+.loading .cont {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.loading svg {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    width: 50%;
+    aspect-ratio: 1 / 1;
+}
+
+.logo-bg {
+    fill: var(--dark-0);
+    stroke: var(--dark-0);
+    stroke-width: 150;
+}
+
+.logo {
+    fill: var(--purple-2);
+    clip-path: inset(0 100% 0 0);
+    animation: reveal 4.5s forwards;
+}
+
+@keyframes reveal {
+  from { clip-path: inset(0 100% 0 0); }  
+  to   { clip-path: inset(0 0 0 0); }   
+}
+
+
 /* Header suggestions since overlap is not allowed */
 .suggestions {
   width: 500px;
@@ -80,7 +125,7 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    position: absolute;
+    position: fixed;
     top: 0px;
     left: 0px;
     width: 100%;
