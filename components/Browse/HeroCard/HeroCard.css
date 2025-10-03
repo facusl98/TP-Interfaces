@@ -65,7 +65,6 @@
     position: absolute;
     cursor: pointer;
     top: 50%;
-    border-radius: 5px;
     overflow: hidden;
     width: 500px;
     height: 350px;
@@ -152,6 +151,11 @@
     padding: 15px 10px 10px 10px;
     box-sizing: border-box;
     background: linear-gradient(to top, var(--dark-translucent), rgba(0, 0, 0, 0));
+    cursor: pointer;
+}
+
+.info:hover {
+    box-shadow: 0px 2px 10px 4px var(--dark-1);
 }
 
 .info h2 {

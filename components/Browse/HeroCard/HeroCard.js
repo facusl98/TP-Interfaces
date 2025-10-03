@@ -107,6 +107,10 @@ class HeroCard extends BaseComponent {
       });
     });
 
+    this.shadowRoot.querySelector(".info").addEventListener("click", () => {
+      location.hash = "#game"
+    });
+
     const arrows = this.shadowRoot.querySelectorAll(".arrow");
     arrows[0].addEventListener(("click"), () => {
       if (this._activeIndex > 0) this._activeIndex--;
