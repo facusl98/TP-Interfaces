@@ -1,8 +1,7 @@
-import { BaseComponent } from "../../BaseComponent";
+import { BaseComponent } from "../../BaseComponent.js";
 
  class GameDot extends BaseComponent {
-
-    construct() {
+    constructor() {
         super();
     }
 
@@ -13,8 +12,13 @@ import { BaseComponent } from "../../BaseComponent";
     async render() {
         await this._attachCSS(import.meta.url);
         this.shadowRoot.innerHTML += `
-            <h1>Mini Game</h1>
+            <img src="${this.getAttribute("image")}" alt="${this.getAttribute("name")}"/>
+            <a href="#game">${this.getAttribute("name")}</a>
         `;
+    }
+
+    static get observedAttributes() {
+        return ["image", "name"]
     }
 }
 GameDot.define("game-dot");
