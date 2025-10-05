@@ -7,6 +7,7 @@ class CustomIcon extends BaseComponent {
     this._icon = "";
     this._size = null;
     this._style = "default";
+    this._img = document.createElement("img");
   }
 
   connectedCallback() {
@@ -19,17 +20,16 @@ class CustomIcon extends BaseComponent {
 
   async render() {
     await this._attachCSS(import.meta.url);
-    this.shadowRoot.innerHTML += `
-      <img src="${this._icon}" alt="Custom Icon" loading="lazy"></img>
-    `;
 
+    this._img.src = this._icon;
+    this._img.alt = "Custom Icon";
     if (this._size) {
-      const img = this.shadowRoot.querySelector("img");
-      img.style.width = this._size;
-      img.style.height = this._size;
-      this.style.height = this._size;
-      this.style.width = this._size;
+      this._img.style.width = this._size;
+      this._img.style.height = this._size;
+      this._img.style.height = this._size;
+      this._img.style.width = this._size;
     }
+    this.shadowRoot.appendChild(this._img)
   }
 
   static get observedAttributes() {

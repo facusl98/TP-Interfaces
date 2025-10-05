@@ -1,11 +1,28 @@
 import { BaseComponent } from "../../BaseComponent.js";
+import { CommentClass } from  "./CommentClass.js";
 
 class CommentSection extends BaseComponent {
   constructor() {
     super();
+    
+    this._comments = [
+      new CommentClass("User-001", "Muito texto", 
+        new Date(2024, 2, 10), [
+        new CommentClass("User-002", "Muito texto", new Date(2025, 2, 10), [
+          new CommentClass("User-003", "Muito textum", new Date(2025, 9, 3), []),
+      ]),
+      new CommentClass("User-003", "Muito texto", new Date(2024, 2, 10), []),
+      ]),
+      new CommentClass("User-002", "Muito texto", new Date(2025, 6, 12), []),
+      new CommentClass("User-005", "Muito texto", new Date(2024, 3, 20), [
+        new CommentClass("User-003", "Muito texto", new Date(2025, 1, 10), []),
+        new CommentClass("User-004", "Muito texto", new Date(2025, 3, 10), []),
+      ]),
+    ]
   }
 
-  connectedCallback() {
+  async connectedCallback() {
+    await import("../CommentItem/CommentItem.js");
     this.render();
   }
 
@@ -33,8 +50,20 @@ class CommentSection extends BaseComponent {
           ></custom-button>
         </div>
       </div>
-      <div class="comments-cont"></div>
+      <div class="comments-cont">
+      
+      </div>
     `;
+
+    const cont = this.shadowRoot.querySelector(".comments-cont");
+    this._comments.map((c) => {
+      const comment = document.createElement("comment-item");
+      comment.setAttribute("user", c.user);
+      comment.setAttribute("comment", c.comment);
+      comment.time = c.time.getTime();
+      comment.comments = c.responses; 
+      cont.appendChild(comment);
+    });
   }
 }
 
