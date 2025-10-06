@@ -75,7 +75,7 @@ class CustomButton extends BaseComponent {
         break;
     }
 
-    this.render(); // 🔁 volver a renderizar
+    this.render();
   }
 }
 
