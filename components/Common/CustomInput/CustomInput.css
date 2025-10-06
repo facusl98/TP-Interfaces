@@ -19,6 +19,11 @@ span {
     color: var(--purple-3);
 }
 
+:host(.required) span {
+    color: var(--error);
+    font-size: 14px;
+}
+
 input {
     height: 34px;
     font-family: var(--text-font);
@@ -27,6 +32,10 @@ input {
     box-sizing: border-box;
     border-radius: 5px;
     border: 1px solid var(--purple-2);
+}
+
+:host(.required) input {
+    border: 1px solid var(--error);
 }
 
 input:focus {

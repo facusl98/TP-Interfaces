@@ -11,8 +11,24 @@ class LoginPage extends BaseComponent {
 
 
     this.addEventListener("login", () => {
-      window.location.hash = "#browse"
+      const inputs = this.shadowRoot.querySelectorAll("custom-input");
+      let valid = true;
+      inputs.forEach((input) => {
+        input.handleRequireds();
+        if (input.required)
+          if (input.value == "")
+            valid = false;
+      })
+      if (valid)
+        window.location.hash = "#browse"
+      else {
+        this.shadowRoot.querySelector(".error")?.classList.remove("hidden")
+      }
     });
+
+    this.addEventListener("login-with", () => {
+      window.location.hash = "#browse"
+    })
 
     this.render();
   }
@@ -43,13 +59,15 @@ class LoginPage extends BaseComponent {
 
         <a href="#register" class="register-link">First time here? Sign up</a>
   
+        <p class="error hidden">Some fields are missing or invalid</p>
+
         <custom-button
           text="Sign in"
           width="250px"
           height="50px"
           icon="/assets/icons/common/SignIn.svg"
           iconSize="30px"
-          class="default"
+          class="default login"
           funcName="login"
         ></custom-button>
 
@@ -61,7 +79,7 @@ class LoginPage extends BaseComponent {
             icon="/assets/icons/socials/GoogleOriginal.svg"
             iconSize="30px"
             class="default"
-            funcName="login"
+            funcName="login-with"
           ></custom-button>
 
           <custom-button
@@ -71,7 +89,7 @@ class LoginPage extends BaseComponent {
             icon="/assets/icons/socials/FacebookOriginal.svg"
             iconSize="30px"
             class="default"
-            funcName="login"
+            funcName="login-with"
           ></custom-button>
         </div>
       </form>

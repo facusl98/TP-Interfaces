@@ -14,8 +14,24 @@ class RegisterPage extends BaseComponent {
 
 
     this.addEventListener("register", () => {
-      window.location.hash = "#login"
+      const inputs = this.shadowRoot.querySelectorAll("custom-input");
+      let valid = true;
+      inputs.forEach((input) => {
+        input.handleRequireds();
+        if (input.required)
+          if (input.value == "")
+            valid = false;
+      })
+      if (valid)
+        window.location.hash = "#login"
+      else {
+        this.shadowRoot.querySelector(".error")?.classList.remove("hidden");
+      }
     });
+
+    this.addEventListener("register-with", () => {
+      window.location.hash = "#browse"
+    })
   }
 
   async render() {
@@ -75,15 +91,17 @@ class RegisterPage extends BaseComponent {
             <textarea name="bio" id="bio"></textarea>
           </div>
 
-          <a href="#login" class="login-link">Already have an account? Sign in</a>
+          <a href="#register" class="login-link">Already have an account? Sign in</a>
 
+           <p class="error hidden">Some fields are missing or invalid</p>
+          
           <custom-button
             text="Sign up"
             width="250px"
             height="50px"
             icon="/assets/icons/common/SignUp.svg"
             iconSize="30px"
-            class="default"
+            class="default register"
             funcName="register"
           ></custom-button>
 
@@ -95,7 +113,7 @@ class RegisterPage extends BaseComponent {
               icon="/assets/icons/socials/GoogleOriginal.svg"
               iconSize="30px"
               class="default"
-              funcName="register"
+              funcName="register-with"
             ></custom-button>
 
             <custom-button
@@ -105,7 +123,7 @@ class RegisterPage extends BaseComponent {
               icon="/assets/icons/socials/FacebookOriginal.svg"
               iconSize="30px"
               class="default"
-              funcName="register"
+              funcName="register-with"
             ></custom-button>
           </div>
         </form>

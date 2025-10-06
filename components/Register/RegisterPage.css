@@ -67,18 +67,19 @@ custom-input {
     font-size: 18px;
 }
 
-button {
-    width: 250px;
-    height: 50px;
-    border: 1px solid var(--purple-2);
-    background-color: var(--dark-4);
-    color: var(--white);
-    display: flex;
-    gap: 6px;
-    justify-content: center;
-    align-items: center;
+.error {
+    color: var(--error);
+    font-size: 18px;
     font-family: var(--text-font);
-    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+
+.register {
+    margin-top: 20px;
 }
 
 .signUp-with {

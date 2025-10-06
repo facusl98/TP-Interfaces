@@ -40,12 +40,25 @@ custom-input {
 
 .register-link {
     color: var(--purple-3);
-    margin-bottom: 20px;
     font-family: var(--text-font);
     font-size: 18px;
 }
 
 
+.error {
+    color: var(--error);
+    font-size: 18px;
+    font-family: var(--text-font);
+}
+
+.hidden {
+    display: none;
+}
+
+
+.login {
+    margin-top: 20px;
+}
 
 .signIn-with {
     display: flex;
