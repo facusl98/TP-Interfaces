@@ -16,6 +16,7 @@ class FooterComponent extends BaseComponent {
 
   async connectedCallback() {
     await import("../CustomIcon/CustomIcon.js"); 
+    await import("../GameDotList/GameDotList.js");
     this.render(); 
   }
 
@@ -24,7 +25,7 @@ class FooterComponent extends BaseComponent {
     this.shadowRoot.innerHTML += `
 
         <div class ="footer-containers-rows">
-            <div class = "column-left">
+            <div class ="column-left">
                 <h2>Follow Us</h2>
 
                 <div>
@@ -84,7 +85,11 @@ class FooterComponent extends BaseComponent {
                         <h2>Our Newsletter</h2>
                         <div class="subscribe">
                             <input type="mail" name="Newsletter"  placeholder="Your Email here...">
-                            <button>Subscribe</button>
+                            <custom-button
+                                text="Subscribe"
+                                width="100%"
+                                height="30px"
+                            ></custom-button>
                         </div>
                     </div>
                 </div>
@@ -114,31 +119,23 @@ class FooterComponent extends BaseComponent {
                     </a>
                 </div>
                 <div class="popular-today">
-                    <h2>Popular Today</h2>
-                    <div class = "games-today">
-                        <div class ="game">
-                            <a href ="#game"><img src="/assets/images/PegSolitaire.png" alt="Peg-Solitaire">
-                            Peg Solitaire</a>
-                        </div>
-                        <div class ="game">
-                            <a href = "#game"><img src="/assets/images/RedDeadRedemption.png" alt="Red-Dead-Redemption-2">
-                            Red Dead Redemption 2</a>
-                        </div>
-                        <div class ="game">
-                            <a href = "#game"><img src="/assets/images/TheWitcher.png" alt="The-Witcher-3">
-                            The Witcher 3: Wild Hunt</a>
-                        </div>
+                    <div class ="games-today">
+                        <game-dot-list
+                            title="Popular Games"
+                            genre="action"
+                            amount="3"
+                        ></game-dot-list>
                     </div>
                 </div>
             </div>
             <div class = "column-right">
                 <div>
                     <h2>Find Us</h2>
-                    <div>
+                    <div class ="ubication">
                         <a href="https://www.google.com.ar/maps/place/Facultad+de+Ciencias+Exactas+Universidad+Nacional+del+Centro+de+la+Provincia+de+Buenos+Aires/@-37.3227478,-59.0848465,17z/data=!3m1!4b1!4m6!3m5!1s0x9590e0389448d6c1:0xeb198d152284b85d!8m2!3d-37.3227521!4d-59.0822716!16s%2Fg%2F11c0x8zspd?hl=es&entry=ttu&g_ep=EgoyMDI1MDkyNC4wIKXMDSoASAFQAw%3D%3D">
                         <custom-icon icon="/assets/icons/common/Ubication.svg" size = "20px"></custom-icon>
                         Unicen exactas</a>
-                        <img src="/assets/images/Maps.png" alt="Gooogle Maps Location">
+                        <img class="ubiImg" src="/assets/images/Maps.png" alt="Gooogle Maps Location">
                     </div>
                 </div>
                 <div>

@@ -64,7 +64,7 @@ display: flex;
   gap: 6px;
   margin-top: 8px;
 }
-.subscribe button, .subscribe input {
+.subscribe input {
   display: inline-block;
   width: 100%;
 }
@@ -80,7 +80,7 @@ input[type="mail"] {
   outline: none;
 }
 
-button {
+custom-button {
   background: var(--dark-4);
   color: var(--white);
   border: 2px solid var(--purple-2);
@@ -93,7 +93,7 @@ button {
   transition: background 0.2s;
 }
 
-button:hover {
+custom-button:hover {
   background: var(--blue-1);
 }
 
@@ -112,13 +112,6 @@ button:hover {
   border-radius: 6px;
   margin-right: 8px;
   vertical-align: middle;
-  background: #23242a;
-  border: 1px solid #23242a;
-}
-
-.game {
-  align-items: stretch;
-  margin-bottom: 4px;
 }
 
 .column-center-right p {
@@ -143,6 +136,10 @@ button:hover {
 .column-right a {
   margin-right: 12px;
   font-size: 0.97em;
+}
+.ubiImg {
+    width: 100%;
+    height: 150px;
 }
 
 .us {
