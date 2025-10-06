@@ -49,35 +49,7 @@ class CustomButton extends BaseComponent {
       }));
     })
   }
-  attributeChangedCallback(name, oldValue, newValue) {
-  if (oldValue !== newValue) {
-    switch (name) {
-      case "icon":
-        this._icon = newValue;
-        break;
-      case "iconSize":
-        this._iconSize = newValue;
-        break;
-      case "text":
-        this._text = newValue;
-        break;
-      case "width":
-        this._width = newValue;
-        break;
-      case "height":
-        this._height = newValue;
-        break;
-      case "funcName":
-        this._funcName = newValue;
-        break;
-      case "funcValue":
-        this._funcValue = newValue;
-        break;
-    }
-
-    this.render();
-  }
-}
+  
 
   async render() {
     await this._attachCSS(import.meta.url);

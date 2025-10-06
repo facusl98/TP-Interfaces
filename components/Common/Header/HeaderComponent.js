@@ -11,15 +11,16 @@ class HeaderComponent extends BaseComponent {
     this._cont = null;
     this._suggestions = document.createElement("div");
     this._menu = document.createElement("div");
+    this._burger = false;
   }
 
   async connectedCallback() {
     await import("../CustomIcon/CustomIcon.js");
     await this.render();
-    this._setupEvents();
     this._setupSuggestion();
     this._setupMenu();
-    this._menuBurguer();
+
+    if (gameService.ready) this._genres = gameService.getGenres();
   }
 
   async render() {
@@ -28,15 +29,11 @@ class HeaderComponent extends BaseComponent {
 
       <div class="header-rows">
         <div class="logo-container">
-          <custom-button
-            icon="/assets/icons/common/Menu.svg"
-            width="20px"
-            height="20px"
-            class="burguer-btn"
-            iconSize="20px"
-          ></custom-button>
+          <img src="${!this._burger ?
+          "/assets/icons/common/Menu.svg" :
+          "/assets/icons/common/Close.svg"}" class="burger-btn"/>
           <a href="#browse">
-          <img src="/assets/images/Logo.png" alt= "Logo"></img>
+          <img src="/assets/images/Logo.png" alt= "Logo" class="logo"></img>
           </a>
         </div>
         <div class="search-container" id="search-container">
@@ -48,29 +45,12 @@ class HeaderComponent extends BaseComponent {
           
           </div>
         </div>
-        <div class="menu-container">
-          <button class="menu-btn"><img src="/assets/images/UserIcon.png"></img></button>
-        </div>
+        <img src="/assets/images/UserIcon.png" class="menu-btn">
       </div>
-      <div class="categories" id="categories">
-
-      </div
-    `;
-  }
-
-
-  _menuBurguer() {
-    const btn = this.shadowRoot.querySelector("custom-button");
-    const categories = this.shadowRoot.querySelector("#categories");
-    let toggled = false;
-    this._genres = gameService.getGenres();
-
-    btn.addEventListener("click", () => {
-        categories.classList.toggle('active');
-        toggled = !toggled;
-        btn.setAttribute("icon", toggled ? "/assets/icons/common/Close.svg" : "/assets/icons/common/Menu.svg");
-
-        categories.innerHTML = Object.keys(this._genres).slice(0, 12).map(genre => `
+      ${this._burger ? `
+        <div class="categories" id="categories">
+          ${Object.keys(this._genres).map((genre) => {
+          return `
           <a href="#search">
             <custom-button
               icon="/assets/icons/genres/${genre}.svg"
@@ -78,10 +58,13 @@ class HeaderComponent extends BaseComponent {
               text="${genre}"
               width="140px"
               height="30px"
+              class="secondary"
             ></custom-button>
-          </a>
-        `).join("");
-    });
+          </a>`
+        }).join("")}
+        </div>` : "" }
+    `;
+    this._setupEvents();
   }
 
   _setupSuggestion() {
@@ -102,11 +85,19 @@ class HeaderComponent extends BaseComponent {
         this._showSuggestions()
     });
 
+    this.shadowRoot.querySelector(".burger-btn").addEventListener("click", () => {
+      this._burger = !this._burger;
+      this.render();
+    })
+
     this._input.addEventListener("blur", () => {
       setTimeout(() => {
         this._removeSuggestions();
       }, 200)
-      
+    })
+
+    gameService.addEventListener("change", () => {
+      this._genres = gameService.getGenres();
     })
   }
 
