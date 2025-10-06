@@ -30,6 +30,12 @@
     align-items: center;
 }
 
+.game-area custom-button {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+}
+
 .start-button {
     margin: auto;
     padding: 10px 20px;

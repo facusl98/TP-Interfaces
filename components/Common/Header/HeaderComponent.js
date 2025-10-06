@@ -5,6 +5,7 @@ class HeaderComponent extends BaseComponent {
   constructor() {
     super()
     this._games = [];
+    this._genres = [];
     this._name = "";
     this._input = null;
     this._cont = null;
@@ -18,33 +19,70 @@ class HeaderComponent extends BaseComponent {
     this._setupEvents();
     this._setupSuggestion();
     this._setupMenu();
+    this._menuBurguer();
   }
 
   async render() {
     await this._attachCSS(import.meta.url);
     this.shadowRoot.innerHTML += `
-      <div class = "logo-container">
-        <a href="#browse">
-        <img src="/assets/images/Logo.png" alt= "Logo"></img>
-        </a>
-      </div>
-      <div class="search-container" id="search-container">
-        <div class="search-input">
-          <input class ="search-header" id="search-input" placeholder="Search game...">
-          <custom-icon icon="/assets/icons/common/Search.svg" size="20px" style="dark"></custom-icon>
-        </div>
-        <div id="suggestions" class="suggestions" style="display: none;">
-        
-        </div>
-      </div>
-      <div class="menu-container">
-        <button class="menu-btn"><img src="/assets/images/UserIcon.png"></img></button>
-      </div>
 
+      <div class="header-rows">
+        <div class="logo-container">
+          <custom-button
+            icon="/assets/icons/common/Menu.svg"
+            width="20px"
+            height="20px"
+            class="burguer-btn"
+            iconSize="20px"
+          ></custom-button>
+          <a href="#browse">
+          <img src="/assets/images/Logo.png" alt= "Logo"></img>
+          </a>
+        </div>
+        <div class="search-container" id="search-container">
+          <div class="search-input">
+            <input class ="search-header" id="search-input" placeholder="Search game...">
+            <custom-icon icon="/assets/icons/common/Search.svg" size="20px" style="dark"></custom-icon>
+          </div>
+          <div id="suggestions" class="suggestions" style="display: none;">
+          
+          </div>
+        </div>
+        <div class="menu-container">
+          <button class="menu-btn"><img src="/assets/images/UserIcon.png"></img></button>
+        </div>
+      </div>
+      <div class="categories" id="categories">
+
+      </div
     `;
-
   }
 
+
+  _menuBurguer() {
+    const btn = this.shadowRoot.querySelector("custom-button");
+    const categories = this.shadowRoot.querySelector("#categories");
+    let toggled = false;
+    this._genres = gameService.getGenres();
+
+    btn.addEventListener("click", () => {
+        categories.classList.toggle('active');
+        toggled = !toggled;
+        btn.setAttribute("icon", toggled ? "/assets/icons/common/Close.svg" : "/assets/icons/common/Menu.svg");
+
+        categories.innerHTML = Object.keys(this._genres).slice(0, 12).map(genre => `
+          <a href="#search">
+            <custom-button
+              icon="/assets/icons/genres/${genre}.svg"
+              iconSize="20px"
+              text="${genre}"
+              width="140px"
+              height="30px"
+            ></custom-button>
+          </a>
+        `).join("");
+    });
+  }
 
   _setupSuggestion() {
     this._cont = this.shadowRoot.querySelector("#search-container");
