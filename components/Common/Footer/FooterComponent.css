@@ -6,7 +6,7 @@
     gap: 15px;
     background-color: var(--dark-1);
     border-top: 1px solid var(--purple-2);
-    color: var(--white);
+    color: var(--white); 
 }
 
 
@@ -24,6 +24,14 @@ h2 {
   flex-direction: row;
   justify-content: space-between;
   gap: 30px;
+}
+
+@media screen and (max-width: 600px) {
+  .footer-containers-rows {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+  }
 }
 
 .footer-containers-rows > div {

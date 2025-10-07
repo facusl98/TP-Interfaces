@@ -128,3 +128,35 @@
     z-index: 99999;
 }
 
+@media screen and (max-width: 600px) {
+    .header-rows {
+        gap: 40px;
+    }
+
+    .search-container {
+        width: 300px;
+        height: min-content;
+    }
+
+    .categories {
+        flex-direction: column;
+        padding: 10px 0px;
+    }
+
+    .categories a {
+        width: 100%;
+        padding: 3px 20px;
+        box-sizing: border-box;
+    }
+
+    .categories a:first-child {
+        margin-left: 0px;
+    }
+    .categories a:last-child {
+        margin-right: 0px;
+    }
+
+    .logo {
+        display: none;
+    }
+}

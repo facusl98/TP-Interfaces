@@ -32,8 +32,6 @@ class CustomInput extends BaseComponent {
 
     await this.render();
 
-    const input = this.shadowRoot.querySelector("input");
-    input.addEventListener("keyup", () => this.value = input.value);
   }
 
   async render() {
@@ -43,17 +41,25 @@ class CustomInput extends BaseComponent {
         <p>${this._label} ${this._required ? 
         this.classList.contains("required") ? `<span>Required</span>` : `<span>*</span>` 
         : ""}</p>
-        <input type="${this._type}" id="${this._name}"/>
+        <input type="${this._type}" id="${this._name}" value="${this._value}"/>
       </label>
     `;
 
+
+    const input = this.shadowRoot.querySelector("input");
+    input.addEventListener("keyup", () => this.value = input.value);
   }
 
 
   handleRequireds(){
     if (this._required) {
-      this.classList.toggle("required", true);
-      this.render();
+      if (!this._value) {
+        this.classList.add("required");
+        this.render();
+      } else {
+        this.classList.remove("required", true);
+        this.render();
+      }
     }
   }
 
@@ -62,4 +68,4 @@ class CustomInput extends BaseComponent {
   }
 }
 
-CustomInput.define("custom-input")
+CustomInput.define("custom-input");

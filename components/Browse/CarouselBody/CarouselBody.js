@@ -142,13 +142,13 @@ class CarouselBody extends BaseComponent {
     this._observer.observe(this);
   }
 
+  disconnectedCallback() {
+    if (this._observer) this._observer.disconnect();
+  }
+
   importGames() {
     this._games = this._types[this._type].import();
     this.renderCards();
-  }
-
-  disconnectedCallback() {
-    if (this._observer) this._observer.disconnect();
   }
 
   async render() {

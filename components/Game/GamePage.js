@@ -23,7 +23,7 @@ class GamePage extends BaseComponent {
         <div class="image-bread-container">
           <a href="#browse" class="breadcrumb">
             <custom-icon icon="/assets/icons/common/Home.svg" size = "15px"></custom-icon>
-            Home >> Tabletop >> Peg Soltaire
+            Browse >> Tabletop >> Peg Soltaire
           </a>
         </div>
       </div>

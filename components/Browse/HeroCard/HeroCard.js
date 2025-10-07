@@ -8,6 +8,7 @@ class HeroCard extends BaseComponent {
     this._games = [];
     this._shown = [];
     this._activeIndex = 3;
+    this._mobile = window.innerWidth < 600 ? true : false;
     this._carousel = null;
 
   }

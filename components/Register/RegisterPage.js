@@ -22,16 +22,25 @@ class RegisterPage extends BaseComponent {
           if (input.value == "")
             valid = false;
       })
-      if (valid)
-        window.location.hash = "#login"
-      else {
+      if (valid) {
+        this.validRegister();
+      } else {
         this.shadowRoot.querySelector(".error")?.classList.remove("hidden");
       }
     });
 
     this.addEventListener("register-with", () => {
-      window.location.hash = "#browse"
+      this.validRegister();
     })
+  }
+
+  validRegister() {
+    const box = this.shadowRoot.querySelector(".register-container");
+    box.classList.add("box-animation");
+
+    setTimeout(() => {
+      window.location.hash = "#login";
+    }, 3000)
   }
 
   async render() {
@@ -91,7 +100,7 @@ class RegisterPage extends BaseComponent {
             <textarea name="bio" id="bio"></textarea>
           </div>
 
-          <a href="#register" class="login-link">Already have an account? Sign in</a>
+          <a href="#login" class="login-link">Already have an account? Sign in</a>
 
            <p class="error hidden">Some fields are missing or invalid</p>
           

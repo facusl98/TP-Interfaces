@@ -121,6 +121,13 @@ html, body {
     gap: 5px;
 }
 
+@media screen and (max-width: 600px) {
+    .suggestions {
+        width: 250px;
+    }
+}
+
+
 
 /* Sidebar Menu */
 .menu {

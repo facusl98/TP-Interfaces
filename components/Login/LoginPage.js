@@ -15,22 +15,32 @@ class LoginPage extends BaseComponent {
       let valid = true;
       inputs.forEach((input) => {
         input.handleRequireds();
+
         if (input.required)
           if (input.value == "")
             valid = false;
       })
-      if (valid)
-        window.location.hash = "#browse"
-      else {
+      if (valid) {
+        this.validLogin();
+      } else {
         this.shadowRoot.querySelector(".error")?.classList.remove("hidden")
       }
     });
 
     this.addEventListener("login-with", () => {
-      window.location.hash = "#browse"
+      this.validLogin();
     })
 
     this.render();
+  }
+
+  validLogin() {
+    const box = this.shadowRoot.querySelector(".login-container");
+    box.classList.add("box-animation");
+
+    setTimeout(() => {
+      window.location.hash = "#browse";
+    }, 3000)
   }
 
   async render() {

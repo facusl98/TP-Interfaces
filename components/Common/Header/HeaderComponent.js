@@ -12,6 +12,7 @@ class HeaderComponent extends BaseComponent {
     this._suggestions = document.createElement("div");
     this._menu = document.createElement("div");
     this._burger = false;
+    this._mobile = window.innerWidth < 600 ? true : false;
   }
 
   async connectedCallback() {
@@ -33,17 +34,18 @@ class HeaderComponent extends BaseComponent {
           <img src="${!this._burger ?
           "/assets/icons/common/Menu.svg" :
           "/assets/icons/common/Close.svg"}" class="burger-btn"/>
-          <a href="#browse">
-          <img src="/assets/images/Logo.png" alt= "Logo" class="logo"></img>
-          </a>
-        </div>
-        <div class="search-container" id="search-container">
-          <div class="search-input">
-            <input class ="search-header" id="search-input" placeholder="Search game...">
-            <custom-icon icon="/assets/icons/common/Search.svg" size="20px" style="dark"></custom-icon>
-          </div>
-          <div id="suggestions" class="suggestions" style="display: none;">
           
+          <a href="#browse">
+            <img class="logo" src="/assets/images/Logo.png" alt="StimGames Logo">
+          </a> 
+          
+          </div>
+        <div class="search-container" id="search-container">
+            <div class="search-input">
+              <input class ="search-header" id="search-input" placeholder="Search game...">
+              <custom-icon icon="/assets/icons/common/Search.svg" size="20px" style="dark"></custom-icon>
+            </div>
+          <div id="suggestions" class="suggestions" style="display: none;">
           </div>
         </div>
         <img src="/assets/images/UserIcon.png" class="menu-btn">
@@ -57,7 +59,7 @@ class HeaderComponent extends BaseComponent {
               icon="/assets/icons/genres/${genre}.svg"
               iconSize="20px"
               text="${genre}"
-              width="140px"
+              width="${this._mobile ? "100%" : "140px"}"
               height="30px"
               class="secondary"
             ></custom-button>
@@ -71,7 +73,7 @@ class HeaderComponent extends BaseComponent {
   _setupSuggestion() {
     this._cont = this.shadowRoot.querySelector("#search-container");
     const rect = this._cont.getBoundingClientRect();
-    this._suggestions.className = "suggestions"
+    this._suggestions.className = "suggestions";
     this._suggestions.style.top = rect.bottom + "px";
     this._suggestions.style.left = rect.left + "px";
   }
