@@ -28,7 +28,7 @@ class FooterComponent extends BaseComponent {
             <div class ="column-left">
                 <h2>Follow Us</h2>
 
-                <div>
+                <div class="list">
                     <a href="https://www.facebook.com/Exactas.UNICEN" target="_blank">
                     <custom-icon icon="${this._facebook}" size="20px"></custom-icon>
                     StimGames
@@ -61,42 +61,40 @@ class FooterComponent extends BaseComponent {
                 </div>
             </div>
             <div class ="column-center-left">
-                <div>
-                    <h2>Quick Access</h2>
-                    <div>
-                        <a href="#browse">
-                        <custom-icon icon="/assets/icons/common/Home.svg" size="20px"></custom-icon>
-                        Catalog
-                        </a>
-                        <a href="#search">
-                        <custom-icon icon="/assets/icons/common/Search.svg" size="20px"></custom-icon>
-                        About Us</a>
-                        <a href="#browse">
-                        <custom-icon icon="/assets/icons/common/Profile.svg" size="20px"></custom-icon>
-                        Profile</a>
-                        <a href="#browse">
-                        <custom-icon icon="/assets/icons/common/FavoriteEmpty.svg" size="20px"></custom-icon>
-                        Favorites</a>
-                        <a href="#browse">
-                        <custom-icon icon="/assets/icons/common/Faq.svg" size="20px"></custom-icon>
-                        FAQs</a>
-                    </div>
-                    <div>
-                        <h2>Our Newsletter</h2>
-                        <div class="subscribe">
-                            <input type="mail" name="Newsletter"  placeholder="Your Email here...">
-                            <custom-button
-                                text="Subscribe"
-                                width="100%"
-                                height="30px"
-                            ></custom-button>
-                        </div>
+                <h2>Quick Access</h2>
+                <div class="list">
+                    <a href="#browse">
+                    <custom-icon icon="/assets/icons/common/Home.svg" size="20px"></custom-icon>
+                    Catalog
+                    </a>
+                    <a href="#search">
+                    <custom-icon icon="/assets/icons/common/Search.svg" size="20px"></custom-icon>
+                    About Us</a>
+                    <a href="#browse">
+                    <custom-icon icon="/assets/icons/common/Profile.svg" size="20px"></custom-icon>
+                    Profile</a>
+                    <a href="#browse">
+                    <custom-icon icon="/assets/icons/common/FavoriteEmpty.svg" size="20px"></custom-icon>
+                    Favorites</a>
+                    <a href="#browse">
+                    <custom-icon icon="/assets/icons/common/Faq.svg" size="20px"></custom-icon>
+                    FAQs</a>
+
+                    <h2>Our Newsletter</h2>
+                    <div class="subscribe">
+                        <input type="mail" name="Newsletter"  placeholder="Your Email here...">
+                        <custom-button
+                            text="Subscribe"
+                            width="100%"
+                            height="34px"
+                            class="default"
+                        ></custom-button>
                     </div>
                 </div>
             </div>
             <div class="column-center-right">
                 <h2>Popular Genres</h2>
-                <div class="popular-genres">
+                <div class="popular-genres list">
                     <a href="#browse">
                     <custom-icon icon="/assets/icons/genres/Platformer.svg" size="20px"></custom-icon>
                     Platformers
@@ -129,22 +127,18 @@ class FooterComponent extends BaseComponent {
                 </div>
             </div>
             <div class = "column-right">
-                <div>
-                    <h2>Find Us</h2>
-                    <div class ="ubication">
-                        <a href="https://www.google.com.ar/maps/place/Facultad+de+Ciencias+Exactas+Universidad+Nacional+del+Centro+de+la+Provincia+de+Buenos+Aires/@-37.3227478,-59.0848465,17z/data=!3m1!4b1!4m6!3m5!1s0x9590e0389448d6c1:0xeb198d152284b85d!8m2!3d-37.3227521!4d-59.0822716!16s%2Fg%2F11c0x8zspd?hl=es&entry=ttu&g_ep=EgoyMDI1MDkyNC4wIKXMDSoASAFQAw%3D%3D">
-                        <custom-icon icon="/assets/icons/common/Ubication.svg" size = "20px"></custom-icon>
-                        Unicen exactas</a>
-                        <img class="ubiImg" src="/assets/images/Maps.png" alt="Gooogle Maps Location">
-                    </div>
+                <h2>Find Us</h2>
+                <div class ="ubication">
+                    <a href="https://www.google.com.ar/maps/place/Facultad+de+Ciencias+Exactas+Universidad+Nacional+del+Centro+de+la+Provincia+de+Buenos+Aires/@-37.3227478,-59.0848465,17z/data=!3m1!4b1!4m6!3m5!1s0x9590e0389448d6c1:0xeb198d152284b85d!8m2!3d-37.3227521!4d-59.0822716!16s%2Fg%2F11c0x8zspd?hl=es&entry=ttu&g_ep=EgoyMDI1MDkyNC4wIKXMDSoASAFQAw%3D%3D">
+                    <custom-icon icon="/assets/icons/common/Ubication.svg" size = "20px"></custom-icon>
+                    Unicen exactas</a>
+                    <img class="ubiImg" src="/assets/images/Maps.png" alt="Gooogle Maps Location">
                 </div>
-                <div>
-                    <h2>Legal</h2>
+                <h2>Legal</h2>
 
-                    <p>© 2010-2025 All rights reserved. </p>
-                    <a href="#browse">Terms of use</a>
-                    <a href="#browse">Privacy Policy</a>
-                </div>
+                <p>© 2010-2025 All rights reserved. </p>
+                <a href="#browse">Terms of use</a>
+                <a href="#browse">Privacy Policy</a>
             </div>
         </div>
         <div class="us">

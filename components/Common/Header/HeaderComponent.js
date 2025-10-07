@@ -16,6 +16,7 @@ class HeaderComponent extends BaseComponent {
 
   async connectedCallback() {
     await import("../CustomIcon/CustomIcon.js");
+    await import("../CustomButton/CustomButton.js");
     await this.render();
     this._setupSuggestion();
     this._setupMenu();
@@ -96,13 +97,17 @@ class HeaderComponent extends BaseComponent {
       }, 200)
     })
 
+    const menu = this.shadowRoot.querySelector(".menu-btn");
+    menu.addEventListener("click", () => {
+      this._toggleMenu();
+    });
+
     gameService.addEventListener("change", () => {
       this._genres = gameService.getGenres();
     })
   }
 
   _setupMenu() {
-    const menu = this.shadowRoot.querySelector(".menu-btn");
     this._menu.className = "menu";
 
     this._menu.innerHTML = `
@@ -146,11 +151,6 @@ class HeaderComponent extends BaseComponent {
       </div>
     `;
 
-
-    menu.addEventListener("click", () => {
-      this._toggleMenu();
-    });
-
     this._menu.addEventListener("click", () => {
       setTimeout(() => {
         this._toggleMenu();
@@ -161,10 +161,8 @@ class HeaderComponent extends BaseComponent {
   _toggleMenu() {
     const menu = document.body.querySelector(".menu");
     if (menu == null) {
-      document.body.style.overflow = 'hidden';
       document.body.appendChild(this._menu);
     } else {
-      document.body.style.overflow = 'auto';
       document.body.querySelector(".menu")?.remove();
     }
   }

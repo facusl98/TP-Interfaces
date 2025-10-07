@@ -1,50 +1,47 @@
 :host {
-    padding: 10px;
+    padding: 10px 20px;
     margin-top: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 15px;
     background-color: var(--dark-1);
     border-top: 1px solid var(--purple-2);
     color: var(--white);
-    font-family: 'Segoe UI', Arial, sans-serif;
-    font-size: 15px;
-    border-radius: 8px;
 }
 
 
 a, p {
   font-family: var(--text-font);
+  margin: 0px;
 }
 h2 {
   font-family: var(--title-font);
+  margin: 0px;
 }
+
 .footer-containers-rows {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  gap: 24px;
-  padding: 24px 32px 16px 32px;
+  gap: 30px;
 }
 
-.footer-containers-rows div {
-  margin-right: 16px;
+.footer-containers-rows > div {
+  padding: 15px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 15px;
 }
 
 
 .footer-containers-rows h2 {
-    font-size: 1.1em;
-    margin-bottom: 8px;
+    font-size: 20px;
     color: var(--white);
     font-weight: 600;
-    letter-spacing: 0.5px;
 }
 
 .footer-containers-rows a {
-display: flex;
+  display: flex;
   align-items: center;
   gap: 8px;
   color: var(--white);
@@ -57,48 +54,36 @@ display: flex;
     color: var(--blue-0);
 }
 
-.column-left div a {
-  margin-bottom: 4px;
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 0px 5px;
 }
+
+.newsletter {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
 .subscribe {
-  gap: 6px;
-  margin-top: 8px;
-}
-.subscribe input {
-  display: inline-block;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 input[type="mail"] {
-  background: var(--black);
-  border: 2px solid var(--purple-2);
+  box-sizing: border-box;
+  height: 34px;
+  width: 100%;
+  background: var(--pale);
+  border: 1px solid var(--purple-2);
   border-radius: 5px;
-  color: var(--white);
-  padding: 8px 12px;
-  width: 180px;
-  font-size: 1em;
+  color: var(--black);
+  padding: 5px;
+  font-size: 16px;
   outline: none;
-}
-
-custom-button {
-  background: var(--dark-4);
-  color: var(--white);
-  border: 2px solid var(--purple-2);
-  border-radius: 5px;
-  padding: 8px 0;
-  width: 120px;
-  font-size: 1em;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-custom-button:hover {
-  background: var(--blue-1);
-}
-
-.column-center-right div a {
-  margin-bottom: 4px;
 }
 
 .games-today {
@@ -106,47 +91,16 @@ custom-button:hover {
   flex-direction: column;
 }
 
-.column-center-right img {
-  width: 36px;
-  height: 36px;
-  border-radius: 6px;
-  margin-right: 8px;
-  vertical-align: middle;
-}
-
-.column-center-right p {
-  margin: 0;
-  font-size: 0.97em;
-}
-
-.column-right iframe {
-  width: 300px;
-  height: 300px;
-  border-radius: 8px;
-  border: none;
-  margin-top: 8px;
-}
-
-.column-right p {
-  margin: 8px 0 4px 0;
-  font-size: 0.95em;
-  color: #bdbdbd;
-}
-
-.column-right a {
-  margin-right: 12px;
-  font-size: 0.97em;
-}
 .ubiImg {
-    width: 100%;
-    height: 150px;
+  width: 100%;
+  height: 150px;
 }
 
 .us {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 32px 10px 32px;
+  padding: 10px;
 }
 
 .us h2 {

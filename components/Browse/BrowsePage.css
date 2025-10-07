@@ -1,6 +1,17 @@
 :host {
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
 
 
+.ad-1 {
+    width: 100%;
+    padding: 0px 25px;
+    box-sizing: border-box;
+}
+
+.ad-1 img {
+    width: 100%;
+    height: 100%;
+}

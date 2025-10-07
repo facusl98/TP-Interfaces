@@ -1,6 +1,6 @@
 :host {
   min-height: 226px;
-  padding: 10px 25px 15px 25px;
+  padding: 5px 25px 0px 25px;
   display: flex;
   flex-direction: column;
   user-select: none;
@@ -35,7 +35,7 @@ carousel-card:not(:last-child) {
   width: max-content;
   display: flex;
   align-items: center;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 }
 
 :host(.default) {
