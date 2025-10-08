@@ -104,7 +104,7 @@ class FooterComponent extends BaseComponent {
                     Arcade
                     </a>
                     <a href="#browse">
-                    <custom-icon icon="/TP-Interfaces/TP2/assets/icons/genres/Rpg.svg" size="20px"></custom-icon>
+                    <custom-icon icon="/TP-Interfaces/TP2/assets/icons/genres/RPG.svg" size="20px"></custom-icon>
                     RPG
                     </a>
                     <a href="#browse">
