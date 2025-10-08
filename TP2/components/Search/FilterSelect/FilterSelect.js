@@ -107,9 +107,9 @@ class FilterSelect extends BaseComponent {
         ${!this._selectedGenre ?  
         `<custom-button      
           ${this._genresOpen ?    // No Genre Selected
-            `icon="../../../assets/icons/common/ArrowUp.svg"`
+            `icon="../../../TP2/assets/icons/common/ArrowUp.svg"`
           :
-            `icon="../../../assets/icons/common/ArrowDown.svg"`
+            `icon="../../../TP2/assets/icons/common/ArrowDown.svg"`
           }
           text="Genres"
           width="300px"
@@ -165,13 +165,13 @@ class FilterSelect extends BaseComponent {
       paginator.innerHTML = `
         <custom-icon
           class="arrow"
-          icon="/assets/icons/common/ArrowLeft.svg"
+          icon="/TP2/assets/icons/common/ArrowLeft.svg"
           size="20px"
         ></custom-icon>
         <p>Page ${this._page} of ${this._pages}</p>
         <custom-icon
           class="arrow"
-          icon="/assets/icons/common/ArrowRight.svg"
+          icon="/TP2/assets/icons/common/ArrowRight.svg"
           size="20px"
         ></custom-icon>`;
 

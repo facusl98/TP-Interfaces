@@ -22,7 +22,7 @@ class GamePage extends BaseComponent {
       <div class="breadcrumb-container">
         <div class="image-bread-container">
           <a href="#browse" class="breadcrumb">
-            <custom-icon icon="/assets/icons/common/Home.svg" size = "15px"></custom-icon>
+            <custom-icon icon="/TP2/assets/icons/common/Home.svg" size = "15px"></custom-icon>
             Browse >> Tabletop >> Peg Soltaire
           </a>
         </div>
@@ -30,7 +30,7 @@ class GamePage extends BaseComponent {
       <div class="game-area-container">
         <div class="game-area">
           <custom-button
-          icon="/assets/icons/common/Play.svg"
+          icon="/TP2/assets/icons/common/Play.svg"
           width="120px"
           height="70px"
           class="default"
@@ -42,21 +42,21 @@ class GamePage extends BaseComponent {
         <h1 class="game-name">Peg Soltaire</h1> 
         <div class="game-bar-buttons">
           <custom-button
-          icon="/assets/icons/common/Share.svg"
+          icon="/TP2/assets/icons/common/Share.svg"
           width="65px"
           height="45px"
           class="default"
           >
           </custom-button>
           <custom-button
-          icon="/assets/icons/common/FavoriteEmpty.svg"
+          icon="/TP2/assets/icons/common/FavoriteEmpty.svg"
           width="65px"
           height="45px"
           class="default"
           >
           </custom-button>
           <custom-button
-          icon="/assets/icons/common/Maximize.svg"
+          icon="/TP2/assets/icons/common/Maximize.svg"
           width="65px"
           height="45px"
           class="default"
@@ -67,7 +67,7 @@ class GamePage extends BaseComponent {
     </div>
 
     <div class="ad ad-1">
-      <img class="ad-image" src="/assets/images/ad.png" alt="Ad Image"></img>
+      <img class="ad-image" src="/TP2/assets/images/ad.png" alt="Ad Image"></img>
     </div>
 
     <div class="game-content">
@@ -86,7 +86,7 @@ class GamePage extends BaseComponent {
             <p>Peg Solitaire, reimagined here as a medieval clash, has its origins in 17th century France, where it was played in royal courts. Over time, the game spread through Europe, much like epic tales of knights and battles. Though the battlefield has changed, the goal remains timeless: reduce the army until one champion is left.</p>
         </div>
         <div class="ad ad-2">
-          <img class="ad-image" src="/assets/images/ad2.png" alt="Ad Image"></img>          
+          <img class="ad-image" src="/TP2/assets/images/ad2.png" alt="Ad Image"></img>          
         </div>
 
 
@@ -95,9 +95,9 @@ class GamePage extends BaseComponent {
 
       <div class="right-column">
         <div class="images-vids-container">
-          <img src="/assets/images/VideoPegSolitaire.png" alt="Game tutorial"></img>
-          <img src="/assets/images/EjPegSolitaire.png" alt="Game tutorial"></img>
-          <img src="/assets/images/EjPegSolitaire.png" alt="Game tutorial"></img> 
+          <img src="/TP2/assets/images/VideoPegSolitaire.png" alt="Game tutorial"></img>
+          <img src="/TP2/assets/images/EjPegSolitaire.png" alt="Game tutorial"></img>
+          <img src="/TP2/assets/images/EjPegSolitaire.png" alt="Game tutorial"></img> 
         </div>
 
         <game-dot-list

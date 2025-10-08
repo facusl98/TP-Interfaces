@@ -23,7 +23,7 @@ class FilterBody extends BaseComponent {
     await this._attachCSS(import.meta.url);
     this.shadowRoot.innerHTML += `
       <section-title
-        icon="../../../assets/icons/common/Search.svg"
+        icon="../../../TP2/assets/icons/common/Search.svg"
         text="Browse"
       ></section-title>
       <filter-select class="paginated"></filter-select>

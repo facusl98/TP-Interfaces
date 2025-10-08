@@ -48,7 +48,7 @@ class HeroCard extends BaseComponent {
 
         <div class="nav">
           <custom-icon
-            icon="/assets/icons/common/ArrowLeft.svg"
+            icon="/TP2/assets/icons/common/ArrowLeft.svg"
             class="arrow"
           ></custom-icon>
           <div class="dots">
@@ -59,7 +59,7 @@ class HeroCard extends BaseComponent {
           </div>
           <custom-icon
             class="arrow"
-            icon="/assets/icons/common/ArrowRight.svg"
+            icon="/TP2/assets/icons/common/ArrowRight.svg"
           ></custom-icon>
         </div>
       </div>

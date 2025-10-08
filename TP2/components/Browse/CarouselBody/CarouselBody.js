@@ -9,7 +9,7 @@ class CarouselBody extends BaseComponent {
     this._games = [];
     this._class = "default"; // Default
 
-    this._placeholder = "/assets/images/Placeholder.png";
+    this._placeholder = "/TP2/assets/images/Placeholder.png";
     this._isPlaceholder = true;  // For Placeholders
 
     this._inner = null;   // To unload offscreen
@@ -26,42 +26,42 @@ class CarouselBody extends BaseComponent {
 
     this._types = {
       featured: {
-        icon: "/assets/icons/common/Featured.svg",
+        icon: "/TP2/assets/icons/common/Featured.svg",
         text: "Featured Picks",
         import: () => gameService.getRandom(10)
       },
       trending: {
-        icon: "/assets/icons/common/Trending.svg",
+        icon: "/TP2/assets/icons/common/Trending.svg",
         text: "Trending Games",
         import: () => gameService.getTrending()
       },
       recent: {
-        icon: "/assets/icons/common/New.svg",
+        icon: "/TP2/assets/icons/common/New.svg",
         text: "Newly Added",
         import: () => gameService.getNewest()
       }, 
       platformers: {
-        icon: "/assets/icons/genres/Platformer.svg",
+        icon: "/TP2/assets/icons/genres/Platformer.svg",
         text: "Platformer",
         import: () => gameService.getRandom(10)
       },
       arcade: {
-        icon: "/assets/icons/genres/Arcade.svg",
+        icon: "/TP2/assets/icons/genres/Arcade.svg",
         text: "Arcade",
         import: () => gameService.getRandom(10)
       }, 
       rpg: {
-        icon: "/assets/icons/genres/RPG.svg",
+        icon: "/TP2/assets/icons/genres/RPG.svg",
         text: "RPG",
         import: () => gameService.getRandom(10)
       }, 
       puzzle: {
-        icon: "/assets/icons/genres/puzzle.svg",
+        icon: "/TP2/assets/icons/genres/puzzle.svg",
         text: "puzzle",
         import: () => gameService.getRandom(10)
       }, 
       fighting: {
-        icon: "/assets/icons/genres/Fighting.svg",
+        icon: "/TP2/assets/icons/genres/Fighting.svg",
         text: "Fighting",
         import: () => gameService.getRandom(10)
       }

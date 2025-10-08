@@ -5,7 +5,7 @@ class ResultsCont extends BaseComponent {
   constructor() {
     super();
 
-    this._placeholder = "/assets/images/Placeholder.png";
+    this._placeholder = "/TP2/assets/images/Placeholder.png";
     this._games = [];
   }
 

@@ -32,7 +32,7 @@ class GamePicture extends BaseComponent {
       <a href="#game">
         <div class="overlay">
           <custom-icon 
-          icon="/assets/icons/common/Play.svg"
+          icon="/TP2/assets/icons/common/Play.svg"
           size="${this._iconSize}"
           ></custom-icon>
         </div>

@@ -29,7 +29,7 @@ class BrowsePage extends BaseComponent {
       <carousel-body type="trending"></carousel-body>
       <carousel-body type="recent"></carousel-body>
       <div class="ad ad-1">
-        <img class="ad-image" src="/assets/images/ad.png" alt="Ad Image"></img>
+        <img class="ad-image" src="/TP2/assets/images/ad.png" alt="Ad Image"></img>
       </div>
       <carousel-body type="platformers" class="small"></carousel-body>
       <carousel-body type="arcade" class="small"></carousel-body>
