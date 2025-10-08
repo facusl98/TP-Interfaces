@@ -9,13 +9,13 @@ class GameService extends EventTarget {
     let iconsRoute = "/TP-Interfaces/TP2/assets/icons/genres/"
     this._genres = {
       Action: iconsRoute + "Action.svg",
-      RPG: iconsRoute + "Rpg.svg",
+      RPG: iconsRoute + "RPG.svg",
       Shooter: iconsRoute + "Shooter.svg",
       Puzzle: iconsRoute + "Puzzle.svg",
       Adventure: iconsRoute + "Adventure.svg",
       Indie: iconsRoute + "Indie.svg",
       Platformer: iconsRoute + "Platformer.svg",
-      MMO: iconsRoute + "Mmo.svg",
+      MMO: iconsRoute + "MMO.svg",
       Sports: iconsRoute + "Sports.svg",
       Racing: iconsRoute + "Racing.svg",
       Simulation: iconsRoute + "Simulation.svg",

@@ -56,8 +56,8 @@ class CarouselBody extends BaseComponent {
         import: () => gameService.getRandom(10)
       }, 
       puzzle: {
-        icon: "/TP-Interfaces/TP2/assets/icons/genres/puzzle.svg",
-        text: "puzzle",
+        icon: "/TP-Interfaces/TP2/assets/icons/genres/Puzzle.svg",
+        text: "Puzzle",
         import: () => gameService.getRandom(10)
       }, 
       fighting: {
