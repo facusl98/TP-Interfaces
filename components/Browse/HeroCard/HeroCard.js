@@ -109,7 +109,7 @@ class HeroCard extends BaseComponent {
     });
 
     this.shadowRoot.querySelector(".info").addEventListener("click", () => {
-      location.hash = "#game"
+      location.hash = "#/game/peg-solitaire"
     });
 
     const arrows = this.shadowRoot.querySelectorAll(".arrow");

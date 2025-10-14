@@ -29,7 +29,7 @@ class GamePicture extends BaseComponent {
     await this._attachCSS(import.meta.url);
     this.shadowRoot.innerHTML += `
       <img src="${this._src}" alt="${this._alt}" loading="lazy"/>
-      <a href="#game">
+      <a href="#/game/peg-solitaire">
         <div class="overlay">
           <custom-icon 
           icon="/assets/icons/common/Play.svg"

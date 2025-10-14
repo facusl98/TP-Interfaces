@@ -39,7 +39,7 @@ class LoginPage extends BaseComponent {
     box.classList.add("box-animation");
 
     setTimeout(() => {
-      window.location.hash = "#browse";
+      window.location.hash = "#/browse";
     }, 3000)
   }
 

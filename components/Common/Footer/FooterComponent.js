@@ -63,20 +63,20 @@ class FooterComponent extends BaseComponent {
             <div class ="column-center-left">
                 <h2>Quick Access</h2>
                 <div class="list">
-                    <a href="#browse">
+                    <a href="#/browse">
                     <custom-icon icon="/assets/icons/common/Home.svg" size="20px"></custom-icon>
                     Catalog
                     </a>
-                    <a href="#search">
+                    <a href="#/search">
                     <custom-icon icon="/assets/icons/common/Search.svg" size="20px"></custom-icon>
                     About Us</a>
-                    <a href="#browse">
+                    <a href="#/browse">
                     <custom-icon icon="/assets/icons/common/Profile.svg" size="20px"></custom-icon>
                     Profile</a>
-                    <a href="#browse">
+                    <a href="#/browse">
                     <custom-icon icon="/assets/icons/common/FavoriteEmpty.svg" size="20px"></custom-icon>
                     Favorites</a>
-                    <a href="#browse">
+                    <a href="#/browse">
                     <custom-icon icon="/assets/icons/common/Faq.svg" size="20px"></custom-icon>
                     FAQs</a>
 
@@ -95,23 +95,23 @@ class FooterComponent extends BaseComponent {
             <div class="column-center-right">
                 <h2>Popular Genres</h2>
                 <div class="popular-genres list">
-                    <a href="#browse">
+                    <a href="#/browse">
                     <custom-icon icon="/assets/icons/genres/Platformer.svg" size="20px"></custom-icon>
                     Platformers
                     </a>
-                    <a href="#browse">
+                    <a href="#/browse">
                     <custom-icon icon="/assets/icons/genres/Arcade.svg" size="20px"></custom-icon>
                     Arcade
                     </a>
-                    <a href="#browse">
+                    <a href="#/browse">
                     <custom-icon icon="/assets/icons/genres/Rpg.svg" size="20px"></custom-icon>
                     RPG
                     </a>
-                    <a href="#browse">
+                    <a href="#/browse">
                     <custom-icon icon="/assets/icons/genres/Puzzle.svg" size="20px"></custom-icon>
                     Puzzle
                     </a>
-                    <a href="#browse">
+                    <a href="#/browse">
                     <custom-icon icon="/assets/icons/genres/Fighting.svg" size="20px"></custom-icon>
                     Fighting
                     </a>
@@ -137,8 +137,8 @@ class FooterComponent extends BaseComponent {
                 <h2>Legal</h2>
 
                 <p>© 2010-2025 All rights reserved. </p>
-                <a href="#browse">Terms of use</a>
-                <a href="#browse">Privacy Policy</a>
+                <a href="#/browse">Terms of use</a>
+                <a href="#/browse">Privacy Policy</a>
             </div>
         </div>
         <div class="us">

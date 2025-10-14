@@ -35,7 +35,7 @@ class HeaderComponent extends BaseComponent {
           "/assets/icons/common/Menu.svg" :
           "/assets/icons/common/Close.svg"}" class="burger-btn"/>
           
-          <a href="#browse">
+          <a href="#/browse">
             <img class="logo" src="/assets/images/Logo.png" alt="StimGames Logo">
           </a> 
           
@@ -54,7 +54,7 @@ class HeaderComponent extends BaseComponent {
         <div class="categories" id="categories">
           ${Object.keys(this._genres).map((genre) => {
           return `
-          <a href="#search">
+          <a href="#/search">
             <custom-button
               icon="/assets/icons/genres/${genre}.svg"
               iconSize="20px"
@@ -120,12 +120,12 @@ class HeaderComponent extends BaseComponent {
         </div>
         <div class="links-cont">
           <div class="top">
-            <a href="#browse">
+            <a href="#/browse">
               <custom-icon icon="/assets/icons/common/Home.svg" size="24px">
               </custom-icon>
               <span>Browse</span>
             </a>
-            <a href="#search">
+            <a href="#/search">
               <custom-icon icon="/assets/icons/common/Search.svg" size="24px">
               </custom-icon>
               <span>Search</span>
@@ -174,10 +174,10 @@ class HeaderComponent extends BaseComponent {
     this._games = gameService.getBy(this._name).slice(0, 3);
 
     this._suggestions.innerHTML = this._games.map(game => `
-      <a href="#game/${game.id}"><div class="suggestion-item">${game.name}</div></a>
+      <a href="#/game/peg-solitaire/${game.id}"><div class="suggestion-item">${game.name}</div></a>
     `).join("") + `
     <div class="suggestion-item advanced">
-    <a href="#search">
+    <a href="#/search">
     <custom-icon icon="/assets/icons/common/Filter.svg" size="15px" style="dark"></custom-icon>
     Advanced Search</a>
     </div>

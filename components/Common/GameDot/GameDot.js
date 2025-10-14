@@ -13,7 +13,7 @@ import { BaseComponent } from "../../BaseComponent.js";
         await this._attachCSS(import.meta.url);
         this.shadowRoot.innerHTML += `
             <img src="${this.getAttribute("image")}" alt="${this.getAttribute("name")}"/>
-            <a href="#game">${this.getAttribute("name")}</a>
+            <a href="#/game/peg-solitaire">${this.getAttribute("name")}</a>
         `;
     }
 

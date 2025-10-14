@@ -21,7 +21,7 @@ class GamePage extends BaseComponent {
     <div class="game-cont">
       <div class="breadcrumb-container">
         <div class="image-bread-container">
-          <a href="#browse" class="breadcrumb">
+          <a href="#/browse" class="breadcrumb">
             <custom-icon icon="/assets/icons/common/Home.svg" size = "15px"></custom-icon>
             Browse >> Tabletop >> Peg Soltaire
           </a>
@@ -112,6 +112,9 @@ class GamePage extends BaseComponent {
     `;
   }
 
+  static get observedAttributes() {
+    return ["game"];
+  }
 
 }
 
