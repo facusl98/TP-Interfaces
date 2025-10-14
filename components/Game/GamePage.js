@@ -13,7 +13,9 @@ class GamePage extends BaseComponent {
         story: "Peg Solitaire, reimagined here as a medieval clash, has its origins in 17th century France, where it was played in royal courts. Over time, the game spread through Europe, much like epic tales of knights and battles. Though the battlefield has changed, the goal remains timeless: reduce the army until one champion is left.",
         video: "/assets/images/VideoPegSolitaire.png",
         img1: "/assets/images/PegSolitaire.png",
-        img2: "/assets/images/EjPegSolitaire.png"
+        img2: "/assets/images/EjPegSolitaire.png",
+        import: async () => await import("./PegSolitaireGame/PegSolitaireGame.js"),
+        component: `<peg-solitaire-game id="game" class="hidden"></peg-solitaire-game>`
       },
       "blocka": {
         title: "Blocka",
@@ -22,7 +24,9 @@ class GamePage extends BaseComponent {
         story: "After a massive data breach, the BLOCKA-9 mainframe lost critical visual archives. The system's recovery AI has only partial access, and every image must be manually reconstructed to stabilize the database. Each restored picture brings the network closer to full recovery — and unveils traces of the lost digital world that once thrived within the machine.",
         video: "/assets/images/blocka/blocka-vid.png",
         img1: "/assets/images/blocka/blocka-2.jpg",
-        img2: "/assets/images/blocka/blocka-3.jpg"
+        img2: "/assets/images/blocka/blocka-3.jpg",
+        import: async () => await import("./BlockaGame/BlockaGame.js"),
+        component: `<blocka-game id="game" class="hidden"></blocka-game>`
       }
     };
   }
@@ -33,6 +37,7 @@ class GamePage extends BaseComponent {
     await import("./CommentSection/CommentSection.js");
 
     this._game = this._games[this.getAttribute("game") ?? "peg-solitaire"];
+    this._game.import();
 
     await this.render();
   }
@@ -50,7 +55,8 @@ class GamePage extends BaseComponent {
         </div>
       </div>
       <div class="game-area-container">
-        <div class="game-area">
+        ${this._game.component}
+        <div class="game-area" id="play">
           <custom-button
           icon="/assets/icons/common/Play.svg"
           width="120px"
@@ -134,6 +140,13 @@ class GamePage extends BaseComponent {
           
       </div>
     `;
+
+    const play = this.shadowRoot.querySelector("#play");
+    play.addEventListener("click", () => {
+      play.remove();
+      const game = this.shadowRoot.querySelector("#game");
+      game.classList.remove("hidden") 
+    })
   }
 
   static get observedAttributes() {

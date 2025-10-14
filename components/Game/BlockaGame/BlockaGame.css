@@ -1,0 +1,5 @@
+:host {
+    width: 720px;
+    height: 480px;
+    background-color: var(--purple-1);
+}

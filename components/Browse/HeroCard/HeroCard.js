@@ -15,6 +15,14 @@ class HeroCard extends BaseComponent {
 
   importGames() {
     this._games = gameService.getRandom(7);
+    this._games[3] = {
+      name: "Blocka",
+      background_image: "/assets/images/blocka/blocka.jpg",
+      genres: [
+        {name: "Puzzle"}, 
+        {name: "Casual"}, 
+        {name: "Indie"}]
+    }
     this._setShown();
     this.render();
   }
@@ -109,7 +117,10 @@ class HeroCard extends BaseComponent {
     });
 
     this.shadowRoot.querySelector(".info").addEventListener("click", () => {
-      location.hash = "#/game/peg-solitaire"
+      if (this._activeIndex == 3)
+        window.location.hash = "#/game/blocka"
+      else 
+        location.hash = "#/game/peg-solitaire"
     });
 
     const arrows = this.shadowRoot.querySelectorAll(".arrow");
