@@ -25,7 +25,7 @@ class AppRoot extends BaseComponent {
     switch (this._route[1]) {
       case "game":
         await import('./components/Game/GamePage.js');
-        this._pageComponent = '<game-page></game-page>';
+        this._pageComponent = `<game-page game="${this._route[2]}"></game-page>`;
         break;
       case "login":
         await import('./components/Login/LoginPage.js');
@@ -42,7 +42,7 @@ class AppRoot extends BaseComponent {
       default:
         window.location.hash = "#/browse"
         await import('./components/Browse/BrowsePage.js');
-        this._pageComponent = `<browse-page game="${this._route[2]}"></browse-page>`;
+        this._pageComponent = `<browse-page></browse-page>`;
         break;
     }
   }

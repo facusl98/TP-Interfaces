@@ -4,13 +4,35 @@ import { BaseComponent } from "../BaseComponent.js";
 class GamePage extends BaseComponent {
   constructor() {
     super();
-    this._games = [];
+    this._game = null;
+    this._games = {
+      "peg-solitaire": {
+        title: "Peg Solitaire",
+        genres: ["Strategy", "Indie"],
+        guide: "Command your knights in this strategic challenge! Select a knight and leap over another to defeat it, landing on the empty space beyond. Each defeated knight is removed from the battlefield. Keep striking until only one brave warrior remains standing in the center. Victory belongs to the last knight!",
+        story: "Peg Solitaire, reimagined here as a medieval clash, has its origins in 17th century France, where it was played in royal courts. Over time, the game spread through Europe, much like epic tales of knights and battles. Though the battlefield has changed, the goal remains timeless: reduce the army until one champion is left.",
+        video: "/assets/images/VideoPegSolitaire.png",
+        img1: "/assets/images/PegSolitaire.png",
+        img2: "/assets/images/EjPegSolitaire.png"
+      },
+      "blocka": {
+        title: "Blocka",
+        genres: ["Puzzle", "Casual", "Indie"],
+        guide: "Restore corrupted data fragments in this digital puzzle challenge! Each level presents a damaged image divided into four rotating blocks. Click a block to rotate it left, or right-click to spin it in the opposite direction. Reconstruct the image by aligning all fragments correctly to restore the original file. Act fast — your repair time is recorded as your system efficiency score!",
+        story: "After a massive data breach, the BLOCKA-9 mainframe lost critical visual archives. The system's recovery AI has only partial access, and every image must be manually reconstructed to stabilize the database. Each restored picture brings the network closer to full recovery — and unveils traces of the lost digital world that once thrived within the machine.",
+        video: "/assets/images/blocka/blocka-vid.png",
+        img1: "/assets/images/blocka/blocka-2.jpg",
+        img2: "/assets/images/blocka/blocka-3.jpg"
+      }
+    };
   }
 
   async connectedCallback() {
     await import("../Common/CustomButton/CustomButton.js");
     await import("../Common/GameDotList/GameDotList.js");
     await import("./CommentSection/CommentSection.js");
+
+    this._game = this._games[this.getAttribute("game") ?? "peg-solitaire"];
 
     await this.render();
   }
@@ -23,7 +45,7 @@ class GamePage extends BaseComponent {
         <div class="image-bread-container">
           <a href="#/browse" class="breadcrumb">
             <custom-icon icon="/assets/icons/common/Home.svg" size = "15px"></custom-icon>
-            Browse >> Tabletop >> Peg Soltaire
+            Browse >> ${this._game.genres[0]} >> ${this._game.title}
           </a>
         </div>
       </div>
@@ -39,7 +61,7 @@ class GamePage extends BaseComponent {
         </div>
       </div>
       <div class="game-bar">
-        <h1 class="game-name">Peg Soltaire</h1> 
+        <h1 class="game-name">${this._game.title}</h1> 
         <div class="game-bar-buttons">
           <custom-button
           icon="/assets/icons/common/Share.svg"
@@ -75,15 +97,17 @@ class GamePage extends BaseComponent {
 
         <div class="genre-container">
             <h2>Genres: </h2>
-            <p>Strategy, Indie</p>
+            <p>${this._game.genres.map((genre) =>
+              {return `${genre}`}
+            ).join(", ")}</p>
         </div>
         <div class="explain-text">
             <h2>How to play</h2>
-            <p>Command your knights in this strategic challenge! Select a knight and leap over another to defeat it, landing on the empty space beyond. Each defeated knight is removed from the battlefield. Keep striking until only one brave warrior remains standing in the center. Victory belongs to the last knight!</p>
+            <p>${this._game.guide}</p>
         </div>
         <div class="explain-text">
             <h2>A bit of history</h2>
-            <p>Peg Solitaire, reimagined here as a medieval clash, has its origins in 17th century France, where it was played in royal courts. Over time, the game spread through Europe, much like epic tales of knights and battles. Though the battlefield has changed, the goal remains timeless: reduce the army until one champion is left.</p>
+            <p>${this._game.story}</p>
         </div>
         <div class="ad ad-2">
           <img class="ad-image" src="/assets/images/ad2.png" alt="Ad Image"></img>          
@@ -95,9 +119,9 @@ class GamePage extends BaseComponent {
 
       <div class="right-column">
         <div class="images-vids-container">
-          <img src="/assets/images/VideoPegSolitaire.png" alt="Game tutorial"></img>
-          <img src="/assets/images/EjPegSolitaire.png" alt="Game tutorial"></img>
-          <img src="/assets/images/EjPegSolitaire.png" alt="Game tutorial"></img> 
+          <img src="${this._game.video}" alt="Game tutorial"></img>
+          <img src="${this._game.img1}" alt="Game tutorial"></img>
+          <img src="${this._game.img2}" alt="Game tutorial"></img> 
         </div>
 
         <game-dot-list
