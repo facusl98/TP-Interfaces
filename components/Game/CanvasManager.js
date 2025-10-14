@@ -1,26 +1,11 @@
-import {BaseComponent} from '../../BaseComponent.js';
 
-class Canvas extends BaseComponent {
-    contructor() {
-        super();
-        this._ctx = document.shadowRoot.quertSelector('canvas').getContext('2d');
+export class CanvasManager {
+    contructor(canvas) {
+        this._canvas = canvas;
+        this._ctx = canvas.getContext('2d');
         this._height = 0;
         this._width = 0;
         this._imageData = this._ctx.createImageData(this._width, this._height);
-    }
-
-    connecterCallbak() {
-        this._ctx.fillRect(0, 0, this._width, this._height);
-        fillImage();
-        fillImageByDegrade();
-        this.render();
-    }
-
-    async render() {
-        await this._attachCSS(import.meta.url);
-        this.shadowRoot.innerHTML = `
-            <canvas></canvas>
-        `;
     }
 
     fillImage() {
@@ -51,8 +36,6 @@ class Canvas extends BaseComponent {
     }
 
     degrade(cInicial, cFinal, XInicial, XFinal, x) {
-        return cInicial + ((cFinal - cInicial) / (XFinal - XInicial)) * (X - XInicial);
+        return cInicial + ((cFinal - cInicial) / (XFinal - XInicial)) * (x - XInicial);
     }
 }
-
-CanvasCustom.define('canvas-custom');

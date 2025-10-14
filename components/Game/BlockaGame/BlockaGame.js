@@ -1,23 +1,23 @@
 import { BaseComponent } from "../../BaseComponent.js";
+import { CanvasManager } from "../CanvasManager.js";
+
 
 class BlockaGame extends BaseComponent {
   constructor() {
     super();
-
-    this._canvas = null;
   }
 
-  connectedCallback() {
+  async connectedCallback() {
     this.render();
   }
 
   async render() {
     await this._attachCSS(import.meta.url);
-    this.innerHTML += `
+    this.shadowRoot.innerHTML += `
       <canvas />
     `;
 
-    this._canvas = this.querySelector("canvas");
+    const manager = new CanvasManager(this.shadowRoot.querySelector("canvas"));
   }
 }
 

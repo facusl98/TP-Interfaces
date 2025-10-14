@@ -20,7 +20,7 @@
 }
 
 .game-area{
-    width: 70%;
+    width: 720px;
     height: 100%;
     background-color: var(--black);
     border: solid var(--purple-2);
