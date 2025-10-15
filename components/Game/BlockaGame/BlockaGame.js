@@ -1,35 +1,20 @@
 import { BaseComponent } from "../../BaseComponent.js";
 import { CanvasManager } from "../CanvasManager.js";
-
+import { HomeScreen } from "./Screens/HomeScreen.js";
+import { SelectScreen } from "./Screens/SelectScreen.js";
+import { GameScreen } from "./Screens/GameScreen.js";
 
 class BlockaGame extends BaseComponent {
   constructor() {
     super();
-    this._manager = null;
-    this._canvas = null;
-    this._screens = Object.freeze({
-      HOME: "HOME",
-      SELECT: "SELECT",
-      GAME: "GAME"
-    });
-    this._screen = this._screens.HOME;
-
-    this._events = {
-      HOME: [
-      {
-        x1: 270, x2: 450, y1: 380, y2: 430, 
-        click: () => {console.log("Click")},
-        hover: null
-      }, 
-      ],
-      SELECT : [],
-      GAME: []
-    }
+    this.manager = null;
+    this.canvas = null;
+    this.ctx = null;
   }
 
   async connectedCallback() {
     await this.render();
-    this.loadScreen();
+    this.drawCurrent();
   }
 
   async render() {
@@ -41,74 +26,45 @@ class BlockaGame extends BaseComponent {
     // Set up canvas
     const canvas = this.shadowRoot.querySelector("canvas");
     const rect = canvas.getBoundingClientRect();
-    this._canvas = canvas;
-    this._manager = new CanvasManager(canvas);
+    this.canvas = canvas;
+    this.manager = new CanvasManager(canvas);
+    this.ctx = this.manager.getCtx();
 
+    // Set up screens
+    this.screens = {
+      HOME: new HomeScreen(this, this.changeScreen.bind(this)),
+      SELECT: new SelectScreen(this, this.changeScreen.bind(this)),
+      GAME: new GameScreen(this, this.changeScreen.bind(this))
+    };
+    this.current = this.screens["HOME"];
 
     // Events
     canvas.addEventListener("click", (e) => {
-      let tx = e.offsetX - rect.left;
-      let ty = e.offsetY - rect.top;
-      for (const o of this._events[this._screen]) {
-        if ((tx > o.x1 && tx < o.x2) && ty > o.y1 && ty < o.y2) {
-          o.click();
-          return;
-        }
-      }
+      let x = e.offsetX - rect.left;
+      let y = e.offsetY - rect.top;
+      this.current.onClick(x, y)
     });
 
     canvas.addEventListener("mousemove", (e) => {
-      let tx = e.offsetX - rect.left;
-      let ty = e.offsetY - rect.top;
-      for (const o of this._events[this._screen]) {
-        if ((tx > o.x1 && tx < o.x2) && ty > o.y1 && ty < o.y2) {
-          if (o.hover)
-            o.hover();
-          else 
-            this.className = "pointer";
-          return;
-        }
-      }
-      // Default
-      this.className = "";
+      let x = e.offsetX - rect.left;
+      let y = e.offsetY - rect.top;
+      this.current.onHover(x, y)
     });
   }
 
-  loadScreen() {
-    switch (this._screen) {
-      case this._screens.HOME:
-        this.loadHome();
-        break;
-      case this._screens.SELECT:
-        this.loadSelect();
-        break;
-      case this._screens.GAME:
-        this.loadGame();
-        break;
-    }
+  clearScreen() {
+    this.ctx.clearRect(0, 0, 720, 480);
   }
 
-  loadHome() {
-    const ctx = this._manager.getCtx();
-    
-    // Play Btn: [270, 380] to [450, 430]
-    ctx.font = "24px Helvetica";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = "rgba(60, 30, 150, 1)";
-    ctx.fillStyle = "rgba(90, 30, 180, 1)"
-    this._manager.drawRoundedRect(270, 380, 180, 50, 10);
-    ctx.fill();
-    ctx.stroke();
-    ctx.fillStyle = "rgba(240, 230, 240, 1)";
-    ctx.fillText("Play", 360, 405);
+  drawCurrent() {
+    this.current.draw();
   }
 
-
-  loadSelect() {}
-
-  loadGame() {}
+  changeScreen(screen) {
+    this.current = this.screens[screen];
+    this.clearScreen();
+    this.drawCurrent();
+  }
 
 }
 

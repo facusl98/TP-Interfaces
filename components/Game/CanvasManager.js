@@ -1,26 +1,26 @@
 
 export class CanvasManager {
     constructor(canvas) {
-        this._canvas = canvas;
-        this._ctx = canvas.getContext('2d');
+        this.canvas = canvas;
+        this.ctx = canvas.getContext('2d');
     }
 
     createImageData(w, h) {
         this._height = h;
         this._width = w;
-        this._imageData = this._ctx.createImageData(w, h);
+        this._imageData = this.ctx.createImageData(w, h);
     }
 
     putImageData(x, y) {
-        this._ctx.putImageData(this._imageData, x, y);
+        this.ctx.putImageData(this._imageData, x, y);
     }
 
     getCtx() {
-        return this._ctx
+        return this.ctx
     }
 
     fillImage(w, h) {
-        const image = this._ctx.createImageData(w, h);
+        const image = this.ctx.createImageData(w, h);
         for(var x = 0; x < w; x++) {
             for(var y = 0; y < h; y++) {
                 setPixel(image, x, y, 0, 0, 0, 255);
@@ -43,7 +43,7 @@ export class CanvasManager {
                 this.setPixel(this._imageData, x, y, color, color, color, 255);
             }
         }
-        this._ctx.putImageData(this._imageData, 0, 0);
+        this.ctx.putImageData(this._imageData, 0, 0);
     }
 
     degrade(cInicial, cFinal, XInicial, XFinal, x) {
@@ -51,17 +51,17 @@ export class CanvasManager {
     }
 
     drawRoundedRect(x, y, w, h, r) {
-        this._ctx.beginPath();
-        this._ctx.moveTo(x + r, y);
-        this._ctx.lineTo(x + w - r, y);
-        this._ctx.quadraticCurveTo(x + w, y, x + w, y + r);
-        this._ctx.lineTo(x + w, y + h - r);
-        this._ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-        this._ctx.lineTo(x + r, y + h);
-        this._ctx.quadraticCurveTo(x, y + h, x, y + h - r);
-        this._ctx.lineTo(x, y + r);
-        this._ctx.quadraticCurveTo(x, y, x + r, y);
-        this._ctx.closePath();
+        this.ctx.beginPath();
+        this.ctx.moveTo(x + r, y);
+        this.ctx.lineTo(x + w - r, y);
+        this.ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+        this.ctx.lineTo(x + w, y + h - r);
+        this.ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+        this.ctx.lineTo(x + r, y + h);
+        this.ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+        this.ctx.lineTo(x, y + r);
+        this.ctx.quadraticCurveTo(x, y, x + r, y);
+        this.ctx.closePath();
     }
 
     getRed(x, y) {
