@@ -19,7 +19,7 @@ class BlockaGame extends BaseComponent {
       {
         x1: 270, x2: 450, y1: 380, y2: 430, 
         click: () => {console.log("Click")},
-        hover: () => { this.className = "pointer" }
+        hover: null
       }, 
       ],
       SELECT : [],
@@ -62,7 +62,10 @@ class BlockaGame extends BaseComponent {
       let ty = e.offsetY - rect.top;
       for (const o of this._events[this._screen]) {
         if ((tx > o.x1 && tx < o.x2) && ty > o.y1 && ty < o.y2) {
-          o.hover();
+          if (o.hover)
+            o.hover();
+          else 
+            this.className = "pointer";
           return;
         }
       }
@@ -90,6 +93,8 @@ class BlockaGame extends BaseComponent {
     
     // Play Btn: [270, 380] to [450, 430]
     ctx.font = "24px Helvetica";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
     ctx.lineWidth = 2;
     ctx.strokeStyle = "rgba(60, 30, 150, 1)";
     ctx.fillStyle = "rgba(90, 30, 180, 1)"
@@ -97,7 +102,7 @@ class BlockaGame extends BaseComponent {
     ctx.fill();
     ctx.stroke();
     ctx.fillStyle = "rgba(240, 230, 240, 1)";
-    ctx.fillText("Play", 340, 414);
+    ctx.fillText("Play", 360, 405);
   }
 
 
