@@ -50,11 +50,15 @@ class HeaderComponent extends BaseComponent {
         </div>
         <img src="/assets/images/UserIcon.png" class="menu-btn">
       </div>
-      ${this._burger ? `
-        <div class="categories" id="categories">
-          ${Object.keys(this._genres).map((genre) => {
-          return `
-          <a href="#/search">
+      ${this._burger ? (() => {
+        // Prepare genres HTML outside the template
+        let html = `<div class="categories" id="categories">`;
+        const genres = Object.keys(this._genres);
+        const hiddenGenres = this._mobile ? genres.slice(6) : [];
+        const visibleGenres = this._mobile ? genres.slice(0, 6) : genres;
+
+        html += visibleGenres.map((genre) => `
+          <a href="#search">
             <custom-button
               icon="/assets/icons/genres/${genre}.svg"
               iconSize="20px"
@@ -63,9 +67,44 @@ class HeaderComponent extends BaseComponent {
               height="30px"
               class="secondary"
             ></custom-button>
-          </a>`
-        }).join("")}
-        </div>` : "" }
+          </a>
+        `).join("");
+
+        if (this._mobile && hiddenGenres.length > 0) {
+          html += `
+            <custom-button id="show-more-btn" class="show-more-btn"
+                text = "Show more . . ."
+                width="${this._mobile ? "91%" : "140px"}"
+                height="30px"
+                class="secondary"
+            ></custom-button>
+            
+            <div id="hidden-genres" class="hidden-genres" style="display:none;">
+              ${hiddenGenres.map((genre) => `
+                <a href="#search">
+                  <custom-button
+                    icon="/assets/icons/genres/${genre}.svg"
+                    iconSize="20px"
+                    text="${genre}"
+                    width="100%"
+                    height="30px"
+                    class="secondary"
+                  ></custom-button>
+                </a>
+              `).join("")}
+              <custom-button id="show-less-btn" class="show-less-btn"
+                text = "Show less . . ."
+                width="${this._mobile ? "91%" : "140px"}"
+                height="30px"
+                class="secondary"
+              ></custom-button>
+            </div>
+          `;
+        }
+
+        html += `</div>`;
+        return html;
+      })() : "" }
     `;
     this._setupEvents();
   }
@@ -103,6 +142,31 @@ class HeaderComponent extends BaseComponent {
     menu.addEventListener("click", () => {
       this._toggleMenu();
     });
+
+    const showMoreBtn = this.shadowRoot.querySelector("#show-more-btn");
+    if (showMoreBtn) {
+    showMoreBtn.addEventListener("click", () => {
+      const hidden = this.shadowRoot.querySelector("#hidden-genres");
+      if (hidden.style.display === "none") {
+        hidden.style.display = "flex";
+        showMoreBtn.style.display = "none";
+      }
+    });
+  }
+
+  const showLessBtn = this.shadowRoot.querySelector("#show-less-btn");
+  if (showLessBtn) {
+    showLessBtn.addEventListener("click", () => {
+      const hidden = this.shadowRoot.querySelector("#hidden-genres");
+      if (hidden.style.display !== "none")
+      {
+        hidden.style.display = "none";
+        showMoreBtn.style.display = "flex";
+        showMoreBtn.textContent = "Show more . . .";
+      }
+       });
+  }
+
 
     gameService.addEventListener("change", () => {
       this._genres = gameService.getGenres();
