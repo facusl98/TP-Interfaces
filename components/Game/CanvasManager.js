@@ -6,13 +6,13 @@ export class CanvasManager {
     }
 
     createImageData(w, h) {
-        this._height = h;
-        this._width = w;
-        this._imageData = this.ctx.createImageData(w, h);
+        this.height = h;
+        this.width = w;
+        this.imageData = this.ctx.createImageData(w, h);
     }
 
     putImageData(x, y) {
-        this.ctx.putImageData(this._imageData, x, y);
+        this.ctx.putImageData(this.imageData, x, y);
     }
 
     getCtx() {
@@ -37,13 +37,13 @@ export class CanvasManager {
     }
 
     fillImageByDegrade() {
-        for(var x = 0; x < this._width; x++) {
-            var color = degrade(255, 0, 0, this._width, x);
-            for(var y = 0; y < this._height; y++) {
-                this.setPixel(this._imageData, x, y, color, color, color, 255);
+        for(var x = 0; x < this.width; x++) {
+            var color = degrade(255, 0, 0, this.width, x);
+            for(var y = 0; y < this.height; y++) {
+                this.setPixel(this.imageData, x, y, color, color, color, 255);
             }
         }
-        this.ctx.putImageData(this._imageData, 0, 0);
+        this.ctx.putImageData(this.imageData, 0, 0);
     }
 
     degrade(cInicial, cFinal, XInicial, XFinal, x) {
@@ -65,17 +65,17 @@ export class CanvasManager {
     }
 
     getRed(x, y) {
-        let i = (x * y * this._imageData.width) * 4;
-        return this._imageData.data[i + 0]
+        let i = (x * y * this.imageData.width) * 4;
+        return this.imageData.data[i + 0]
     }
 
     getGreen(x, y) {
-        let i = (x * y * this._imageData.width) * 4;
-        return this._imageData.data[i + 1]
+        let i = (x * y * this.imageData.width) * 4;
+        return this.imageData.data[i + 1]
     }
 
     getBlue(x, y) {
-        let i = (x * y * this._imageData.width) * 4;
-        return this._imageData.data[i + 2]
+        let i = (x * y * this.imageData.width) * 4;
+        return this.imageData.data[i + 2]
     }
 }

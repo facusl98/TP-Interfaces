@@ -10,6 +10,7 @@ class BlockaGame extends BaseComponent {
     this.manager = null;
     this.canvas = null;
     this.ctx = null;
+    this.gridSize = 2;
   }
 
   async connectedCallback() {
