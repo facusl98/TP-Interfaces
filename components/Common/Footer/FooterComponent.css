@@ -16,7 +16,10 @@ a, p {
 }
 h2 {
   font-family: var(--title-font);
+  color: var(--white);
   margin: 0px;
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .footer-containers-rows {
@@ -33,13 +36,7 @@ h2 {
   gap: 15px;
 }
 
-.footer-containers-rows h2 {
-    font-size: 20px;
-    color: var(--white);
-    font-weight: 600;
-}
-
-.footer-containers-rows a {
+a {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -49,7 +46,7 @@ h2 {
   transition: color 0.2s;
 }
 
-.footer-containers-rows a:hover {   
+a:hover {   
     color: var(--blue-0);
 }
 
@@ -102,14 +99,7 @@ input[type="mail"] {
   padding: 10px;
 }
 
-.us h2 {
-  font-size: 1.1em;
-  margin-bottom: 6px;
-  color: var(--white);
-  font-weight: 600;
-}
-
-.us p {
+p {
   margin: 0;
   color: var(--white);
   font-size: 1em;
@@ -134,5 +124,14 @@ input[type="mail"] {
     align-items: center;
     padding: 10px;
     gap: 8px;
+  }
+  input[type="mail"] {
+    font-size: 13px;
+  }
+  h2 {
+    font-size: 15px;
+  }
+  a, p {
+    font-size: 12px;
   }
 }
