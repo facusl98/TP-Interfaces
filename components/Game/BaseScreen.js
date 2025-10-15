@@ -1,8 +1,8 @@
 export class BaseScreen {
   constructor(game, changeScreen) {
     this.game = game;
-    this.manager = game.manager;
-    this.ctx = this.manager.getCtx();
+    this.toolkit = game.toolkit;
+    this.ctx = this.toolkit.getCtx();
     this.changeScreen = changeScreen;
     this.events = [];
 

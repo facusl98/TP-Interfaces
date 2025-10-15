@@ -1,5 +1,5 @@
 import { BaseComponent } from "../../BaseComponent.js";
-import { CanvasManager } from "../CanvasManager.js";
+import { CanvasToolkit } from "../CanvasToolkit.js";
 import { HomeScreen } from "./Screens/HomeScreen.js";
 import { SelectScreen } from "./Screens/SelectScreen.js";
 import { GameScreen } from "./Screens/GameScreen.js";
@@ -7,7 +7,7 @@ import { GameScreen } from "./Screens/GameScreen.js";
 class BlockaGame extends BaseComponent {
   constructor() {
     super();
-    this.manager = null;
+    this.toolkit = null;
     this.canvas = null;
     this.ctx = null;
     this.gridSize = 2;
@@ -28,8 +28,8 @@ class BlockaGame extends BaseComponent {
     const canvas = this.shadowRoot.querySelector("canvas");
     const rect = canvas.getBoundingClientRect();
     this.canvas = canvas;
-    this.manager = new CanvasManager(canvas);
-    this.ctx = this.manager.getCtx();
+    this.toolkit = new CanvasToolkit(canvas);
+    this.ctx = this.toolkit.getCtx();
 
     // Set up screens
     this.screens = {
@@ -58,12 +58,25 @@ class BlockaGame extends BaseComponent {
   }
 
   drawCurrent() {
+    this.clearScreen();
+    this.drawBG();
     this.current.draw();
+  }
+
+  drawBG() {
+    let size = 20;
+    for (let i = 0; i <= 720 / size; i++) {
+      for (let j = 0; j <= 480 / size; j++) {
+        this.ctx.fillStyle = "rgba(67, 71, 138, 1)"
+        if ((i % 2 == 0 && j % 2 != 0) || (i % 2 != 0 && j % 2 == 0))
+          this.ctx.fillStyle = "rgba(80, 83, 156, 1)"
+        this.ctx.fillRect(i * size - 10, j * size - 10, size, size);
+      }
+    }
   }
 
   changeScreen(screen) {
     this.current = this.screens[screen];
-    this.clearScreen();
     this.drawCurrent();
   }
 
