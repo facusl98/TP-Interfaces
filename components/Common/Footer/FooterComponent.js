@@ -92,7 +92,7 @@ class FooterComponent extends BaseComponent {
                     </div>
                 </div>
             </div>
-            <div class="column-center-right">
+            <div class="column-center-right invisible">
                 <h2>Popular Genres</h2>
                 <div class="popular-genres list">
                     <a href="#/browse">
@@ -127,8 +127,8 @@ class FooterComponent extends BaseComponent {
                 </div>
             </div>
             <div class = "column-right">
-                <h2>Find Us</h2>
-                <div class ="ubication">
+                <h2 class="invisible">Find Us</h2>
+                <div class ="ubication invisible">
                     <a href="https://www.google.com.ar/maps/place/Facultad+de+Ciencias+Exactas+Universidad+Nacional+del+Centro+de+la+Provincia+de+Buenos+Aires/@-37.3227478,-59.0848465,17z/data=!3m1!4b1!4m6!3m5!1s0x9590e0389448d6c1:0xeb198d152284b85d!8m2!3d-37.3227521!4d-59.0822716!16s%2Fg%2F11c0x8zspd?hl=es&entry=ttu&g_ep=EgoyMDI1MDkyNC4wIKXMDSoASAFQAw%3D%3D">
                     <custom-icon icon="/assets/icons/common/Ubication.svg" size = "20px"></custom-icon>
                     Unicen exactas</a>

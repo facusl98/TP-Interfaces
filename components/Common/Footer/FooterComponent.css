@@ -26,21 +26,12 @@ h2 {
   gap: 30px;
 }
 
-@media screen and (max-width: 600px) {
-  .footer-containers-rows {
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 10px;
-  }
-}
-
 .footer-containers-rows > div {
   padding: 15px;
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
-
 
 .footer-containers-rows h2 {
     font-size: 20px;
@@ -127,4 +118,21 @@ input[type="mail"] {
 .us img {
   height: 48px;
   margin-left: 24px;
+}
+
+@media screen and (max-width: 600px) {
+  .footer-containers-rows {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+  .footer-containers-rows .invisible {
+    display: none;
+  }
+  .us {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    gap: 8px;
+  }
 }
