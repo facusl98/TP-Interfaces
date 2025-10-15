@@ -7,9 +7,16 @@ import { GameScreen } from "./Screens/GameScreen.js";
 class BlockaGame extends BaseComponent {
   constructor() {
     super();
-    this.toolkit = null;
-    this.canvas = null;
-    this.ctx = null;
+
+    this.canvas = document.createElement("canvas");
+    this.canvas.width = 720; this.canvas.height = 480; 
+    this.toolkit = new CanvasToolkit(this.canvas);
+    this.ctx = this.toolkit.getCtx();
+
+    this.offscreen = new OffscreenCanvas(720, 480);
+    this.offCtx = this.offscreen.getContext("2d");
+    this.drawBG();
+
     this.gridSize = 2;
   }
 
@@ -20,18 +27,11 @@ class BlockaGame extends BaseComponent {
 
   async render() {
     await this._attachCSS(import.meta.url);
-    this.shadowRoot.innerHTML += `
-      <canvas width="720px" height="480px" />
-    `;
+    this.shadowRoot.appendChild(this.canvas);
 
-    // Set up canvas
-    const canvas = this.shadowRoot.querySelector("canvas");
-    const rect = canvas.getBoundingClientRect();
-    this.canvas = canvas;
-    this.toolkit = new CanvasToolkit(canvas);
-    this.ctx = this.toolkit.getCtx();
 
     // Set up screens
+    const rect = this.canvas.getBoundingClientRect();
     this.screens = {
       HOME: new HomeScreen(this, this.changeScreen.bind(this)),
       SELECT: new SelectScreen(this, this.changeScreen.bind(this)),
@@ -40,13 +40,13 @@ class BlockaGame extends BaseComponent {
     this.current = this.screens["HOME"];
 
     // Events
-    canvas.addEventListener("click", (e) => {
+    this.canvas.addEventListener("click", (e) => {
       let x = e.offsetX - rect.left;
       let y = e.offsetY - rect.top;
       this.current.onClick(x, y)
     });
 
-    canvas.addEventListener("mousemove", (e) => {
+    this.canvas.addEventListener("mousemove", (e) => {
       let x = e.offsetX - rect.left;
       let y = e.offsetY - rect.top;
       this.current.onHover(x, y)
@@ -59,7 +59,7 @@ class BlockaGame extends BaseComponent {
 
   drawCurrent() {
     this.clearScreen();
-    this.drawBG();
+    this.ctx.drawImage(this.offscreen, 0, 0);
     this.current.draw();
   }
 
@@ -67,10 +67,10 @@ class BlockaGame extends BaseComponent {
     let size = 20;
     for (let i = 0; i <= 720 / size; i++) {
       for (let j = 0; j <= 480 / size; j++) {
-        this.ctx.fillStyle = "rgba(67, 71, 138, 1)"
+        this.offCtx.fillStyle = "rgba(67, 71, 138, 1)"
         if ((i % 2 == 0 && j % 2 != 0) || (i % 2 != 0 && j % 2 == 0))
-          this.ctx.fillStyle = "rgba(80, 83, 156, 1)"
-        this.ctx.fillRect(i * size - 10, j * size - 10, size, size);
+          this.offCtx.fillStyle = "rgba(80, 83, 156, 1)"
+        this.offCtx.fillRect(i * size - 10, j * size - 10, size, size);
       }
     }
   }
