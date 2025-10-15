@@ -1,114 +1,127 @@
 import { BaseComponent } from "../../BaseComponent.js";
-import { CanvasManager } from "../CanvasManager.js";
-
+import { CanvasToolkit } from "../CanvasToolkit.js";
+import { HomeScreen } from "./Screens/HomeScreen.js";
+import { SelectScreen } from "./Screens/SelectScreen.js";
+import { GameScreen } from "./Screens/GameScreen.js";
 
 class BlockaGame extends BaseComponent {
   constructor() {
     super();
-    this._manager = null;
-    this._canvas = null;
-    this._screens = Object.freeze({
-      HOME: "HOME",
-      SELECT: "SELECT",
-      GAME: "GAME"
-    });
-    this._screen = this._screens.HOME;
+    const width = 720;
+    const height = 480;
 
-    this._events = {
-      HOME: [
-      {
-        x1: 270, x2: 450, y1: 380, y2: 430, 
-        click: () => {console.log("Click")},
-        hover: null
-      }, 
-      ],
-      SELECT : [],
-      GAME: []
-    }
+    this.canvas = document.createElement("canvas");
+    this.canvas.width = width; this.canvas.height = 480; 
+    this.toolkit = new CanvasToolkit(this.canvas);
+    this.ctx = this.toolkit.getCtx();
+
+    this.offscreen = new OffscreenCanvas(width, height);
+    this.offCtx = this.offscreen.getContext("2d");
+    // this.drawBG();
+    this.drawPattern(width, height)
+
+    this.gridSize = 2;
   }
 
   async connectedCallback() {
     await this.render();
-    this.loadScreen();
+    this.drawCurrent();
   }
 
   async render() {
     await this._attachCSS(import.meta.url);
-    this.shadowRoot.innerHTML += `
-      <canvas width="720px" height="480px" />
-    `;
+    this.shadowRoot.appendChild(this.canvas);
 
-    // Set up canvas
-    const canvas = this.shadowRoot.querySelector("canvas");
-    const rect = canvas.getBoundingClientRect();
-    this._canvas = canvas;
-    this._manager = new CanvasManager(canvas);
 
+    // Set up screens
+    const rect = this.canvas.getBoundingClientRect();
+    this.screens = {
+      HOME: new HomeScreen(this, this.changeScreen.bind(this)),
+      SELECT: new SelectScreen(this, this.changeScreen.bind(this)),
+      GAME: new GameScreen(this, this.changeScreen.bind(this))
+    };
+    this.current = this.screens["HOME"];
 
     // Events
-    canvas.addEventListener("click", (e) => {
-      let tx = e.offsetX - rect.left;
-      let ty = e.offsetY - rect.top;
-      for (const o of this._events[this._screen]) {
-        if ((tx > o.x1 && tx < o.x2) && ty > o.y1 && ty < o.y2) {
-          o.click();
-          return;
-        }
-      }
+    this.canvas.addEventListener("click", (e) => {
+      let x = e.offsetX - rect.left;
+      let y = e.offsetY - rect.top;
+      this.current.onClick(x, y)
     });
 
-    canvas.addEventListener("mousemove", (e) => {
-      let tx = e.offsetX - rect.left;
-      let ty = e.offsetY - rect.top;
-      for (const o of this._events[this._screen]) {
-        if ((tx > o.x1 && tx < o.x2) && ty > o.y1 && ty < o.y2) {
-          if (o.hover)
-            o.hover();
-          else 
-            this.className = "pointer";
-          return;
-        }
-      }
-      // Default
-      this.className = "";
+    this.canvas.addEventListener("mousemove", (e) => {
+      let x = e.offsetX - rect.left;
+      let y = e.offsetY - rect.top;
+      this.current.onHover(x, y)
     });
   }
 
-  loadScreen() {
-    switch (this._screen) {
-      case this._screens.HOME:
-        this.loadHome();
-        break;
-      case this._screens.SELECT:
-        this.loadSelect();
-        break;
-      case this._screens.GAME:
-        this.loadGame();
-        break;
+  clearScreen() {
+    this.ctx.clearRect(0, 0, 720, 480);
+  }
+
+  drawCurrent() {
+    this.clearScreen();
+    this.ctx.drawImage(this.offscreen, 0, 0);
+    this.current.draw();
+  }
+
+  drawBG() {
+    let size = 20;
+    for (let i = 0; i <= 720 / size; i++) {
+      for (let j = 0; j <= 480 / size; j++) {
+        this.offCtx.fillStyle = "rgba(67, 71, 138, 1)"
+        if ((i % 2 == 0 && j % 2 != 0) || (i % 2 != 0 && j % 2 == 0))
+          this.offCtx.fillStyle = "rgba(80, 83, 156, 1)"
+        this.offCtx.fillRect(i * size - 10, j * size - 10, size, size);
+      }
     }
   }
 
-  loadHome() {
-    const ctx = this._manager.getCtx();
-    
-    // Play Btn: [270, 380] to [450, 430]
-    ctx.font = "24px Helvetica";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = "rgba(60, 30, 150, 1)";
-    ctx.fillStyle = "rgba(90, 30, 180, 1)"
-    this._manager.drawRoundedRect(270, 380, 180, 50, 10);
-    ctx.fill();
-    ctx.stroke();
-    ctx.fillStyle = "rgba(240, 230, 240, 1)";
-    ctx.fillText("Play", 360, 405);
+   drawPattern(width, height, hexSize = 30) {
+    const ctx = this.offCtx;
+
+    // Equilateral Triangle Simplified Formula
+    const hexHeight = Math.sqrt(3) * hexSize;
+    // hexSize works as radius, so width = diameter = r * 2 
+    const hexWidth = 2 * hexSize;
+    const vertDist = hexHeight;
+    // Distance from center to center. 1r + .5r from the next hexagon.
+    const horizDist = hexSize * 1.5;
+
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+    ctx.lineWidth = 1;
+
+    for (let y = 0; y < height + hexHeight; y += vertDist) {
+      for (let x = 0; x < width + hexWidth; x += horizDist) {
+        // Displaces vertically every other row. Either 0 or half the height.
+        const offsetY = (Math.floor(x / horizDist) % 2) * (hexHeight / 2);
+        this.drawHex(ctx, x, y + offsetY, hexSize);
+      }
+    }
   }
 
+  drawHex(ctx, x, y, size) {
+    ctx.beginPath();
+    // 360° = 2PI | 2PI / 6 = PI / 3 = 60°
+    const angleStep = Math.PI / 3;
+    for (let i = 0; i < 6; i++) {
+      let angle = angleStep * i;
+      // Position from center + Distance to edge * Angle multiplier
+      // Cos from -1 to 1 for X. Sin from -0.866 to 0.866 for Y
+      const px = x + size * Math.cos(angle);
+      const py = y + size * Math.sin(angle);
+      if (i === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    }
+    ctx.closePath();
+    ctx.stroke();
+  }
 
-  loadSelect() {}
-
-  loadGame() {}
+  changeScreen(screen) {
+    this.current = this.screens[screen];
+    this.drawCurrent();
+  }
 
 }
 
