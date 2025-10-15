@@ -7,15 +7,18 @@ import { GameScreen } from "./Screens/GameScreen.js";
 class BlockaGame extends BaseComponent {
   constructor() {
     super();
+    const width = 720;
+    const height = 480;
 
     this.canvas = document.createElement("canvas");
-    this.canvas.width = 720; this.canvas.height = 480; 
+    this.canvas.width = width; this.canvas.height = 480; 
     this.toolkit = new CanvasToolkit(this.canvas);
     this.ctx = this.toolkit.getCtx();
 
-    this.offscreen = new OffscreenCanvas(720, 480);
+    this.offscreen = new OffscreenCanvas(width, height);
     this.offCtx = this.offscreen.getContext("2d");
-    this.drawBG();
+    // this.drawBG();
+    this.drawPattern(width, height)
 
     this.gridSize = 2;
   }
@@ -73,6 +76,46 @@ class BlockaGame extends BaseComponent {
         this.offCtx.fillRect(i * size - 10, j * size - 10, size, size);
       }
     }
+  }
+
+   drawPattern(width, height, hexSize = 30) {
+    const ctx = this.offCtx;
+
+    // Equilateral Triangle Simplified Formula
+    const hexHeight = Math.sqrt(3) * hexSize;
+    // hexSize works as radius, so width = diameter = r * 2 
+    const hexWidth = 2 * hexSize;
+    const vertDist = hexHeight;
+    // Distance from center to center. 1r + .5r from the next hexagon.
+    const horizDist = hexSize * 1.5;
+
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+    ctx.lineWidth = 1;
+
+    for (let y = 0; y < height + hexHeight; y += vertDist) {
+      for (let x = 0; x < width + hexWidth; x += horizDist) {
+        // Displaces vertically every other row. Either 0 or half the height.
+        const offsetY = (Math.floor(x / horizDist) % 2) * (hexHeight / 2);
+        this.drawHex(ctx, x, y + offsetY, hexSize);
+      }
+    }
+  }
+
+  drawHex(ctx, x, y, size) {
+    ctx.beginPath();
+    // 360° = 2PI | 2PI / 6 = PI / 3 = 60°
+    const angleStep = Math.PI / 3;
+    for (let i = 0; i < 6; i++) {
+      let angle = angleStep * i;
+      // Position from center + Distance to edge * Angle multiplier
+      // Cos from -1 to 1 for X. Sin from -0.866 to 0.866 for Y
+      const px = x + size * Math.cos(angle);
+      const py = y + size * Math.sin(angle);
+      if (i === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    }
+    ctx.closePath();
+    ctx.stroke();
   }
 
   changeScreen(screen) {
