@@ -128,6 +128,7 @@ class BlockaGame extends BaseComponent {
 
   changeScreen(screen) {
     this.current = this.screens[screen];
+    this.className = "";
     this.drawCurrent();
   }
 

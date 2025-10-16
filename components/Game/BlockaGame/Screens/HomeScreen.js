@@ -84,7 +84,8 @@ export class HomeScreen extends BaseScreen {
       this.ctx.fillStyle = this.game.colors.purpleHover;
     else 
       this.ctx.fillStyle = this.game.colors.purple;
-    this.toolkit.drawRoundedRect(270, 380, 180, 50, 10);
+    this.ctx.beginPath();
+    this.ctx.roundRect(270, 380, 180, 50, 10);
     this.ctx.fill();
     this.ctx.stroke();
 
@@ -118,12 +119,13 @@ export class HomeScreen extends BaseScreen {
     let py = 20 + (size - 2) * 50; // Starting from 20, 50 offset for each btn.
     let ty = py + 20; // Text position 
 
-    this.toolkit.drawRoundedRect(660, py, 40, 40, 5);
+    this.ctx.beginPath();
+    this.ctx.roundRect(660, py, 40, 40, 5);
     this.ctx.fill();
     this.ctx.stroke();
 
     this.ctx.font = "24px Helvetica";
-    this.ctx.fillStyle = "rgba(240, 240, 250, 1)";
+    this.ctx.fillStyle = this.game.colors.light;
     this.ctx.fillText(size, 680, ty);
   }
 }

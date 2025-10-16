@@ -19,6 +19,19 @@ export class CanvasToolkit {
         return this.ctx
     }
 
+    drawImage(image, x, y, w, h) {
+        this.ctx.drawImage(image, x, y. w, h)
+    }
+
+    drawImageRounded(image, x, y, w, h, r) {
+        this.ctx.save(); 
+        this.ctx.beginPath();
+        this.ctx.roundRect(x, y, w, h, r); 
+        this.ctx.clip(); 
+        this.ctx.drawImage(image, x, y, w, h); 
+        this.ctx.restore(); 
+    }
+
     fillImage(w, h) {
         const image = this.ctx.createImageData(w, h);
         for(var x = 0; x < w; x++) {
@@ -48,20 +61,6 @@ export class CanvasToolkit {
 
     degrade(cInicial, cFinal, XInicial, XFinal, x) {
         return cInicial + ((cFinal - cInicial) / (XFinal - XInicial)) * (x - XInicial);
-    }
-
-    drawRoundedRect(x, y, w, h, r) {
-        this.ctx.beginPath();
-        this.ctx.moveTo(x + r, y);
-        this.ctx.lineTo(x + w - r, y);
-        this.ctx.quadraticCurveTo(x + w, y, x + w, y + r);
-        this.ctx.lineTo(x + w, y + h - r);
-        this.ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-        this.ctx.lineTo(x + r, y + h);
-        this.ctx.quadraticCurveTo(x, y + h, x, y + h - r);
-        this.ctx.lineTo(x, y + r);
-        this.ctx.quadraticCurveTo(x, y, x + r, y);
-        this.ctx.closePath();
     }
 
     getRed(x, y) {
