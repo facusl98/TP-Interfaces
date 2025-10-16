@@ -24,7 +24,7 @@ export class SelectScreen extends BaseScreen {
   draw() {
     // Start Btn: [270, 380] to [450, 430]
     this.drawLevels();
-    // Levels Thumbnail: [97.5, 250] to [547.5, 310]
+    // Levels Thumbnail: [97.5, 250] to [622.5, 310]
     this.drawStart();
 
     this.rouletteSelect();
@@ -33,6 +33,9 @@ export class SelectScreen extends BaseScreen {
   drawLevels() {
     if (!this.ready) return;
     
+    this.ctx.fillStyle = this.game.colors.purple;
+    this.ctx.roundRect(77.5, 230, 555, 100, 10);
+    this.ctx.fill();
     for (let i = 0; i < this.levels; i++) {
       this.drawLevel(i)
     }
@@ -43,7 +46,7 @@ export class SelectScreen extends BaseScreen {
     this.ctx.strokeStyle = active ? 
     this.game.colors.purpleActive : this.game.colors.purple;
 
-    this.ctx.lineWidth = 5;
+    this.ctx.lineWidth = active ? 5 : 6;
 
     this.toolkit.drawImageRounded(this.images[i], x + ((w + gap) * i), y, w, h, r);
 
