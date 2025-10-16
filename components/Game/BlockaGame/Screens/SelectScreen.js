@@ -8,7 +8,8 @@ export class SelectScreen extends BaseScreen {
         name: "StartBtn",
         x1: 270, x2: 450, y1: 380, y2: 430, 
         click: () => {
-          this.changeScreen("HOME")
+          if (this.game.image != null)
+            this.changeScreen("GAME")
         },
         hover: () => { this.drawStart(true) },
         unhover: () => { this.drawStart() }
@@ -48,7 +49,7 @@ export class SelectScreen extends BaseScreen {
 
     this.ctx.lineWidth = active ? 5 : 6;
 
-    this.toolkit.drawImageRounded(this.images[i], x + ((w + gap) * i), y, w, h, r);
+    this.ctx.drawImage(this.images[i], x + ((w + gap) * i), y, w, h);
 
     this.ctx.beginPath();
     this.ctx.roundRect(x + ((w + gap) * i), y, w, h, r);
@@ -57,7 +58,7 @@ export class SelectScreen extends BaseScreen {
 
   rouletteSelect() {
     let current = 0, prev = null; 
-    let speed = 150;
+    let speed = 0; // Place at 150. 0 for Game screen development
     const cycles = Math.floor(Math.random() * 2) + 2; // Full spins
     let steps = cycles * this.levels + Math.floor(Math.random() * this.levels); // Total Steps 
 
@@ -75,7 +76,8 @@ export class SelectScreen extends BaseScreen {
         speed *= 1.1;
         setTimeout(spin, speed);
       } else {
-        this.selected = this.images[prev];
+        this.game.image = this.images[prev];
+        this.ready = true;
       }
     }
 

@@ -25,10 +25,11 @@ class BlockaGame extends BaseComponent {
 
     this.offscreen = new OffscreenCanvas(width, height);
     this.offCtx = this.offscreen.getContext("2d");
-    // this.drawBG();
+    
     this.drawPattern(width, height)
 
     this.gridSize = 2;
+    this.image = null;
   }
 
   async connectedCallback() {
