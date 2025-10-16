@@ -14,30 +14,45 @@ export class HomeScreen extends BaseScreen {
       },
       {
         name: "Grid2",
-        x1: 600, x2: 700, y1: 20, y2: 60, 
+        x1: 660, x2: 700, y1: 20, y2: 60, 
         click: () => {
           this.game.gridSize = 2;
-          this.game.drawCurrent();
+          this.drawGridSizeSelector();
         },
-        hover: null
+        hover: () => {
+          this.drawGridBtn(2, true);
+        },
+        unhover: () => {
+          this.drawGridBtn(2);
+        }
       },
       {
         name: "Grid3",
-        x1: 600, x2: 700, y1: 70, y2: 110, 
+        x1: 660, x2: 700, y1: 70, y2: 110, 
         click: () => {
           this.game.gridSize = 3;
-          this.game.drawCurrent();
+          this.drawGridSizeSelector();
         },
-        hover: null
+        hover: () => {
+          this.drawGridBtn(3, true);
+        },
+        unhover: () => {
+          this.drawGridBtn(3);
+        }
       },
       {
         name: "Grid4",
-        x1: 600, x2: 700, y1: 120, y2: 160, 
+        x1: 660, x2: 700, y1: 120, y2: 160, 
         click: () => {
           this.game.gridSize = 4;
-          this.game.drawCurrent();
+          this.drawGridSizeSelector();
         },
-        hover: null
+        hover: () => {
+          this.drawGridBtn(4, true);
+        },
+        unhover: () => {
+          this.drawGridBtn(4);
+        }
       },
     ];
   }
@@ -56,6 +71,9 @@ export class HomeScreen extends BaseScreen {
     this.ctx.strokeText("Blocka: The Game", 360, 250)
     this.ctx.fillStyle = "rgba(240, 240, 250, 1)";
     this.ctx.fillText("Blocka: The Game", 360, 250);
+
+    // Debug for events
+    // this.showEventHitboxes();
   }
 
   drawPlay() {
@@ -72,38 +90,36 @@ export class HomeScreen extends BaseScreen {
   }
 
   drawGridSizeSelector() {
-    this.ctx.lineWidth = 2;
-    this.ctx.strokeStyle = "rgba(60, 30, 150, 1)";
-
     // Grid 2: [660, 20] to [700, 60]
-    this.checkActiveSize(2);
-    this.toolkit.drawRoundedRect(660, 20, 40, 40, 5);
-    this.ctx.fill();
-    this.ctx.stroke();
+    this.drawGridBtn(2)
 
     // Grid 3: [660, 70] to [700, 110]
-    this.checkActiveSize(3);
-    this.toolkit.drawRoundedRect(660, 70, 40, 40, 5);
-    this.ctx.fill();
-    this.ctx.stroke();
+    this.drawGridBtn(3)
 
     // Grid 4: [660, 120] to [700, 160]
-    this.checkActiveSize(4);
-    this.toolkit.drawRoundedRect(660, 120, 40, 40, 5);
+    this.drawGridBtn(4)
+  }
+
+
+  drawGridBtn(size, hover = false) {
+    this.ctx.lineWidth = 2;
+    this.ctx.strokeStyle = "rgba(60, 30, 150, 1)";
+    if (hover)
+      this.ctx.fillStyle = "rgba(80, 49, 175, 1)";
+    else 
+      this.ctx.fillStyle = "rgba(60, 30, 150, 1)";
+    if (this.game.gridSize == size) 
+      this.ctx.fillStyle = "rgba(123, 61, 216, 1)";
+
+    let py = 20 + (size - 2) * 50; // Starting from 20, 50 offset for each btn.
+    let ty = py + 20; // Text position 
+
+    this.toolkit.drawRoundedRect(660, py, 40, 40, 5);
     this.ctx.fill();
     this.ctx.stroke();
 
     this.ctx.font = "24px Helvetica";
     this.ctx.fillStyle = "rgba(240, 240, 250, 1)";
-    this.ctx.fillText("2", 680, 40);
-    this.ctx.fillText("3", 680, 90);
-    this.ctx.fillText("4", 680, 140);
-  }
-
-  checkActiveSize(n) {
-    if (this.game.gridSize == n) 
-      this.ctx.fillStyle = "rgba(123, 61, 216, 1)";
-    else 
-      this.ctx.fillStyle = "rgba(90, 30, 180, 1)";
+    this.ctx.fillText(size, 680, ty);
   }
 }
