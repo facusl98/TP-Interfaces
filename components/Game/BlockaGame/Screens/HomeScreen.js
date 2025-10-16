@@ -10,7 +10,8 @@ export class HomeScreen extends BaseScreen {
         click: () => {
           this.changeScreen("SELECT")
         },
-        hover: null
+        hover: () => { this.drawPlay(true) },
+        unhover: () => { this.drawPlay() }
       },
       {
         name: "Grid2",
@@ -67,25 +68,28 @@ export class HomeScreen extends BaseScreen {
     // Title: [260, 225] to [460, 275]
     this.ctx.font = "bold 50px Helvetica";
     this.ctx.lineWidth = 5;
-    this.ctx.strokeStyle = "rgba(30, 30, 30, 1)";
+    this.ctx.strokeStyle = this.game.colors.dark;
+    this.ctx.fillStyle = this.game.colors.light;
     this.ctx.strokeText("Blocka: The Game", 360, 250)
-    this.ctx.fillStyle = "rgba(240, 240, 250, 1)";
     this.ctx.fillText("Blocka: The Game", 360, 250);
 
     // Debug for events
     // this.showEventHitboxes();
   }
 
-  drawPlay() {
+  drawPlay(hover = false) {
     this.ctx.lineWidth = 2;
-    this.ctx.strokeStyle = "rgba(60, 30, 150, 1)";
-    this.ctx.fillStyle = "rgba(90, 30, 180, 1)"
+    this.ctx.strokeStyle = this.game.colors.purple;
+    if (hover)
+      this.ctx.fillStyle = this.game.colors.purpleHover;
+    else 
+      this.ctx.fillStyle = this.game.colors.purple;
     this.toolkit.drawRoundedRect(270, 380, 180, 50, 10);
     this.ctx.fill();
     this.ctx.stroke();
 
     this.ctx.font = "24px Helvetica";
-    this.ctx.fillStyle = "rgba(240, 240, 250, 1)";
+    this.ctx.fillStyle = this.game.colors.light;
     this.ctx.fillText("Play", 360, 405);
   }
 
@@ -103,13 +107,13 @@ export class HomeScreen extends BaseScreen {
 
   drawGridBtn(size, hover = false) {
     this.ctx.lineWidth = 2;
-    this.ctx.strokeStyle = "rgba(60, 30, 150, 1)";
+    this.ctx.strokeStyle = this.game.colors.purple;
     if (hover)
-      this.ctx.fillStyle = "rgba(80, 49, 175, 1)";
+      this.ctx.fillStyle = this.game.colors.purpleHover;
     else 
-      this.ctx.fillStyle = "rgba(60, 30, 150, 1)";
+      this.ctx.fillStyle = this.game.colors.purple;
     if (this.game.gridSize == size) 
-      this.ctx.fillStyle = "rgba(123, 61, 216, 1)";
+      this.ctx.fillStyle = this.game.colors.purpleActive;
 
     let py = 20 + (size - 2) * 50; // Starting from 20, 50 offset for each btn.
     let ty = py + 20; // Text position 

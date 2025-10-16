@@ -15,6 +15,14 @@ class BlockaGame extends BaseComponent {
     this.toolkit = new CanvasToolkit(this.canvas);
     this.ctx = this.toolkit.getCtx();
 
+    this.colors = {
+      purple: "rgba(60, 30, 150, 1)",
+      purpleHover: "rgba(80, 49, 175, 1)",
+      purpleActive: "rgba(123, 61, 216, 1)",
+      light: "rgba(240, 240, 250, 1)",
+      dark: "rgba(30, 30, 30, 1)"
+    }
+
     this.offscreen = new OffscreenCanvas(width, height);
     this.offCtx = this.offscreen.getContext("2d");
     // this.drawBG();
