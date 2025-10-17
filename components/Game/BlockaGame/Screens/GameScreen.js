@@ -4,13 +4,116 @@ export class GameScreen extends BaseScreen {
   constructor(toolkit, changeScreen) {
     super(toolkit, changeScreen);
     this.events = [];
+
     this.time = 0;
+
+    this.images = [];
+    this.pieces = [];
   }
 
   draw() {
-    this.time = 0;  
+    this.pieceImage();
+
+    // Game Frame: [140, 20] to [580, 460]
+    this.drawFrame();
+
     // Timer: [20, 20] to [95, 70]
+    this.time = 0;  
+    this.timer(); // Once, to preload
     setInterval(this.timer, 1000);
+
+    // this.showEventHitboxes();
+  }
+
+  drawFrame() {
+    const gridSize = this.game.gridSize; // (For short)
+    const x = 140, y = 20, r = 10;
+    this.frame = 420, this.padding = 20, this.gap = 10;
+
+    this.fx = x + this.padding, this.fy = y + this.padding;
+    const frameSize = this.frame - this.padding;
+    this.size = (frameSize - (this.gap * (gridSize - 1))) / gridSize;
+
+    this.ctx.fillStyle = this.game.colors.purple;
+    this.ctx.roundRect(x, y, this.frame + this.padding, this.frame + this.padding, r);
+    this.ctx.fill();
+
+    for (let i = 0; i < this.images.length; i++) {
+      const col = i % gridSize;
+      const row = Math.floor(i / gridSize);
+      const px = this.fx + col * (this.size + this.gap);
+      const py = this.fy + row * (this.size + this.gap);
+
+      const src = this.images[i];
+      const imgCopy = new OffscreenCanvas(this.images[i].width,this.images[i].height);
+      imgCopy.getContext("2d").drawImage(src, 0, 0);
+      const piece = {
+        canvas: imgCopy,
+        imgIndex: i,
+        x: px, y: py,
+        w: this.size, h: this.size,
+        angle: 0
+      }
+      this.pieces.push(piece);
+
+      this.drawPiece(piece);
+      this.addPieceEvent(piece);
+    }
+  }
+
+  addPieceEvent(piece) {
+    const { canvas, x, y, w, h, angle = 0 } = piece;
+    this.events.push({
+        name: `Piece[${x}, ${y}]`,
+        x1: x, x2: x + w, y1: y, y2: y + h, 
+        click: (e) => {
+          this.rotatePiece(piece, e.button === 0 ? true : false);     
+        },
+        hover: () => {},
+        unhover: () => {}
+    });
+  }
+
+  rotatePiece(piece, clockwise) {
+    const { canvas, imgIndex } = piece;
+    const w = canvas.width, h = canvas.height;
+    const src = this.images[imgIndex];
+
+    const delta = (clockwise ? 90 : -90) * Math.PI / 180;         // Deg to Rads
+    piece.angle = ((piece.angle || 0) + delta) % (Math.PI * 2);   // Total Rads
+
+    const offCtx = canvas.getContext("2d");
+    
+    offCtx.clearRect(0, 0, w, h);
+    offCtx.setTransform(1, 0, 0, 1, 0, 0);
+
+    offCtx.save();
+    offCtx.translate(w / 2, h / 2);
+    offCtx.rotate(piece.angle);
+    offCtx.drawImage(src, -w / 2, -h / 2, w, h);
+    offCtx.restore();
+
+    this.drawPiece(piece);
+  }
+
+  drawPiece(piece) {
+    const { canvas, imgIndex, x, y, w, h, angle = 0 } = piece;
+    const gridSize = this.game.gridSize;
+    const col = imgIndex % gridSize;
+    const row = Math.floor(imgIndex / gridSize);
+
+    const radius = [
+      row == 0 && col == 0 ? 10 : 0,                        // TL
+      row == 0 && col == gridSize - 1 ? 10 : 0,             // TR
+      row == gridSize - 1 && col == gridSize - 1 ? 10 : 0,  // BR
+      row == gridSize - 1 && col == 0 ? 10 : 0,             // BL
+    ];
+
+    this.toolkit.drawImageRounded(
+      canvas,
+      x, y, w, h,
+      radius 
+    );
   }
 
   timer = () => {
@@ -29,4 +132,25 @@ export class GameScreen extends BaseScreen {
     this.time += 1;
     this.ctx.restore();
   }
+
+  pieceImage() {
+    const gridSize = this.game.gridSize; // (For short)
+    const pw = this.game.image.width / gridSize;
+    const ph = this.game.image.height / gridSize;
+    for (let i = 0; i < gridSize; i++) {
+      for (let j = 0; j < gridSize; j++) {
+        const off = new OffscreenCanvas(pw, ph);
+        const offCtx = off.getContext("2d");
+
+        offCtx.drawImage(this.game.image,
+          j * pw, i * ph,               // Source Image coords
+          pw, ph,                       // Source Image chunks size
+          0, 0, pw, ph                  // Destination canvas position
+        );
+
+        this.images.push(off);
+      }
+    }
+  }
+
 }

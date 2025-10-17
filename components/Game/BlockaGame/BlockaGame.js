@@ -52,10 +52,10 @@ class BlockaGame extends BaseComponent {
     this.current = this.screens["HOME"];
 
     // Events
-    this.canvas.addEventListener("click", (e) => {
+    this.canvas.addEventListener("pointerdown", (e) => {
       let x = e.offsetX - rect.left;
       let y = e.offsetY - rect.top;
-      this.current.onClick(x, y)
+      this.current.onClick(x, y, e)
     });
 
     this.canvas.addEventListener("mousemove", (e) => {
@@ -63,6 +63,8 @@ class BlockaGame extends BaseComponent {
       let y = e.offsetY - rect.top;
       this.current.onHover(x, y)
     });
+
+    this.canvas.addEventListener("contextmenu", (e) => {e.preventDefault()})
   }
 
   clearScreen() {

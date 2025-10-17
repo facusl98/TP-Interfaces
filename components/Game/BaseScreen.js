@@ -14,10 +14,10 @@ export class BaseScreen {
 
   draw() {}
 
-  onClick(x, y) {
+  onClick(x, y, e) {
     for (const o of this.events) {
       if ((x > o.x1 && x < o.x2) && (y > o.y1 && y < o.y2)) {
-        o.click();
+        o.click(e);
         return;
       }
     }
