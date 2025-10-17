@@ -52,17 +52,18 @@ export class GameScreen extends BaseScreen {
         imgIndex: i,
         x: px, y: py,
         w: this.size, h: this.size,
-        angle: 0
+        angle: Math.floor(Math.random() * 4) * 90
       }
       this.pieces.push(piece);
 
+      this.rotatePiece(piece, true, true);
       this.drawPiece(piece);
       this.addPieceEvent(piece);
     }
   }
 
   addPieceEvent(piece) {
-    const { canvas, x, y, w, h, angle = 0 } = piece;
+    const { x, y, w, h } = piece;
     this.events.push({
         name: `Piece[${x}, ${y}]`,
         x1: x, x2: x + w, y1: y, y2: y + h, 
@@ -74,13 +75,21 @@ export class GameScreen extends BaseScreen {
     });
   }
 
-  rotatePiece(piece, clockwise) {
+  rotatePiece(piece, clockwise, setup) {
     const { canvas, imgIndex } = piece;
     const w = canvas.width, h = canvas.height;
     const src = this.images[imgIndex];
 
-    const delta = (clockwise ? 90 : -90) * Math.PI / 180;         // Deg to Rads
-    piece.angle = ((piece.angle || 0) + delta) % (Math.PI * 2);   // Total Rads
+    let delta;
+    if (setup) {
+      delta = piece.angle * Math.PI / 180;
+      piece.angle = delta % (Math.PI * 2); // Total Rads
+    }
+    else {
+      delta = (clockwise ? 90 : -90) * Math.PI / 180;             // Deg to Rads
+      piece.angle = ((piece.angle || 0) + delta) % (Math.PI * 2); // Total Rads
+    }
+    
 
     const offCtx = canvas.getContext("2d");
     
@@ -94,10 +103,11 @@ export class GameScreen extends BaseScreen {
     offCtx.restore();
 
     this.drawPiece(piece);
+    this.checkWinCondition();
   }
 
   drawPiece(piece) {
-    const { canvas, imgIndex, x, y, w, h, angle = 0 } = piece;
+    const { canvas, imgIndex, x, y, w, h } = piece;
     const gridSize = this.game.gridSize;
     const col = imgIndex % gridSize;
     const row = Math.floor(imgIndex / gridSize);
@@ -153,4 +163,13 @@ export class GameScreen extends BaseScreen {
     }
   }
 
+  checkWinCondition() {
+    if (this.pieces.length != this.images.length) return;
+    let win = true;
+    this.pieces.forEach((piece) => {
+      if (piece.angle != 0)
+        win = false;
+    });
+    console.log(win)
+  }
 }
