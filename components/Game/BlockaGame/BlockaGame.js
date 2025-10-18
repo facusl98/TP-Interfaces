@@ -77,18 +77,6 @@ class BlockaGame extends BaseComponent {
     this.current.draw();
   }
 
-  drawBG() {
-    let size = 20;
-    for (let i = 0; i <= 720 / size; i++) {
-      for (let j = 0; j <= 480 / size; j++) {
-        this.offCtx.fillStyle = "rgba(67, 71, 138, 1)"
-        if ((i % 2 == 0 && j % 2 != 0) || (i % 2 != 0 && j % 2 == 0))
-          this.offCtx.fillStyle = "rgba(80, 83, 156, 1)"
-        this.offCtx.fillRect(i * size - 10, j * size - 10, size, size);
-      }
-    }
-  }
-
    drawPattern(width, height, hexSize = 30) {
     const ctx = this.offCtx;
 

@@ -207,7 +207,7 @@ class HeaderComponent extends BaseComponent {
           </div>
 
           <div class="bottom">
-            <a href="#login">
+            <a href="#/login">
               <custom-icon icon="/assets/icons/common/Logout.svg" size="24px">
               </custom-icon>
               <span>Logout</span>

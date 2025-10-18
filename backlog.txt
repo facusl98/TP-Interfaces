@@ -1,6 +1,0 @@
-Login, Register & Game pages.
-Login mocked-up system.
-Adapt Menu to mocked up system.
-Build Comments system w/ Comment custom class"
-Fix Footer Map Size.
-Animations. A lot of them.

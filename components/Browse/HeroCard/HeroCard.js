@@ -120,7 +120,7 @@ class HeroCard extends BaseComponent {
       if (this._activeIndex == 3)
         window.location.hash = "#/game/blocka"
       else 
-        location.hash = "#/game/peg-solitaire"
+        window.location.hash = "#/game/peg-solitaire"
     });
 
     const arrows = this.shadowRoot.querySelectorAll(".arrow");
@@ -147,7 +147,7 @@ class HeroCard extends BaseComponent {
       this._activeIndex = parseInt(e.dataset.index);
       this._setShown();
       this.render();
-    }, 400) 
+    }, 300) 
   }
 
   shift(offset) {

@@ -24,9 +24,9 @@ export class SelectScreen extends BaseScreen {
 
   draw() {
     // Start Btn: [270, 380] to [450, 430]
-    this.drawLevels();
-    // Levels Thumbnail: [97.5, 250] to [622.5, 310]
     this.drawStart();
+    // Levels Thumbnail: [97.5, 250] to [622.5, 310]
+    this.drawLevels();
 
     this.rouletteSelect();
   }
