@@ -6,21 +6,19 @@ class CommentSection extends BaseComponent {
     super();
     
     this._comments = [
-      new CommentClass("User-001", "Muito texto", 
+      new CommentClass("JohnSmith", "Blocka is addictive and really fun; its simple yet challenging mechanics keep you playing for hours.", 
         new Date(2024, 2, 10), [
-        new CommentClass("User-002", "Muito texto", new Date(2025, 2, 10), [
-          new CommentClass("User-003", "Muito textum", new Date(2025, 9, 3), []),
+        new CommentClass("EmilyJones07", "I totally agree! The gameplay is super addictive — I keep saying 'just one more round' and end up playing for an hour.", new Date(2025, 2, 10), [
+          new CommentClass("JohnSmith", "Yes!", new Date(2025, 9, 3), []),
       ]),
-      new CommentClass("User-003", "Muito texto", new Date(2024, 2, 10), []),
       ]),
-      new CommentClass("User-002", "Muito texto", new Date(2025, 6, 12), []),
-      new CommentClass("User-005", "Muito texto", new Date(2024, 3, 20), [
-        new CommentClass("User-003", "Muito texto", new Date(2025, 1, 10), []),
-        new CommentClass("User-004", "Muito texto", new Date(2025, 3, 10), []),
+      new CommentClass("EmilyJones07", "The colors and animations are pleasant, and the minimalist design makes it easy to focus on the gameplay.", new Date(2025, 6, 12), []),
+      new CommentClass("Wiresplash12", "It could use more levels or game modes, since it can feel a bit repetitive after a while.", new Date(2024, 3, 20), [
+        new CommentClass("DavidWilson1992", "I wish they added a multiplayer mode though, that would make it even more fun!", new Date(2025, 1, 10), []),
+        new CommentClass("SarahMiller", "Same here — it's a bit repetitive, but still satisfying. It's the perfect quick game to play during breaks.", new Date(2025, 3, 10), []),
       ]),
     ]
   }
-
   async connectedCallback() {
     await import("../CommentItem/CommentItem.js");
     this.render();

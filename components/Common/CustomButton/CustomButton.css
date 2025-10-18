@@ -108,4 +108,5 @@ p {
 custom-icon {
     z-index: 11;
     pointer-events: none;
+    justify-content: center;
 }
