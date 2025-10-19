@@ -6,27 +6,34 @@ export class GameScreen extends BaseScreen {
     this.events = [];
 
     this.time = 0;
-
     this.images = [];
     this.filterImages = [];
     this.pieces = [];
   }
 
   draw() {
+    this.time = 0;
+    this.images = [];
+    this.filterImages = [];
+    this.pieces = [];
+    
     this.pieceImage();
-
-    // Game Frame: [140, 20] to [580, 460]
-    this.drawFrame();
 
     // Timer: [20, 20] to [95, 70]
     this.time = 0;  
     this.timer(); // Once, to preload
-    const timer = setInterval(this.timer, 1000);
+
+    // Game Frame: [140, 20] to [580, 460]
+    this.drawFrame(true);
+    setTimeout(() => { 
+      this.drawFrame();
+      this.timerInterval = setInterval(this.timer, 1000);
+    }, this.game.level == this.toolkit.keys.length - 1 ? 3000 : 1000);
 
     // this.showEventHitboxes();
   }
 
-  drawFrame() {
+  drawFrame(clean = false) {
     const gridSize = this.game.gridSize; // (For short)
     const x = 140, y = 20, r = 10;
     this.frame = 420, this.padding = 20, this.gap = 10;
@@ -38,6 +45,8 @@ export class GameScreen extends BaseScreen {
     this.ctx.fillStyle = this.game.colors.purple;
     this.ctx.roundRect(x, y, this.frame + this.padding, this.frame + this.padding, r);
     this.ctx.fill();
+
+    this.pieces = [];
 
     for (let i = 0; i < this.images.length; i++) {
       const col = i % gridSize;
@@ -57,9 +66,11 @@ export class GameScreen extends BaseScreen {
       }
       this.pieces.push(piece);
 
-      this.applyRotation(piece);
+      if (!clean) {
+        this.applyRotation(piece);
+        this.addPieceEvent(piece);
+      }
       this.drawPiece(piece);
-      this.addPieceEvent(piece);
     }
   }
 
@@ -147,7 +158,7 @@ export class GameScreen extends BaseScreen {
         );
 
         this.filterImages.push(
-          this.toolkit.applyFilter(off, 9)
+          this.toolkit.applyFilter(off, this.game.level)
         );
         this.images.push(off);
       }
@@ -160,14 +171,32 @@ export class GameScreen extends BaseScreen {
       if (piece.angle != 0)
         win = false;
     });
-    console.log(win)
+    
+    if (!win) return;
+    clearInterval(this.timerInterval)
+    this.timer(true);
+    this.events = [];
+
+    setTimeout(() => {
+      this.drawFrame(true);
+      this.timer(true);
+    }, 1000);
+
+    this.game.level += 1;
+    this.game.image = null;
+    setTimeout(() => {
+      if (this.game.level < this.toolkit.keys.length)
+        this.changeScreen("SELECT");
+    }, 3000)
   }
 
-  timer = () => {
+  timer = (win = false) => {
     this.ctx.save();
     let m = Math.floor(this.time / 60);
     let s = this.time % 60;
 
+    win ? 
+    this.ctx.fillStyle = this.game.colors.purpleActive :
     this.ctx.fillStyle = this.game.colors.purple;
     this.ctx.beginPath();
     this.ctx.roundRect(20, 20, 75, 50, 8);
@@ -176,7 +205,7 @@ export class GameScreen extends BaseScreen {
     this.ctx.fillStyle = this.game.colors.light;
     this.ctx.fillText(`${m}:${s >= 10 ? s : `0${s}`}`, 57.5, 45);
 
-    this.time += 1;
+    if (!win) this.time += 1;
     this.ctx.restore();
   }
 }

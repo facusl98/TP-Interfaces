@@ -23,19 +23,21 @@ export class CanvasToolkit {
                     a
                 ]
             },
-            "Negative": (r, g, b, a) => {
-                return [
-                    255 - r,
-                    255 - g,
-                    255 - b,
-                    a
-                ]
-            }, 
             "Sepia": (r, g, b, a) => {
                 const sr = 0.393 * r + 0.769 * g + 0.189 * b
                 const sg = 0.349 * r + 0.686 * g + 0.168 * b
                 const sb = 0.272 * r + 0.534 * g + 0.131 * b
                 return [sr, sg, sb, a]
+            },
+            "Low Contrast": (r, g, b, a) => {
+                const contrast = -100// Contrast = -100 to 100
+                const factor = (259 * (contrast + 255)) / (255 * (259 - contrast));
+                
+                const cr = Math.min(255, Math.max(0, factor * (r - 128) + 128));
+                const cg = Math.min(255, Math.max(0, factor * (g - 128) + 128));
+                const cb = Math.min(255, Math.max(0, factor * (b - 128) + 128));
+                
+                return [cr, cg, cb, a];
             },
             "Posterize": (r, g, b, a) => {
                 const levels = 4;
@@ -45,30 +47,38 @@ export class CanvasToolkit {
                 );
                 return [f(r), f(g), f(b), a];
             },
-            "High Contrast": (r, g, b, a, contrast = 70) => {
-                // Contrast = -100 to 100
-                const factor = (259 * (contrast + 255)) / (255 * (259 - contrast));
-                
-                const cr = Math.min(255, Math.max(0, factor * (r - 128) + 128));
-                const cg = Math.min(255, Math.max(0, factor * (g - 128) + 128));
-                const cb = Math.min(255, Math.max(0, factor * (b - 128) + 128));
-
-                return [cr, cg, cb, a];
+            "Single Color": (r, g, b, a, random) => {
+                if (random % 3 == 0)
+                    return [r,      g * .2, b * .2, a];
+                else if (random % 3 == 1)
+                    return [r * .2, g,      b * .2, a];
+                else 
+                    return [r * .2, g * .2, b,      a];
             },
-            "Low Contrast": (r, g, b, a) => {
-                const pixel = this.filters["HIGHCONTRAST"](r, g, b, a, -90);
-                return pixel;
-            },
-            "No Greens": (r, g, b, a) => {
-                return [r, 0, b, a];
-            },
-            "Only Green": (r, g, b, a) => {
-                return [0, g, 0, a]
+            "Negative": (r, g, b, a) => {
+                return [
+                    255 - r,
+                    255 - g,
+                    255 - b,
+                    a
+                ]
             }, 
             "Low Opacity": (r, g, b, a) => {
                 return [r, g, b, Math.floor(a / 2)]
+            },
+            "Broken Pixels": (r, g, b, a) => {
+                let flag = (Math.floor(Math.random() * 4)) ? false : true;
+                if (flag)
+                    return [0, 0, 0, a]
+                else 
+                    return [r, g, b, a]
+            }, 
+            "Chaos": (r, g, b, a, random) => {
+                return this.filters[this.keys[random % (this.keys.length - 1)]](r, g, b, a, random);
             }
         }
+
+        this.keys = Object.keys(this.filters);
     }
 
     getCtx() {
@@ -86,15 +96,16 @@ export class CanvasToolkit {
 
     applyFilter(canvas, level) {
         const w = canvas.width, h = canvas.height;
-        const filter = this.filters[Object.keys(this.filters)[level]];
+        const filter = this.filters[this.keys[level]];
         const copy = new OffscreenCanvas(w, h);
         const ctx = copy.getContext("2d");
         ctx.drawImage(canvas, 0, 0);
         const imageData = ctx.getImageData(0, 0, w, h);
+        const random = Math.floor(Math.random() * this.keys.length);
 
         for(var x = 0; x < w; x++) {
            for(var y = 0; y < h; y++) {
-                this.applyFilterPixel(imageData, x, y, filter);
+                this.applyFilterPixel(imageData, x, y, filter, random);
             }
         }
 
@@ -102,14 +113,14 @@ export class CanvasToolkit {
         return copy;
     }
 
-    applyFilterPixel(imageData, x, y, filter) {
+    applyFilterPixel(imageData, x, y, filter, random) {
         const pixels = imageData.data;
         var index = (x + y * imageData.width) * 4;
         const r = pixels[index+0];
         const g = pixels[index+1];
         const b = pixels[index+2];
         const a = pixels[index+3];
-        const newPixel = filter(r, g, b, a);
+        const newPixel = filter(r, g, b, a, random);
         pixels[index+0] = newPixel[0];
         pixels[index+1] = newPixel[1];
         pixels[index+2] = newPixel[2];
