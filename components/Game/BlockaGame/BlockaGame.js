@@ -10,8 +10,8 @@ class BlockaGame extends BaseComponent {
     const width = 720;
     const height = 480;
 
-    this.canvas = document.createElement("canvas");
-    this.canvas.width = width; this.canvas.height = 480; 
+    this.canvas = document.createElement("canvas"); 
+    this.canvas.width = width; this.canvas.height = height; 
     this.toolkit = new CanvasToolkit(this.canvas);
     this.ctx = this.toolkit.getCtx();
 
@@ -30,6 +30,7 @@ class BlockaGame extends BaseComponent {
 
     this.gridSize = 2;
     this.image = null;
+    this.level = 0;
   }
 
   async connectedCallback() {
@@ -77,7 +78,7 @@ class BlockaGame extends BaseComponent {
     this.current.draw();
   }
 
-   drawPattern(width, height, hexSize = 30) {
+  drawPattern(width, height, hexSize = 30) {
     const ctx = this.offCtx;
 
     // Equilateral Triangle Simplified Formula

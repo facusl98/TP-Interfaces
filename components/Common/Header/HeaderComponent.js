@@ -45,8 +45,6 @@ class HeaderComponent extends BaseComponent {
               <input class ="search-header" id="search-input" placeholder="Search game...">
               <custom-icon icon="/assets/icons/common/Search.svg" size="20px" style="dark"></custom-icon>
             </div>
-          <div id="suggestions" class="suggestions" style="display: none;">
-          </div>
         </div>
         <img src="/assets/images/UserIcon.png" class="menu-btn">
       </div>
@@ -74,7 +72,7 @@ class HeaderComponent extends BaseComponent {
           html += `
             <custom-button id="show-more-btn" class="show-more-btn"
                 text = "Show more . . ."
-                width="${this._mobile ? "91%" : "140px"}"
+                width="91%"
                 height="30px"
                 class="secondary"
             ></custom-button>
@@ -94,7 +92,7 @@ class HeaderComponent extends BaseComponent {
               `).join("")}
               <custom-button id="show-less-btn" class="show-less-btn"
                 text = "Show less . . ."
-                width="${this._mobile ? "91%" : "140px"}"
+                width="91%"
                 height="30px"
                 class="secondary"
               ></custom-button>

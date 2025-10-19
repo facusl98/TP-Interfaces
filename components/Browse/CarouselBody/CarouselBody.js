@@ -57,7 +57,7 @@ class CarouselBody extends BaseComponent {
       }, 
       puzzle: {
         icon: "/assets/icons/genres/puzzle.svg",
-        text: "puzzle",
+        text: "Puzzle",
         import: () => gameService.getRandom(10)
       }, 
       fighting: {

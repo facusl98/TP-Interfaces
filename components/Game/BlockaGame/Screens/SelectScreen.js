@@ -73,11 +73,10 @@ export class SelectScreen extends BaseScreen {
       steps--;
 
       if (steps > 0) {
-        speed *= 1.1;
+        speed *= 1.1; 
         setTimeout(spin, speed);
       } else {
         this.game.image = this.images[prev];
-        this.ready = true;
       }
     }
 

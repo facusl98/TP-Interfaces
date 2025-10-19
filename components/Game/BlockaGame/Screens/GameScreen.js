@@ -8,6 +8,7 @@ export class GameScreen extends BaseScreen {
     this.time = 0;
 
     this.images = [];
+    this.filterImages = [];
     this.pieces = [];
   }
 
@@ -20,7 +21,7 @@ export class GameScreen extends BaseScreen {
     // Timer: [20, 20] to [95, 70]
     this.time = 0;  
     this.timer(); // Once, to preload
-    setInterval(this.timer, 1000);
+    const timer = setInterval(this.timer, 1000);
 
     // this.showEventHitboxes();
   }
@@ -45,18 +46,18 @@ export class GameScreen extends BaseScreen {
       const py = this.fy + row * (this.size + this.gap);
 
       const src = this.images[i];
-      const imgCopy = new OffscreenCanvas(this.images[i].width,this.images[i].height);
+      const imgCopy = new OffscreenCanvas(src.width, src.height);
       imgCopy.getContext("2d").drawImage(src, 0, 0);
       const piece = {
         canvas: imgCopy,
         imgIndex: i,
         x: px, y: py,
         w: this.size, h: this.size,
-        angle: Math.floor(Math.random() * 4) * 90
+        angle: (Math.floor(Math.random() * 4) * 90) * Math.PI / 180
       }
       this.pieces.push(piece);
 
-      this.rotatePiece(piece, true, true);
+      this.applyRotation(piece);
       this.drawPiece(piece);
       this.addPieceEvent(piece);
     }
@@ -75,35 +76,34 @@ export class GameScreen extends BaseScreen {
     });
   }
 
-  rotatePiece(piece, clockwise, setup) {
+  rotatePiece(piece, clockwise) {
+    const delta = (clockwise ? 90 : -90) * Math.PI / 180;       // Deg to Rads
+    piece.angle = ((piece.angle || 0) + delta ) % (Math.PI * 2); // Total Rads
+
+    this.applyRotation(piece);
+
+    this.checkWinCondition();
+  }
+
+  applyRotation(piece) {
     const { canvas, imgIndex } = piece;
     const w = canvas.width, h = canvas.height;
-    const src = this.images[imgIndex];
-
-    let delta;
-    if (setup) {
-      delta = piece.angle * Math.PI / 180;
-      piece.angle = delta % (Math.PI * 2); // Total Rads
-    }
-    else {
-      delta = (clockwise ? 90 : -90) * Math.PI / 180;             // Deg to Rads
-      piece.angle = ((piece.angle || 0) + delta) % (Math.PI * 2); // Total Rads
-    }
-    
+    const src = this.filterImages[imgIndex];
 
     const offCtx = canvas.getContext("2d");
-    
+  
     offCtx.clearRect(0, 0, w, h);
-    offCtx.setTransform(1, 0, 0, 1, 0, 0);
 
     offCtx.save();
-    offCtx.translate(w / 2, h / 2);
-    offCtx.rotate(piece.angle);
-    offCtx.drawImage(src, -w / 2, -h / 2, w, h);
+    offCtx.translate(w / 2, h / 2); // "Grabs" piece by the middle point
+    offCtx.rotate(piece.angle);     // Rotates based on the middle point
+    // -w / 2 and h / 2 to compensate. 
+    // Currente point of reference for coordinates is on 
+    // w / 2, h / 2 (middle point)
+    offCtx.drawImage(src, -w / 2, -h / 2, w, h);  
     offCtx.restore();
 
     this.drawPiece(piece);
-    this.checkWinCondition();
   }
 
   drawPiece(piece) {
@@ -119,11 +119,48 @@ export class GameScreen extends BaseScreen {
       row == gridSize - 1 && col == 0 ? 10 : 0,             // BL
     ];
 
+    this.ctx.fillStyle = this.game.colors.purple;
+    this.ctx.beginPath();
+    this.ctx.roundRect(x, y, w, h);
+    this.ctx.fill();
     this.toolkit.drawImageRounded(
       canvas,
       x, y, w, h,
       radius 
     );
+  }
+
+  pieceImage() {
+    const gridSize = this.game.gridSize;  // (For short)
+    const pw = this.game.image.width / gridSize;
+    const ph = this.game.image.height / gridSize;
+
+    for (let i = 0; i < gridSize; i++) {
+      for (let j = 0; j < gridSize; j++) {
+        const off = new OffscreenCanvas(pw, ph);
+        const offCtx = off.getContext("2d");
+
+        offCtx.drawImage(this.game.image,
+          j * pw, i * ph,               // Source Image coords
+          pw, ph,                       // Source Image chunks size
+          0, 0, pw, ph                  // Destination canvas position
+        );
+
+        this.filterImages.push(
+          this.toolkit.applyFilter(off, 9)
+        );
+        this.images.push(off);
+      }
+    }
+  }
+
+  checkWinCondition() {
+    let win = true;
+    this.pieces.forEach((piece) => {
+      if (piece.angle != 0)
+        win = false;
+    });
+    console.log(win)
   }
 
   timer = () => {
@@ -141,35 +178,5 @@ export class GameScreen extends BaseScreen {
 
     this.time += 1;
     this.ctx.restore();
-  }
-
-  pieceImage() {
-    const gridSize = this.game.gridSize; // (For short)
-    const pw = this.game.image.width / gridSize;
-    const ph = this.game.image.height / gridSize;
-    for (let i = 0; i < gridSize; i++) {
-      for (let j = 0; j < gridSize; j++) {
-        const off = new OffscreenCanvas(pw, ph);
-        const offCtx = off.getContext("2d");
-
-        offCtx.drawImage(this.game.image,
-          j * pw, i * ph,               // Source Image coords
-          pw, ph,                       // Source Image chunks size
-          0, 0, pw, ph                  // Destination canvas position
-        );
-
-        this.images.push(off);
-      }
-    }
-  }
-
-  checkWinCondition() {
-    if (this.pieces.length != this.images.length) return;
-    let win = true;
-    this.pieces.forEach((piece) => {
-      if (piece.angle != 0)
-        win = false;
-    });
-    console.log(win)
   }
 }
