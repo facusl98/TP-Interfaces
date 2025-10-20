@@ -23,17 +23,23 @@ export class GameScreen extends BaseScreen {
     this.time = 0;  
     this.timer(); // Once, to preload
 
+    // Hint: [20, 80] to [95, 130]
+    this.hintLoaded = false;
+    this.hint();
+
     // Game Frame: [140, 20] to [580, 460]
     this.drawFrame(true);
     setTimeout(() => { 
       this.drawFrame();
       this.timerInterval = setInterval(this.timer, 1000);
     }, this.game.level == this.toolkit.keys.length - 1 ? 3000 : 1000);
+    
 
     // this.showEventHitboxes();
   }
 
   drawFrame(clean = false) {
+    this.ctx.save()
     const gridSize = this.game.gridSize; // (For short)
     const x = 140, y = 20, r = 10;
     this.frame = 420, this.padding = 20, this.gap = 10;
@@ -43,6 +49,7 @@ export class GameScreen extends BaseScreen {
     this.size = (frameSize - (this.gap * (gridSize - 1))) / gridSize;
 
     this.ctx.fillStyle = this.game.colors.purple;
+    this.ctx.beginPath();
     this.ctx.roundRect(x, y, this.frame + this.padding, this.frame + this.padding, r);
     this.ctx.fill();
 
@@ -72,12 +79,14 @@ export class GameScreen extends BaseScreen {
       }
       this.drawPiece(piece);
     }
+
+    this.ctx.restore();
   }
 
   addPieceEvent(piece) {
-    const { x, y, w, h } = piece;
+    const { x, y, w, h, imgIndex } = piece;
     this.events.push({
-        name: `Piece[${x}, ${y}]`,
+        name: `${imgIndex}`,
         x1: x, x2: x + w, y1: y, y2: y + h, 
         click: (e) => {
           this.rotatePiece(piece, e.button === 0 ? true : false);     
@@ -117,7 +126,7 @@ export class GameScreen extends BaseScreen {
     this.drawPiece(piece);
   }
 
-  drawPiece(piece) {
+  drawPiece(piece, clean = false) {
     const { canvas, imgIndex, x, y, w, h } = piece;
     const gridSize = this.game.gridSize;
     const col = imgIndex % gridSize;
@@ -135,7 +144,7 @@ export class GameScreen extends BaseScreen {
     this.ctx.roundRect(x, y, w, h);
     this.ctx.fill();
     this.toolkit.drawImageRounded(
-      canvas,
+      clean ? this.images[piece.imgIndex] : canvas,
       x, y, w, h,
       radius 
     );
@@ -190,6 +199,48 @@ export class GameScreen extends BaseScreen {
     }, 3000)
   }
 
+  hint(hover = false) {
+    this.ctx.save();
+    this.ctx.strokeStyle = this.game.colors.purple;
+    this.ctx.lineWidth = 2;
+    this.ctx.fillStyle = hover ? 
+      this.game.colors.purpleActive :
+      this.game.colors.purple;
+    const x = 20, y = 80, w = 75, h = 50, r = 5;
+    this.ctx.beginPath();
+    this.ctx.roundRect(x, y, w, h, r);
+    this.ctx.fill();
+    this.ctx.stroke();
+
+    this.ctx.fillStyle = this.game.colors.light;
+    this.ctx.font = `24px Helvetica`;
+    this.ctx.fillText("Hint", x + w / 2, y + h / 2);
+    this.ctx.restore();
+
+    if (!this.hintLoaded) {
+      this.events.push({
+        name: `Hint`,
+        x1: x, x2: x + w, y1: y, y2: y + h, 
+        click: () => {
+          if (this.events.length == 1) return;
+          const pieceEvents = this.events.filter((e) => (e.name != "Hint"));
+          const random = Math.floor(Math.random() * pieceEvents.length);
+          const piece = this.pieces[parseInt(pieceEvents[random].name)];
+          this.events = this.events.filter((e) => 
+            (e.name != pieceEvents[random].name));
+
+          piece.angle = 0;
+          this.drawPiece(piece, true);
+          this.time += 60;
+          this.checkWinCondition()
+        },
+        hover: () => {this.hint(true)},
+        unhover: () => {this.hint()}
+    });
+    }
+    this.hintLoaded = true;
+  }
+
   timer = (win = false) => {
     this.ctx.save();
     let m = Math.floor(this.time / 60);
@@ -199,7 +250,7 @@ export class GameScreen extends BaseScreen {
     this.ctx.fillStyle = this.game.colors.purpleActive :
     this.ctx.fillStyle = this.game.colors.purple;
     this.ctx.beginPath();
-    this.ctx.roundRect(20, 20, 75, 50, 8);
+    this.ctx.roundRect(20, 20, 75, 50, 5);
     this.ctx.fill();
     this.ctx.font = "24px Helvetica";
     this.ctx.fillStyle = this.game.colors.light;

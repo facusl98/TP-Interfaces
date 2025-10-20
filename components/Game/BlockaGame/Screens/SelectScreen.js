@@ -14,50 +14,9 @@ export class SelectScreen extends BaseScreen {
         hover: () => { this.drawStart(true) },
         unhover: () => { this.drawStart() }
       },
-      {
-        name: "Grid2",
-        x1: 290, x2: 330, y1: 200, y2: 240, 
-        click: () => {
-          this.game.gridSize = 2;
-          this.drawGridSizeSelector();
-        },
-        hover: () => {
-          this.drawGridBtn(2, true);
-        },
-        unhover: () => {
-          this.drawGridBtn(2);
-        }
-      },
-      {
-        name: "Grid3",
-        x1: 340, x2: 380, y1: 200, y2: 240, 
-        click: () => {
-          this.game.gridSize = 3;
-          this.drawGridSizeSelector();
-        },
-        hover: () => {
-          this.drawGridBtn(3, true);
-        },
-        unhover: () => {
-          this.drawGridBtn(3);
-        }
-      },
-      {
-        name: "Grid4",
-        x1: 390, x2: 430, y1: 200, y2: 240, 
-        click: () => {
-          this.game.gridSize = 4;
-          this.drawGridSizeSelector();
-        },
-        hover: () => {
-          this.drawGridBtn(4, true);
-        },
-        unhover: () => {
-          this.drawGridBtn(4);
-        }
-      },
     ];
     this.images = [];
+    this.validSizes = [2, 3, 4, 5];
     this.ready = false;
     this.levels = 7;
     this.selected = 0;
@@ -70,23 +29,30 @@ export class SelectScreen extends BaseScreen {
     // Levels Thumbnail: [97.5, 260] to [622.5, 360]
     this.drawLevels();
 
-    // Grid Size Selector: [290, 200] to [430, 240]
-    this.drawGridSizeSelector();
+
+    const y = 200, w = 40, h = 40, r = 5, gap = 10;
+    const x = 720 / 2 - ((w + gap) * (this.validSizes.length - 1) + w) / 2
+    this.drawGridSizeSelector(x, y, w, h, gap);
+    this.addGridSizeEvents(x, y, w, h, gap);
 
     this.rouletteSelect();
 
-    // Level Text: [] to []
+    // Level Text: [270, 20] to [450, 98]
+    this.ctx.fillStyle = this.game.colors.purple;
+    this.ctx.beginPath();
+    this.ctx.roundRect(270, 20, 180, 78, 10);
+    this.ctx.fill();
     const fontSize = 24;
     const levels = Object.keys(this.toolkit.filters)
     this.ctx.fillStyle = this.game.colors.light;
     this.ctx.font = `${fontSize}px Helvetica`;
     this.ctx.fillText(
       `Level ${this.game.level + 1} / ${levels.length}`,
-      720/2 , 20 + fontSize / 2
+      720/2 , 30 + fontSize / 2
     )
     this.ctx.fillText(
       `${levels[this.game.level]}`,
-      720/2 , 20 + fontSize + 10 + fontSize / 2
+      720/2 , 30 + fontSize + 10 + fontSize / 2
     )
 
     // this.showEventHitboxes();
@@ -96,7 +62,7 @@ export class SelectScreen extends BaseScreen {
     if (!this.ready) return;
     
     this.ctx.fillStyle = this.game.colors.purple;
-    this.ctx.roundRect(77.5, 260, 555, 100, 10);
+    this.ctx.roundRect(95, 270, 530, 80, 10);
     this.ctx.fill();
     for (let i = 0; i < this.levels; i++) {
       this.drawLevel(i);
@@ -162,23 +128,29 @@ export class SelectScreen extends BaseScreen {
     this.ctx.fillText("Start", 360, 405);
   }
 
-  drawGridSizeSelector() {
-    // Grid 2: [290, 200] to [330, 240]
-    this.drawGridBtn(2)
+  drawGridSizeSelector(x, y, w, h, gap) {
+    const pad = 10, font = 24;
+    const textSpace = font + 20;
+    const totalW = (this.validSizes.length - 1) * (w + gap) + w + pad;
+    this.ctx.fillStyle = this.game.colors.purple;
+    this.ctx.roundRect(
+      x - pad / 2, y - pad / 2 - textSpace, 
+      totalW, h + pad + textSpace, 5
+    );
+    this.ctx.fill();
 
-    // Grid 3: [340, 200] to [380, 240]
-    this.drawGridBtn(3)
+    this.ctx.fillStyle = this.game.colors.light;
+    this.ctx.font = `${font}px Helvetica`;
+    this.ctx.fillText("Difficulty", x + totalW / 2, (y + (h + pad) / 2) - 50)
 
-    // Grid 4: [390, 200] to [430, 240]
-    this.drawGridBtn(4)
+    this.validSizes.forEach((size) => {this.drawGridBtn(x, y, w, h, gap, size)})
   }
 
 
-  drawGridBtn(size, hover = false) {
+  drawGridBtn(x, y, w, h, gap, size, hover = false) {
+    const padding = 6, r = 3;
     this.ctx.lineWidth = 2;
-    const y = 200, w = 40, h = 40, r = 5, gap = 10;
-    const x = 720 / 2 - ((w + gap) * 2 + w) / 2
-    this.ctx.strokeStyle = this.game.colors.purple;
+    this.ctx.strokeStyle = this.game.colors.purpleHover;
     if (hover)
       this.ctx.fillStyle = this.game.colors.purpleHover;
     else 
@@ -186,19 +158,48 @@ export class SelectScreen extends BaseScreen {
     if (this.game.gridSize == size) 
       this.ctx.fillStyle = this.game.colors.purpleActive;
     
-    // Starting from 20, 50 offset for each btn.
     let px = x + (size - 2) * (w + gap); 
-    let tx = px + w / 2; // Text position 
-
     this.ctx.beginPath();
     this.ctx.roundRect(px, y, w, h, r);
     this.ctx.fill();
     this.ctx.stroke();
 
-    this.ctx.font = "24px Helvetica";
-    this.ctx.fillStyle = this.game.colors.light;
-    this.ctx.fillText(size, tx, y + w / 2);
+    const iconSpace = h - padding * 2;
+    const cellSize = iconSpace / size;
+    const cx = px + padding, cy = y + padding;
+    this.ctx.strokeStyle = this.game.colors.light;
+    this.ctx.lineWidth = 1;
+    for (let i = 0; i < size; i++) {
+      for (let j = 0; j < size; j++) {
+        this.ctx.strokeRect(
+          cx + cellSize * i, cy + cellSize * j,
+          cellSize, cellSize
+        );
+      }
+    }
   } 
+
+  addGridSizeEvents(x, y, w, h, gap) {
+    this.validSizes.map((size) => {
+      const ex = x + (size - 2) * (w + gap);
+      this.events.push(
+          {
+          name: `Grid${size}`,
+          x1: ex, x2: ex + w, y1: y, y2: y + h, 
+          click: () => {
+            this.game.gridSize = size;
+            this.drawGridSizeSelector(x, y, w, h, gap);
+          },
+          hover: () => {
+            this.drawGridBtn(x, y, w, h, gap, size, true);
+          },
+          unhover: () => {
+            this.drawGridBtn(x, y, w, h, gap, size);
+          }
+        }
+      );
+    })
+  }
 
   loadImages() {
     let loaded = 0;
