@@ -86,7 +86,7 @@ export class SelectScreen extends BaseScreen {
 
   rouletteSelect() {
     let current = 0, prev = null; 
-    let speed = 0; // Place at 80. 0 for Game screen development
+    let speed = 50; // Place at 80. 0 for Game screen development
     const cycles = Math.floor(Math.random() * 2) + 2; // Full spins
     let steps = cycles * this.levels + Math.floor(Math.random() * this.levels); // Total Steps 
 
@@ -101,7 +101,7 @@ export class SelectScreen extends BaseScreen {
       steps--;
 
       if (steps > 0) {
-        speed *= 1.1; 
+        speed *= 1.2; 
         setTimeout(spin, speed);
       } else {
         this.game.image = this.images[prev];
