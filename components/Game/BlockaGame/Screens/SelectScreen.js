@@ -40,18 +40,17 @@ export class SelectScreen extends BaseScreen {
     // Level Text: [270, 20] to [450, 98]
     this.ctx.fillStyle = this.game.colors.purple;
     this.ctx.beginPath();
-    this.ctx.roundRect(270, 20, 180, 78, 10);
+    this.ctx.roundRect(270, 20, 180, 78, 5);
     this.ctx.fill();
-    const fontSize = 24;
-    const levels = Object.keys(this.toolkit.filters)
+    const fontSize = 24;  
     this.ctx.fillStyle = this.game.colors.light;
     this.ctx.font = `${fontSize}px Helvetica`;
     this.ctx.fillText(
-      `Level ${this.game.level + 1} / ${levels.length}`,
+      `Level ${this.game.level + 1} / ${this.toolkit.keys.length}`,
       720/2 , 30 + fontSize / 2
     )
     this.ctx.fillText(
-      `${levels[this.game.level]}`,
+      `${this.toolkit.keys[this.game.level]}`,
       720/2 , 30 + fontSize + 10 + fontSize / 2
     )
 
@@ -62,7 +61,8 @@ export class SelectScreen extends BaseScreen {
     if (!this.ready) return;
     
     this.ctx.fillStyle = this.game.colors.purple;
-    this.ctx.roundRect(95, 270, 530, 80, 10);
+    this.ctx.beginPath();
+    this.ctx.roundRect(95, 270, 530, 80, 5);
     this.ctx.fill();
     for (let i = 0; i < this.levels; i++) {
       this.drawLevel(i);
@@ -86,7 +86,7 @@ export class SelectScreen extends BaseScreen {
 
   rouletteSelect() {
     let current = 0, prev = null; 
-    let speed = 0; // Place at 150. 0 for Game screen development
+    let speed = 0; // Place at 80. 0 for Game screen development
     const cycles = Math.floor(Math.random() * 2) + 2; // Full spins
     let steps = cycles * this.levels + Math.floor(Math.random() * this.levels); // Total Steps 
 
@@ -133,6 +133,7 @@ export class SelectScreen extends BaseScreen {
     const textSpace = font + 20;
     const totalW = (this.validSizes.length - 1) * (w + gap) + w + pad;
     this.ctx.fillStyle = this.game.colors.purple;
+    this.ctx.beginPath();
     this.ctx.roundRect(
       x - pad / 2, y - pad / 2 - textSpace, 
       totalW, h + pad + textSpace, 5
@@ -158,7 +159,7 @@ export class SelectScreen extends BaseScreen {
     if (this.game.gridSize == size) 
       this.ctx.fillStyle = this.game.colors.purpleActive;
     
-    let px = x + (size - 2) * (w + gap); 
+    let px = x + this.validSizes.indexOf(size) * (w + gap); 
     this.ctx.beginPath();
     this.ctx.roundRect(px, y, w, h, r);
     this.ctx.fill();
@@ -181,7 +182,7 @@ export class SelectScreen extends BaseScreen {
 
   addGridSizeEvents(x, y, w, h, gap) {
     this.validSizes.map((size) => {
-      const ex = x + (size - 2) * (w + gap);
+      const ex = x + this.validSizes.indexOf(size) * (w + gap);
       this.events.push(
           {
           name: `Grid${size}`,

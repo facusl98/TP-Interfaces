@@ -1,18 +1,17 @@
 import { BaseScreen } from "../../BaseScreen.js";
 
 export class GameScreen extends BaseScreen {
-  constructor(toolkit, changeScreen) {
-    super(toolkit, changeScreen);
+  constructor(game, changeScreen) {
+    super(game, changeScreen);
     this.events = [];
 
-    this.time = 0;
+    this.time = 595;
     this.images = [];
     this.filterImages = [];
     this.pieces = [];
   }
 
   draw() {
-    this.time = 0;
     this.images = [];
     this.filterImages = [];
     this.pieces = [];
@@ -97,7 +96,7 @@ export class GameScreen extends BaseScreen {
   }
 
   rotatePiece(piece, clockwise) {
-    const delta = (clockwise ? 90 : -90) * Math.PI / 180;       // Deg to Rads
+    const delta = (clockwise ? -90 : 90) * Math.PI / 180;       // Deg to Rads
     piece.angle = ((piece.angle || 0) + delta ) % (Math.PI * 2); // Total Rads
 
     this.applyRotation(piece);
@@ -196,6 +195,8 @@ export class GameScreen extends BaseScreen {
     setTimeout(() => {
       if (this.game.level < this.toolkit.keys.length)
         this.changeScreen("SELECT");
+      else 
+        this.changeScreen("END", { state: "WIN" })
     }, 3000)
   }
 
@@ -231,7 +232,8 @@ export class GameScreen extends BaseScreen {
 
           piece.angle = 0;
           this.drawPiece(piece, true);
-          this.time += 60;
+          // Should be 10 to 30, really. Overall difficulty on latter levels justifies it.
+          this.time += 5; 
           this.checkWinCondition()
         },
         hover: () => {this.hint(true)},
@@ -246,7 +248,23 @@ export class GameScreen extends BaseScreen {
     let m = Math.floor(this.time / 60);
     let s = this.time % 60;
 
-    win ? 
+    this.drawTimer(m, s, win);
+
+    if (!win) this.time += 1;
+    this.ctx.restore();
+
+    if (this.time > 600) {
+      clearInterval(this.timerInterval);
+      this.events = [];
+      this.drawTimer(m, s, true);
+      setTimeout(() => {
+        this.changeScreen("END", {state: "LOSE"});
+      }, 3000)
+    }
+  }
+
+  drawTimer(m, s, active = false) {
+    active ? 
     this.ctx.fillStyle = this.game.colors.purpleActive :
     this.ctx.fillStyle = this.game.colors.purple;
     this.ctx.beginPath();
@@ -255,8 +273,5 @@ export class GameScreen extends BaseScreen {
     this.ctx.font = "24px Helvetica";
     this.ctx.fillStyle = this.game.colors.light;
     this.ctx.fillText(`${m}:${s >= 10 ? s : `0${s}`}`, 57.5, 45);
-
-    if (!win) this.time += 1;
-    this.ctx.restore();
   }
 }

@@ -3,6 +3,8 @@ import { CanvasToolkit } from "../CanvasToolkit.js";
 import { HomeScreen } from "./Screens/HomeScreen.js";
 import { SelectScreen } from "./Screens/SelectScreen.js";
 import { GameScreen } from "./Screens/GameScreen.js";
+import { EndScreen } from "./Screens/EndScreen.js";
+import { GuideScreen } from "./Screens/GuideScreen.js";
 
 class BlockaGame extends BaseComponent {
   constructor() {
@@ -48,7 +50,9 @@ class BlockaGame extends BaseComponent {
     this.screens = {
       HOME: new HomeScreen(this, this.changeScreen.bind(this)),
       SELECT: new SelectScreen(this, this.changeScreen.bind(this)),
-      GAME: new GameScreen(this, this.changeScreen.bind(this))
+      GAME: new GameScreen(this, this.changeScreen.bind(this)),
+      END: new EndScreen(this, this.changeScreen.bind(this)),
+      GUIDE: new GuideScreen(this, this.changeScreen.bind(this))
     };
     this.current = this.screens["HOME"];
 
@@ -72,10 +76,10 @@ class BlockaGame extends BaseComponent {
     this.ctx.clearRect(0, 0, 720, 480);
   }
 
-  drawCurrent() {
+  drawCurrent(params) {
     this.clearScreen();
     this.ctx.drawImage(this.offscreen, 0, 0);
-    this.current.draw();
+    this.current.draw(params);
   }
 
   drawPattern(width, height, hexSize = 30) {
@@ -118,10 +122,10 @@ class BlockaGame extends BaseComponent {
     ctx.stroke();
   }
 
-  changeScreen(screen) {
+  changeScreen(screen, params) {
     this.current = this.screens[screen];
     this.className = "";
-    this.drawCurrent();
+    this.drawCurrent(params);
   }
 
 }

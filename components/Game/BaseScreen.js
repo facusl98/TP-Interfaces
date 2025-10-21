@@ -12,7 +12,7 @@ export class BaseScreen {
     this.ctx.font = "24px Helvetica";
   }
 
-  draw() {}
+  draw(params = {}) {}
 
   onClick(x, y, e) {
     for (const o of this.events) {

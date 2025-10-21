@@ -8,7 +8,7 @@ export class HomeScreen extends BaseScreen {
         name: "PlayBtn",
         x1: 270, x2: 450, y1: 380, y2: 430, 
         click: () => {
-          this.changeScreen("SELECT")
+          this.changeScreen("GUIDE")
         },
         hover: () => { this.drawPlay(true) },
         unhover: () => { this.drawPlay() }
@@ -25,8 +25,8 @@ export class HomeScreen extends BaseScreen {
     this.ctx.lineWidth = 5;
     this.ctx.strokeStyle = this.game.colors.dark;
     this.ctx.fillStyle = this.game.colors.light;
-    this.ctx.strokeText("Blocka: The Game", 360, 250)
-    this.ctx.fillText("Blocka: The Game", 360, 250);
+    this.ctx.strokeText("Blocka: Picture Fixer", 360, 100)
+    this.ctx.fillText("Blocka: Picture Fixer", 360, 100);
 
     // Debug for events
     // this.showEventHitboxes();

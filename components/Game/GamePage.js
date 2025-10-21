@@ -10,7 +10,7 @@ class GamePage extends BaseComponent {
         title: "Peg Solitaire",
         genres: ["Strategy", "Indie"],
         guide: "Command your knights in this strategic challenge! Select a knight and leap over another to defeat it, landing on the empty space beyond. Each defeated knight is removed from the battlefield. Keep striking until only one brave warrior remains standing in the center. Victory belongs to the last knight!",
-        story: "Peg Solitaire, reimagined here as a medieval clash, has its origins in 17th century France, where it was played in royal courts. Over time, the game spread through Europe, much like epic tales of knights and battles. Though the battlefield has changed, the goal remains timeless: reduce the army until one champion is left.",
+        lore: "Peg Solitaire, reimagined here as a medieval clash, has its origins in 17th century France, where it was played in royal courts. Over time, the game spread through Europe, much like epic tales of knights and battles. Though the battlefield has changed, the goal remains timeless: reduce the army until one champion is left.",
         video: "/assets/images/VideoPegSolitaire.png",
         img1: "/assets/images/PegSolitaire.png",
         img2: "/assets/images/EjPegSolitaire.png",
@@ -20,11 +20,11 @@ class GamePage extends BaseComponent {
       "blocka": {
         title: "Blocka",
         genres: ["Puzzle", "Casual", "Indie"],
-        guide: "Restore corrupted data fragments in this digital puzzle challenge! Each level presents a damaged image divided into four rotating blocks. Click a block to rotate it left, or right-click to spin it in the opposite direction. Reconstruct the image by aligning all fragments correctly to restore the original file. Act fast — your repair time is recorded as your system efficiency score!",
-        story: "After a massive data breach, the BLOCKA-9 mainframe lost critical visual archives. The system's recovery AI has only partial access, and every image must be manually reconstructed to stabilize the database. Each restored picture brings the network closer to full recovery — and unveils traces of the lost digital world that once thrived within the machine.",
+        guide: "To play, rotate the pieces to reassemble the original image. Use the left mouse button to rotate a piece to the left and the right button to rotate it to the right. If you find yourself stuck, you can use a hint, but be careful — doing so will add extra time to your timer. Each puzzle must be completed within ten minutes, or the game will end. You can also challenge yourself by increasing the grid size to raise the difficulty. As you progress, each level will become more complex. Good luck!",
+        lore: "Years of travel led a renowned photographer to capture countless breathtaking landscapes. But after a strange storm struck during his latest journey, his photographs became mysteriously corrupted, their fragments scattered and their colors distorted. Now, it's up to you to restore his memories by piecing the damaged images back together, bringing his lost work to life once more.",
         video: "/assets/images/blocka/blocka-vid.png",
-        img1: "/assets/images/blocka/blocka-2.jpg",
-        img2: "/assets/images/blocka/blocka-3.jpg",
+        img1: "/assets/images/blocka/blocka-1.png",
+        img2: "/assets/images/blocka/blocka-2.png",
         import: async () => await import("./BlockaGame/BlockaGame.js"),
         component: `<blocka-game id="game" class="hidden"></blocka-game>`
       }
@@ -112,8 +112,8 @@ class GamePage extends BaseComponent {
             <p>${this._game.guide}</p>
         </div>
         <div class="explain-text">
-            <h2>A bit of history</h2>
-            <p>${this._game.story}</p>
+            <h2>A bit of lore</h2>
+            <p>${this._game.lore}</p>
         </div>
         <div class="ad ad-2">
           <img class="ad-image" src="/assets/images/ad2.png" alt="Ad Image"></img>          
