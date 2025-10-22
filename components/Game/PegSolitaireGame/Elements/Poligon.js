@@ -53,8 +53,4 @@ export class Poligon extends Figure {
     }
     return inside;
   }
-
-  onMouseDown(x, y) {
-    this.setAngle((this.angle * 180 / Math.PI) + 45);
-  }
 }
