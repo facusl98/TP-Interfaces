@@ -24,8 +24,12 @@ export class Figure {
   // Abstract
   isPointerInside(x, y) {}; 
 
-  // Override
-  onMouseDown(x, y) {
-    console.log(this);
-  };
+  // Abstract
+  onMouseDown(x, y) {};
+
+  // Abstract
+  onMouseMove(x, y) {};
+
+  // Abstract 
+  onMouseUp(x, y) {};
 }

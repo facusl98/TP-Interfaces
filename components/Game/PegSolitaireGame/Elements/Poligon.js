@@ -23,6 +23,12 @@ export class Poligon extends Figure {
     if (this.stroke) this.ctx.stroke();
   }
 
+  setPos(x, y) {
+    this.x = x;
+    this.y = y;
+    this.generateEdges();
+  }
+
   generateEdges() {
     this.edges = [];
     const step = (2 * Math.PI) / this.sides;

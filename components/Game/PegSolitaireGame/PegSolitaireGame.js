@@ -39,7 +39,7 @@ class PegSolitaireGame extends BaseComponent {
   connectedCallback() {
     this.render();
 
-    this.refresh = setInterval(this.drawScreen.bind(this), 333);
+    this.refresh = setInterval(this.drawScreen.bind(this), 50);
 
     this.createBoard(
       this.centerX, this.centerY,
@@ -57,7 +57,19 @@ class PegSolitaireGame extends BaseComponent {
       const x = e.offsetX;
       const y = e.offsetY;
       this.board.onMouseDown(x, y);
-    })
+    });
+
+    this.canvas.addEventListener("mousemove", (e) => {
+      const x = e.offsetX;
+      const y = e.offsetY;
+      this.board.onMouseMove(x, y);
+    });
+
+    this.canvas.addEventListener("mouseup", (e) => {
+      const x = e.offsetX;
+      const y = e.offsetY;
+      this.board.onMouseUp(x, y);
+    });
   }
 
   // Screen Handlers
@@ -85,36 +97,6 @@ class PegSolitaireGame extends BaseComponent {
     );
     this.board = board;
     return board;
-  }
-
-  createRect(x, y, w, h, fill = null, stroke = null, line = null) {
-    const rect = new Rectangle(
-      this.ctx, this.pieces.length,
-      x, y, w, h, 
-      fill, stroke, line
-    );
-    this.pieces.push(rect);
-    return rect;
-  }
-
-  createCircle(x, y, r, fill = null, stroke = null, line = null) {
-    const circle = new Circle(
-      this.ctx, this.pieces.length,
-      x, y, r,
-      fill, stroke, line
-    );
-    this.pieces.push(circle);
-    return circle;
-  }
-
-  createPoligon(x, y, r, sides, angle, fill, stroke, line) {
-    const poligon = new Poligon(
-      this.ctx, this.pieces.length,
-      x, y, r, sides, angle,
-      fill, stroke, line
-    );
-    this.pieces.push(poligon);
-    return poligon;
   }
   
 }
