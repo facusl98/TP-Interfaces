@@ -1,5 +1,7 @@
 import { BaseComponent } from "../../BaseComponent.js";
 import { CanvasToolkit } from "../CanvasToolkit.js";
+import { Circle } from "./Elements/Circle.js";
+import { Poligon } from "./Elements/Poligon.js";
 import { Rectangle } from "./Elements/Rectangle.js";
 
 class PegSolitaireGame extends BaseComponent {
@@ -20,9 +22,11 @@ class PegSolitaireGame extends BaseComponent {
   connectedCallback() {
     this.render();
 
-    this.createRect(this.width / 2, this.height / 2, 100, 100, "red", "purple", 5);
+    const circle = this.createCircle(this.width / 2, this.height / 2, 50, "blue", "gray", 5);
 
-    this.refresh = setInterval(this.drawScreen(), 333);
+    const poli = this.createPoligon(this.width / 2, this.height / 2, 50, 5, 0, "yellow", "teal", 1);
+
+    this.refresh = setInterval(this.drawScreen.bind(this), 333);
   }
 
   async render() {
@@ -36,6 +40,7 @@ class PegSolitaireGame extends BaseComponent {
     })
   }
 
+  // Screen Handlers
   drawScreen() {
     this.clearScreen();
     this.elements.forEach((elem, i) => {
@@ -43,6 +48,24 @@ class PegSolitaireGame extends BaseComponent {
     })
   }
 
+  clearScreen() {
+    this.ctx.clearRect(0, 0, this.width, this.height);
+  }
+
+  // Event Handlers
+  onMouseDown(x, y) {
+    let clicked = null;
+    for (let i = this.elements.length - 1; i >= 0; i--) {
+      let elem = this.elements[i] ?? null;
+      if (elem.isPointerInside(x, y)) {
+        clicked = elem;
+        break;
+      }
+    }
+    clicked?.onMouseDown(x, y);
+  }
+
+  // Create Figures
   createRect(x, y, w, h, fill = null, stroke = null, line = null) {
     const rect = new Rectangle(
       this.ctx, this.elements.length,
@@ -50,22 +73,29 @@ class PegSolitaireGame extends BaseComponent {
       fill, stroke, line
     );
     this.elements.push(rect);
+    return rect;
   }
 
-  clearScreen() {
-    this.ctx.clearRect(0, 0, this.width, this.height);
+  createCircle(x, y, r, fill = null, stroke = null, line = null) {
+    const circle = new Circle(
+      this.ctx, this.elements.length,
+      x, y, r,
+      fill, stroke, line
+    );
+    this.elements.push(circle);
+    return circle;
   }
 
-  onMouseDown(x, y) {
-    let clicked = null;
-    for (let elem of this.elements) {
-      if (elem.isPointerInside(x, y)) {
-        clicked = elem;
-        break;
-      }
-    }
-    console.log(clicked);
+  createPoligon(x, y, r, sides, angle, fill, stroke, line) {
+    const poligon = new Poligon(
+      this.ctx, this.elements.length,
+      x, y, r, sides, angle,
+      fill, stroke, line
+    );
+    this.elements.push(poligon);
+    return poligon;
   }
+  
 }
 
 PegSolitaireGame.define("peg-solitaire-game");

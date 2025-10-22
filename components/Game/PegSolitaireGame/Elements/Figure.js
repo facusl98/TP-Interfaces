@@ -10,6 +10,8 @@ export class Figure {
     this.stroke = stroke;
     this.line = line;
     this.ctx = ctx;
+
+    this.rad = Math.PI / 180;
   }
 
   // Override
@@ -20,5 +22,10 @@ export class Figure {
   };
 
   // Abstract
-  isPointerInside() {}; 
+  isPointerInside(x, y) {}; 
+
+  // Override
+  onMouseDown(x, y) {
+    console.log(this);
+  };
 }
