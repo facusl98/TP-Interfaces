@@ -206,7 +206,7 @@ export class SelectScreen extends BaseScreen {
     let loaded = 0;
     for (let i = 1; i <= this.levels; i++) {
       const img = new Image();
-      img.src = `/assets/images/blocka/levels/img${i}.jpg`;
+      img.src = `/TP-Interfaces/TP3/assets/images/blocka/levels/img${i}.jpg`;
       img.onload = () => {
         this.images[i - 1] = img;
         loaded++;

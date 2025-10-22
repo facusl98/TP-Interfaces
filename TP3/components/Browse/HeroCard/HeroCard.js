@@ -17,7 +17,7 @@ class HeroCard extends BaseComponent {
     this._games = gameService.getRandom(7);
     this._games[3] = {
       name: "Blocka",
-      background_image: "/TP-Interfaces/TP2/assets/images/blocka/blocka.jpg",
+      background_image: "/TP-Interfaces/TP3/assets/images/blocka/blocka.jpg",
       genres: [
         {name: "Puzzle"}, 
         {name: "Casual"}, 
@@ -56,7 +56,7 @@ class HeroCard extends BaseComponent {
 
         <div class="nav">
           <custom-icon
-            icon="/TP-Interfaces/TP2/assets/icons/common/ArrowLeft.svg"
+            icon="/TP-Interfaces/TP3/assets/icons/common/ArrowLeft.svg"
             class="arrow"
           ></custom-icon>
           <div class="dots">
@@ -67,7 +67,7 @@ class HeroCard extends BaseComponent {
           </div>
           <custom-icon
             class="arrow"
-            icon="/TP-Interfaces/TP2/assets/icons/common/ArrowRight.svg"
+            icon="/TP-Interfaces/TP3/assets/icons/common/ArrowRight.svg"
           ></custom-icon>
         </div>
       </div>

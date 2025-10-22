@@ -165,13 +165,13 @@ class FilterSelect extends BaseComponent {
       paginator.innerHTML = `
         <custom-icon
           class="arrow"
-          icon="/TP-Interfaces/TP2/assets/icons/common/ArrowLeft.svg"
+          icon="/TP-Interfaces/TP3/assets/icons/common/ArrowLeft.svg"
           size="20px"
         ></custom-icon>
         <p>Page ${this._page} of ${this._pages}</p>
         <custom-icon
           class="arrow"
-          icon="/TP-Interfaces/TP2/assets/icons/common/ArrowRight.svg"
+          icon="/TP-Interfaces/TP3/assets/icons/common/ArrowRight.svg"
           size="20px"
         ></custom-icon>`;
 

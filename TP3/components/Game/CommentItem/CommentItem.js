@@ -57,7 +57,7 @@ class CommentItem extends BaseComponent {
 
     this._container.innerHTML = `
     <div class="user">
-      <span class="user-name"><img src="/TP-Interfaces/TP2/assets/images/UserIcon.png" alt="User Pic" /> ${this._user}</span> 
+      <span class="user-name"><img src="/TP-Interfaces/TP3/assets/images/UserIcon.png" alt="User Pic" /> ${this._user}</span> 
       <span class="time">${ago} ${this._timeUnits[count]}</span>
     </div>
     <p class="comment">${this._comment}</p>
@@ -66,13 +66,13 @@ class CommentItem extends BaseComponent {
       <p class="toggle-responses">
         ${this._open ? `
           <custom-icon
-            icon="/TP-Interfaces/TP2/assets/icons/common/ArrowUp.svg"
+            icon="/TP-Interfaces/TP3/assets/icons/common/ArrowUp.svg"
             size="20px"
           ></custom-icon>
           <span>Hide Responses</span>
         ` : `
           <custom-icon
-            icon="/TP-Interfaces/TP2/assets/icons/common/ArrowDown.svg"
+            icon="/TP-Interfaces/TP3/assets/icons/common/ArrowDown.svg"
             size="20px"
           ></custom-icon>
           <span>See Responses</span>

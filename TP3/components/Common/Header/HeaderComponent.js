@@ -32,21 +32,21 @@ class HeaderComponent extends BaseComponent {
       <div class="header-rows">
         <div class="logo-container">
           <img src="${!this._burger ?
-          "/TP-Interfaces/TP2/assets/icons/common/Menu.svg" :
-          "/TP-Interfaces/TP2/assets/icons/common/Close.svg"}" class="burger-btn"/>
+          "/TP-Interfaces/TP3/assets/icons/common/Menu.svg" :
+          "/TP-Interfaces/TP3/assets/icons/common/Close.svg"}" class="burger-btn"/>
           
           <a href="#/browse">
-            <img class="logo" src="/TP-Interfaces/TP2/assets/images/Logo.png" alt="StimGames Logo">
+            <img class="logo" src="/TP-Interfaces/TP3/assets/images/Logo.png" alt="StimGames Logo">
           </a> 
           
           </div>
         <div class="search-container" id="search-container">
             <div class="search-input">
               <input class ="search-header" id="search-input" placeholder="Search game...">
-              <custom-icon icon="/TP-Interfaces/TP2/assets/icons/common/Search.svg" size="20px" style="dark"></custom-icon>
+              <custom-icon icon="/TP-Interfaces/TP3/assets/icons/common/Search.svg" size="20px" style="dark"></custom-icon>
             </div>
         </div>
-        <img src="/TP-Interfaces/TP2/assets/images/UserIcon.png" class="menu-btn">
+        <img src="/TP-Interfaces/TP3/assets/images/UserIcon.png" class="menu-btn">
       </div>
       ${this._burger ? (() => {
         // Prepare genres HTML outside the template
@@ -58,7 +58,7 @@ class HeaderComponent extends BaseComponent {
         html += visibleGenres.map((genre) => `
           <a href="#search">
             <custom-button
-              icon="/TP-Interfaces/TP2/assets/icons/genres/${genre}.svg"
+              icon="/TP-Interfaces/TP3/assets/icons/genres/${genre}.svg"
               iconSize="20px"
               text="${genre}"
               width="${this._mobile ? "100%" : "140px"}"
@@ -81,7 +81,7 @@ class HeaderComponent extends BaseComponent {
               ${hiddenGenres.map((genre) => `
                 <a href="#search">
                   <custom-button
-                    icon="/TP-Interfaces/TP2/assets/icons/genres/${genre}.svg"
+                    icon="/TP-Interfaces/TP3/assets/icons/genres/${genre}.svg"
                     iconSize="20px"
                     text="${genre}"
                     width="100%"
@@ -177,28 +177,28 @@ class HeaderComponent extends BaseComponent {
     this._menu.innerHTML = `
       <div class="cont">
         <div class="user">
-          <img src="/TP-Interfaces/TP2/assets/images/UserIcon.png" alt="User Icon" />
+          <img src="/TP-Interfaces/TP3/assets/images/UserIcon.png" alt="User Icon" />
           <p>Random_User12</p>
         </div>
         <div class="links-cont">
           <div class="top">
             <a href="#/browse">
-              <custom-icon icon="/TP-Interfaces/TP2/assets/icons/common/Home.svg" size="24px">
+              <custom-icon icon="/TP-Interfaces/TP3/assets/icons/common/Home.svg" size="24px">
               </custom-icon>
               <span>Browse</span>
             </a>
             <a href="#/search">
-              <custom-icon icon="/TP-Interfaces/TP2/assets/icons/common/Search.svg" size="24px">
+              <custom-icon icon="/TP-Interfaces/TP3/assets/icons/common/Search.svg" size="24px">
               </custom-icon>
               <span>Search</span>
             </a>
             <a href="#profile">
-              <custom-icon icon="/TP-Interfaces/TP2/assets/icons/common/Profile.svg" size="24px">
+              <custom-icon icon="/TP-Interfaces/TP3/assets/icons/common/Profile.svg" size="24px">
               </custom-icon>
               <span>Profile</span>
             </a>
             <a href="#favorites">
-              <custom-icon icon="/TP-Interfaces/TP2/assets/icons/common/FavoriteEmpty.svg" size="24px">
+              <custom-icon icon="/TP-Interfaces/TP3/assets/icons/common/FavoriteEmpty.svg" size="24px">
               </custom-icon>
               <span>Favorites</span>
             </a>
@@ -206,7 +206,7 @@ class HeaderComponent extends BaseComponent {
 
           <div class="bottom">
             <a href="#/login">
-              <custom-icon icon="/TP-Interfaces/TP2/assets/icons/common/Logout.svg" size="24px">
+              <custom-icon icon="/TP-Interfaces/TP3/assets/icons/common/Logout.svg" size="24px">
               </custom-icon>
               <span>Logout</span>
             </a>
@@ -240,7 +240,7 @@ class HeaderComponent extends BaseComponent {
     `).join("") + `
     <div class="suggestion-item advanced">
     <a href="#/search">
-    <custom-icon icon="/TP-Interfaces/TP2/assets/icons/common/Filter.svg" size="15px" style="dark"></custom-icon>
+    <custom-icon icon="/TP-Interfaces/TP3/assets/icons/common/Filter.svg" size="15px" style="dark"></custom-icon>
     Advanced Search</a>
     </div>
     `;

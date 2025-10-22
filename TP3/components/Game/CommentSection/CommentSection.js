@@ -30,7 +30,7 @@ class CommentSection extends BaseComponent {
       <div class="comment-box">
         <h3>Share your thoughts</h3>
         <div class="write-box">
-          <img src="/TP-Interfaces/TP2/assets/images/UserIcon.png" alt="User Picture"/>
+          <img src="/TP-Interfaces/TP3/assets/images/UserIcon.png" alt="User Picture"/>
           <input type="text" class="comment-input" placeholder="Write your review here..."/>
         </div>
         <div class="btn-box">

@@ -6,7 +6,7 @@ class GameService extends EventTarget {
   
     this.ready = false;
 
-    let iconsRoute = "/TP-Interfaces/TP2/assets/icons/genres/"
+    let iconsRoute = "/TP-Interfaces/TP3/assets/icons/genres/"
     this._genres = {
       Action: iconsRoute + "Action.svg",
       RPG: iconsRoute + "RPG.svg",
