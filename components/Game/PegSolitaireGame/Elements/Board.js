@@ -96,7 +96,7 @@ export class Board extends Rectangle {
   }
 
   onMouseUp(x, y) {
-    if (!this.selected) 
+    if (!this.selected) return;
 
     this.selected.setDefault();
 
