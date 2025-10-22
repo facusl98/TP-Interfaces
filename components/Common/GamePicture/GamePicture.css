@@ -46,5 +46,15 @@ img {
     height: 500px;
 }
 
+@media screen and (max-width: 600px) {
+    :host(.small) {
+        width: 90px;
+        height: 60px;
+    }
 
+    :host(.default) {
+        width: 100px;
+        height: 60px;
+    }
 
+}

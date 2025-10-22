@@ -39,7 +39,7 @@ class CarouselCard extends BaseComponent {
       ></game-picture>
       <div class="info">
         <p class="name">${this._name}</p>
-        <div class="rating">
+        <div class="rating  desktop">
           <p>${this._rating}</p> 
           <changeable-icon 
             firstIcon="../../../assets/icons/common/FavoriteEmpty.svg"
