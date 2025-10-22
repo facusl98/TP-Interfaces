@@ -1,0 +1,34 @@
+:host {
+    font-family: var(--title-font);
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    padding:  0px 10px;
+}
+
+h3 {
+    margin: 0px;
+    font-weight: 500;
+}
+
+img {
+    margin-right: 10px;
+}
+
+:host(.default) h3 {
+    font-size: 24px;
+}
+
+:host(.default) img {
+    height: 25px;
+    width: 25px;
+}
+
+:host(.small) h3 {
+    font-size: 20px;
+}
+
+:host(.small) img {
+    height: 20px;
+    width: 20px;
+}
