@@ -32,3 +32,23 @@ img {
     height: 20px;
     width: 20px;
 }
+
+@media screen and (max-width: 600px) {
+    :host(.default) h3 {
+        font-size: 20px;
+    }
+
+    :host(.default) img {
+        height: 20px;
+        width: 20px;
+    }
+
+    :host(.small) h3 {
+        font-size: 18px;
+    }
+
+    :host(.small) img {
+        height: 18px;
+        width: 18px;
+    }
+}

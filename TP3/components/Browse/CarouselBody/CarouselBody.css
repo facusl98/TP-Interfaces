@@ -41,3 +41,9 @@ carousel-card:not(:last-child) {
 :host(.default) {
   min-height: 160px;
 }
+
+@media screen and (max-width: 600px) {
+  :host {
+    min-height: 0px;
+  }
+}
