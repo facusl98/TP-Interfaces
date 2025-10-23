@@ -4,24 +4,41 @@ export class Piece extends Poligon {
   constructor(ctx, col, row, x, y, r, colors) {
     super(
       ctx, `${col}-${row}`, x, y, r, 7, 270, 
-      colors.bone, 
+      colors.pale, 
       colors.dark, 1
     );
+
+    this.setTheme(colors);
+
     this.col = col;
     this.row = row;
     this.colors = colors;
   }
 
+  setTheme(colors) {
+    this.default = {
+      fill: colors.pale,
+      stroke: colors.dark
+    };
+
+    this.active = {
+      fill: colors.white,
+      stroke: colors.bg
+    };
+
+    this.setDefault();
+  }
+
   setDefault() {
-    this.fill = this.colors.bone;
-    this.stroke = this.colors.dark;
+    this.fill = this.default.fill;
+    this.stroke = this.default.stroke;
     this.line = 1;
   }
 
   setActive() {
-    this.fill = this.colors.white;
-    this.stroke = this.colors.teal;
-    this.line = 2;
+    this.fill = this.active.fill;
+    this.stroke = this.active.stroke;
+    this.line = 1;
   }
 
   setGridPos(col, row) {

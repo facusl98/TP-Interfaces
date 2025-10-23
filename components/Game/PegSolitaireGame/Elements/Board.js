@@ -3,9 +3,8 @@ import { Rectangle } from "./Rectangle.js";
 import { Slot } from "./Slot.js";
 
 export class Board extends Rectangle {
-  constructor(ctx, id, pieces, x, y, w, h, pad, gap, colors, fill, stroke, line) {
+  constructor(ctx, id, x, y, w, h, pad, gap, colors, fill, stroke, line) {
     super(ctx, id, x, y, w, h, fill, stroke, line);
-    this.pieces = pieces;
     this.colors = colors;
     this.pad = pad;
     this.gap = gap;
@@ -120,6 +119,13 @@ export class Board extends Rectangle {
       }
     }
     return slot;
+  }
+
+  // Assigns new theme to pieces and slots
+  setTheme(theme) {
+    this.fill = theme.bg;
+    this.slots.forEach(s => s.setTheme(theme));
+    this.pieces.forEach(p => p.setTheme(theme));
   }
 
   // Returns piece based on col & grid

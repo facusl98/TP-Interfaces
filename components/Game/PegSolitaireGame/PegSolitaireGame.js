@@ -4,12 +4,13 @@ import { Board } from "./Elements/Board.js";
 import { Circle } from "./Elements/Circle.js";
 import { Poligon } from "./Elements/Poligon.js";
 import { Rectangle } from "./Elements/Rectangle.js";
+import { ThemeSelector } from "./Elements/ThemeSelector.js";
 
 class PegSolitaireGame extends BaseComponent {
   constructor() {
     super();
 
-    this.width = 720;
+    this.width = 1080;
     this.height = 480;
     
     this.boardSize = this.height - 30;
@@ -19,14 +20,7 @@ class PegSolitaireGame extends BaseComponent {
     this.centerX = this.width / 2;
     this.centerY = this.height / 2;
 
-    this.colors = {
-      dark: "#212121",
-      teal: "#6D9886",
-      sage: "#9FB8AD",
-      slate: "#819A91",
-      bone: "#EDE4E0",
-      white: "#F6F6F6",
-    }
+    this.colors = {}
 
     this.canvas = document.createElement("canvas"); 
     this.canvas.width = this.width; this.canvas.height = this.height; 
@@ -34,7 +28,7 @@ class PegSolitaireGame extends BaseComponent {
     this.ctx = this.toolkit.getCtx();
 
     this.board = null;
-    this.pieces = [];
+    this.selector = null;
   }
 
   connectedCallback() {
@@ -42,12 +36,15 @@ class PegSolitaireGame extends BaseComponent {
 
     this.refresh = setInterval(this.drawScreen.bind(this), 50);
 
+    this.createThemeSelector(120, 40, 200); 
+
     this.createBoard(
       this.centerX, this.centerY,
       this.boardSize, this.boardSize, 
       this.boardPad, this.boardGap,
-      this.colors.teal, this.colors.light, 1
+      this.colors.bg, this.colors.light, 1
     )
+
   }
 
   async render() {
@@ -58,6 +55,7 @@ class PegSolitaireGame extends BaseComponent {
       const x = e.offsetX;
       const y = e.offsetY;
       this.board.onMouseDown(x, y);
+      this.selector.onMouseDown(x, y);
     });
 
     this.canvas.addEventListener("mousemove", (e) => {
@@ -77,20 +75,24 @@ class PegSolitaireGame extends BaseComponent {
   drawScreen() {
     this.clearScreen();
     this.board?.draw();
-    this.pieces.forEach((elem, i) => {
-      elem.draw();
-    })
+    this.selector?.draw();
   }
 
   clearScreen() {
     this.ctx.clearRect(0, 0, this.width, this.height);
   }
 
+  // Utils
+  setTheme(theme) {
+    this.colors = theme;
+    if (this.board)
+      this.board.setTheme(this.colors);
+  }
+
   // Create Figures
   createBoard(x, y, w, h, pad, gap, fill = null, stroke = null, line = null) {
     const board = new Board(
-      this.ctx, this.pieces.length,
-      this.pieces, 
+      this.ctx, "Board",
       x, y, w, h, 
       pad, gap,
       this.colors,
@@ -98,6 +100,15 @@ class PegSolitaireGame extends BaseComponent {
     );
     this.board = board;
     return board;
+  }
+
+  createThemeSelector(x, y, w) {
+    const selector = new ThemeSelector(
+      this.ctx, "selector",
+      x, y, w,
+      this.setTheme.bind(this)
+    );
+    this.selector = selector;
   }
   
 }
