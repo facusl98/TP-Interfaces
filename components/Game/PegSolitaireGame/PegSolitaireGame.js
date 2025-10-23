@@ -23,6 +23,7 @@ class PegSolitaireGame extends BaseComponent {
       dark: "#212121",
       teal: "#6D9886",
       sage: "#9FB8AD",
+      slate: "#819A91",
       bone: "#EDE4E0",
       white: "#F6F6F6",
     }

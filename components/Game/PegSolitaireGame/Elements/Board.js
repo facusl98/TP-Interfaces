@@ -21,6 +21,7 @@ export class Board extends Rectangle {
     this.createPieces();
 
     this.selected = null;
+    this.jumps = [];
   }
 
   draw() {
@@ -42,11 +43,13 @@ export class Board extends Rectangle {
   }
 
 
-  // Utils
+  // Utils //
+  // Returns piece if [x, y] is inside
   findPiece(x, y) {
     let piece = null;
     for (let i = this.pieces.length - 1; i >= 0; i--) {
       let elem = this.pieces[i] ?? null;
+      if (elem == this.selected) continue;
       if (elem.isPointerInside(x, y)) {
         piece = elem;
         break;
@@ -55,6 +58,7 @@ export class Board extends Rectangle {
     return piece;
   }
 
+  // Returns slot if [x, y] is inside
   findSlot(x, y) {
     let slot = null;
     for (let i = this.slots.length - 1; i >= 0; i--) {
@@ -67,6 +71,7 @@ export class Board extends Rectangle {
     return slot;
   }
 
+  // Calculates x & y based on col & row
   getPos(col, row) {
     const offsetY = Math.round(row - this.boardSize / 2);
     const offsetX = Math.round(col - this.boardSize / 2);
@@ -77,34 +82,129 @@ export class Board extends Rectangle {
     return coords;
   }
 
-  relocaPiece(piece) {
+  // Places piece on top of the stack for drawing
+  relocaFirst(piece) {
     this.pieces.forEach((p, i) => { 
         if (p.id == piece.id) this.pieces.splice(i, 1);
     });
     this.pieces.push(piece);
   }
 
+  // Returns piece to its asigned col & row
+  returnToOrigin(piece) {
+    const pos = this.getPos(piece.col, piece.row);
+    piece.setPos(pos.x, pos.y);
+  }
+
+  // Checks if slot is free
+  isAvailable(slot) {
+    if (slot == null) return false;
+    const piece = this.findPiece(slot.x, slot.y);
+    return piece ? false : true;
+  }
+
+  // Set up piece col & row and [x, y] to slot's
+  placeInSlot(slot, piece) {
+    piece.setGridPos(slot.col, slot.row);
+    const coords = this.getPos(slot.col, slot.row);
+    piece.setPos(coords.x, coords.y);
+  }
+
+  // Returns slot based on col & grid
+  slotByGrid(col, row) {
+    let slot = null;
+    for (let i = 0; i < this.slots.length; i++) {
+      if (this.slots[i].col == col && this.slots[i].row == row) {
+        slot = this.slots[i];
+        break;
+      }
+    }
+    return slot;
+  }
+
+  // Returns piece based on col & grid
+  pieceByGrid(col, row) {
+    let piece = null;
+    for (let i = 0; i < this.pieces.length; i++) {
+      if (this.pieces[i].col == col && this.pieces[i].row == row) {
+        piece = this.pieces[i];
+        break;
+      }
+    }
+    return piece;
+  }
+
+  // Get slots at the right distance from the piece
+  getJumps(piece) {
+    const { col, row } = piece;
+    let slots = [
+      this.slotByGrid(col, row - 2),
+      this.slotByGrid(col + 2, row),
+      this.slotByGrid(col, row + 2),
+      this.slotByGrid(col - 2, row)
+    ];
+
+    slots = slots.filter((s) => (s != null));
+
+    return slots;
+  }
+
+  // Get jumps and check if they're valid
+  getValidJumps(piece) {
+    let jumps = this.getJumps(piece)
+    let filtered = [];
+    jumps?.forEach(jump => {
+      let rowDiff = (jump.row - piece.row) / 2;
+      let colDiff = (jump.col - piece.col) / 2;
+      const p = this.pieceByGrid(piece.col + colDiff, piece.row + rowDiff);
+      if (p != null && this.isAvailable(jump)) 
+        filtered.push({slot: jump, piece: p});
+    })
+    return filtered;
+  }
+
+  // Removes piece from board
+  removePiece(piece) {
+    this.pieces = this.pieces.filter((p) => (p != piece));
+  }
+
   // Event Handlers
   onMouseDown(x, y) {
     const piece = this.findPiece(x, y); 
     if (!piece) return;
-    this.relocaPiece(piece)
-
+    this.relocaFirst(piece);
     piece.setActive();
+
+    this.jumps = this.getValidJumps(piece);
+    this.jumps?.forEach(jump => jump.slot.setActive());
 
     this.selected = piece;
   }
 
   onMouseUp(x, y) {
     if (!this.selected) return;
+    const selected = this.selected;
 
-    this.selected.setDefault();
+    selected.setDefault();
+    this.jumps?.forEach(jump => jump.slot.setDefault());
 
-    // Reset Pos (Temporary)
-    const pos = this.getPos(
-      this.selected.col, this.selected.row
-    );
-    this.selected.setPos(pos.x, pos.y);
+    const slot = this.findSlot(selected.x, selected.y);
+
+    let valid = false;
+    let removed = null
+    this.jumps?.forEach(jump => { 
+      if (jump.slot == slot) {
+        valid = true;
+        removed = jump.piece;
+      }
+    });
+
+    if (valid) {
+      this.placeInSlot(slot, selected);
+      this.removePiece(removed);
+    } else {
+      this.returnToOrigin(selected);
+    } 
     
     this.selected = null;
   }
@@ -136,8 +236,7 @@ export class Board extends Rectangle {
               coords.x,
               coords.y,
               this.bs, 
-              this.colors.sage, 
-              this.colors.white, 1
+              this.colors
             )
           )
         }

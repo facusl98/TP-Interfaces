@@ -23,4 +23,9 @@ export class Piece extends Poligon {
     this.stroke = this.colors.teal;
     this.line = 2;
   }
+
+  setGridPos(col, row) {
+    this.col = col;
+    this.row = row;
+  }
 }
