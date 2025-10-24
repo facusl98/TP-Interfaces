@@ -24,7 +24,6 @@ class PegSolitaireGame extends BaseComponent {
     this.generalColors = {
       dark: "#212121",
       white: "#f6f6f6",
-      transparent: "#00000000"
     }
 
     this.canvas = document.createElement("canvas"); 

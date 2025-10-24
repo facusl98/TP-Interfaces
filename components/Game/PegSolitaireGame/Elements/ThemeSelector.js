@@ -1,9 +1,10 @@
 import { Rectangle } from "./Rectangle.js";
+import { TextFigure } from "./TextFigure.js";
 import { ThemeBtn } from "./ThemeBtn.js";
 
 export class ThemeSelector extends Rectangle {
   constructor(ctx, id, x, y, w, colors, setTheme) {
-    super(ctx, id, x, 0, w, 0, colors.transparent, colors.transparent, 0);
+    super(ctx, id, x, 0, w, 0, "transparent", "transparent", 0);
     this.setTheme = setTheme;
 
     this.themes = [
@@ -60,18 +61,21 @@ export class ThemeSelector extends Rectangle {
     this.y = y + this.h / 2; 
     this.dy = y;
 
-    this.setTheme(this.themes[0]);
+    this.title = new TextFigure(
+      ctx, this.x, (this.dy + this.titleSpace / 2),
+      "Theme", 30, undefined,
+      colors.white
+    );
+
     this.createBtns();
+    this.setTheme(this.themes[0]);
   }
   
 
   draw() {
     super.draw();
 
-    this.ctx.fillStyle = this.colors.white;
-    this.ctx.font = "30px Helvetica";
-    this.ctx.fillText("Themes", 
-      this.x, (this.dy + this.titleSpace / 2));
+    this.title.draw();
     
     this.btns.forEach((btn) => btn.draw());
   }

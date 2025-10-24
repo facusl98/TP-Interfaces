@@ -19,8 +19,6 @@ export class Figure {
     this.ctx.fillStyle = this.fill;
     this.ctx.strokeStyle = this.stroke;
     this.ctx.lineWidth = this.line;
-    this.ctx.textAlign = "center";
-    this.ctx.textBaseline = "middle";
   };
 
   // Abstract
