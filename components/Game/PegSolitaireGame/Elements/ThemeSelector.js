@@ -54,10 +54,10 @@ export class ThemeSelector extends Rectangle {
 
     this.btns = [];
 
-    this.titleSpace = 50;
-    this.themeSpace = 60;
+    this.titleSpace = 30;
+    this.themeSpace = 40;
     this.gap = 10;
-    this.h = this.titleSpace + 50 + (this.themeSpace + this.gap) * (this.themes.length - 1);
+    this.h = this.titleSpace + (this.themeSpace + this.gap) * (this.themes.length - 1);
     this.y = y + this.h / 2; 
     this.dy = y;
 

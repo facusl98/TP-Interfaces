@@ -5,6 +5,7 @@ import { Circle } from "./Elements/Circle.js";
 import { Poligon } from "./Elements/Poligon.js";
 import { Rectangle } from "./Elements/Rectangle.js";
 import { ThemeSelector } from "./Elements/ThemeSelector.js";
+import { Timer } from "./Elements/Timer.js";
 
 class PegSolitaireGame extends BaseComponent {
   constructor() {
@@ -33,6 +34,7 @@ class PegSolitaireGame extends BaseComponent {
 
     this.board = null;
     this.selector = null;
+    this.timer = null;
   }
 
   connectedCallback() {
@@ -40,7 +42,7 @@ class PegSolitaireGame extends BaseComponent {
 
     this.refresh = setInterval(this.drawScreen.bind(this), 50);
 
-    this.createThemeSelector(120, 40, 200); 
+    this.createThemeSelector(120, this.boardPad, 200); 
 
     this.createBoard(
       this.centerX, this.centerY,
@@ -48,6 +50,9 @@ class PegSolitaireGame extends BaseComponent {
       this.boardPad, this.boardGap,
       this.colors.bg, this.colors.light, 1
     )
+
+    let h = 50;
+    this.createTimer(this.width - 120, this.boardPad + h / 2, 200, h);
 
   }
 
@@ -80,6 +85,7 @@ class PegSolitaireGame extends BaseComponent {
     this.clearScreen();
     this.board?.draw();
     this.selector?.draw();
+    this.timer?.draw();
   }
 
   clearScreen() {
@@ -88,11 +94,9 @@ class PegSolitaireGame extends BaseComponent {
 
   // Utils
   setTheme(theme) {
-    this.colors = this.generalColors;
-    let keys = Object.keys(theme);
-    keys.forEach(k => { this.colors[k] = theme[k] });
-    if (this.board)
-      this.board.setTheme(this.colors);
+    this.colors = {... this.generalColors, ...theme};
+    this.board?.setTheme(this.colors);
+    this.timer?.setTheme(this.colors);
   }
 
   // Create Figures
@@ -116,6 +120,14 @@ class PegSolitaireGame extends BaseComponent {
       this.setTheme.bind(this)
     );
     this.selector = selector;
+  }
+
+  createTimer(x, y, w, h) {
+    const timer = new Timer(
+      this.ctx, "timer",
+      x, y, w, h, this.colors
+    );
+    this.timer = timer;
   }
   
 }
