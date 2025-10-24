@@ -1,17 +1,27 @@
 import { Rectangle } from "./Rectangle.js";
 
 export class ThemeBtn extends Rectangle {
-  constructor(ctx, id, x, y, w, h, theme, setTheme) {
-    super(ctx, id, x, y, w, h, null, theme.bg, 1);
+  constructor(ctx, id, x, y, w, h, theme, colors, setTheme) {
+    super(ctx, id, x, y, w, h, colors.transparent, colors.transparent, 0);
     this.theme = theme;
     this.setTheme = setTheme;
 
-    this.colors = [
+    this.themeColors = [
       theme.bg,
       theme.slot,
       theme.valid,
       theme.pale
     ];
+
+    const grad = this.ctx.createLinearGradient(
+      this.dx, this.dy, this.dx + this.w, this.dy + this.h
+    );
+    this.themeColors.forEach((c, i) => {
+      grad.addColorStop((1 / this.themeColors.length) * i, c);
+    }); 
+    this.fill = grad;
+
+    this.colors = colors;
 
     this.colorSpace = w / this.colors.length;
   }
@@ -19,20 +29,15 @@ export class ThemeBtn extends Rectangle {
   draw() {
     super.draw();
 
-    this.colors.forEach((color, i) => {
-      this.ctx.fillStyle = color;
-      this.ctx.fillRect(
-        this.dx + (i * this.colorSpace), this.dy,
-        this.colorSpace, this.h
-      );
-    });
-
-    this.ctx.fillStyle = this.theme.white;
-    this.ctx.strokeStyle = this.theme.dark;
-    this.ctx.font = "16px Helvetica";
-    this.ctx.lineWidth = 1.5;
+    this.ctx.fillStyle = this.colors.white;
+    this.ctx.strokeStyle = this.theme.bg;
+    this.ctx.font = "bold 16px Helvetica";
+    this.ctx.textAlign = "center";
+    this.ctx.textBaseline = "middle";
+    this.ctx.lineWidth = 4;
     this.ctx.strokeText(this.id, this.x, this.y);
     this.ctx.fillText(this.id, this.x, this.y);
+
   }
 
   onMouseDown(x, y) {

@@ -16,9 +16,9 @@ export class Figure {
 
   // Override
   draw() {  
-    if (this.fill) this.ctx.fillStyle = this.fill;
-    if (this.stroke) this.ctx.strokeStyle = this.stroke;
-    if (this.line) this.ctx.lineWidth = this.line;
+    this.ctx.fillStyle = this.fill;
+    this.ctx.strokeStyle = this.stroke;
+    this.ctx.lineWidth = this.line;
     this.ctx.textAlign = "center";
     this.ctx.textBaseline = "middle";
   };

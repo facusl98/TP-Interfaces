@@ -2,57 +2,54 @@ import { Rectangle } from "./Rectangle.js";
 import { ThemeBtn } from "./ThemeBtn.js";
 
 export class ThemeSelector extends Rectangle {
-  constructor(ctx, id, x, y, w, setTheme) {
-    super(ctx, id, x, 0, w, 0, null, null, 0);
+  constructor(ctx, id, x, y, w, colors, setTheme) {
+    super(ctx, id, x, 0, w, 0, colors.transparent, colors.transparent, 0);
     this.setTheme = setTheme;
 
     this.themes = [
       {
         name: "Green Tea",
-        dark: "#212121ff",
+        sides: 7,
         bg: "#819A91",
-        slot: "#D1D8BE",
-        valid: "#A7C1A8",
+        slot: "#A7C1A8",
+        valid: "#D1D8BE",
         pale: "#EEEFE0",
-        white: "#f6f6f6ff",
       }, 
       {
         name: "Wine",
-        dark: "#212121ff",
+        sides: 6,
         bg: "#6B3F69",
-        slot: "#A376A2",
-        valid: "#8D5F8C",
+        slot: "#8D5F8C",
+        valid: "#A376A2",
         pale: "#DDC3C3",
-        white: "#f6f6f6ff",
       }, 
       {
         name: "Coffee",
-        dark: "#212121ff",
+        sides: 8,
         bg: "#37353E",
         slot: "#715A5A",
-        valid: "#44444E",
+        valid: "#AB886D",
         pale: "#D3DAD9",
-        white: "#f6f6f6ff",
       }, 
       {
         name: "Blueberry Juice",
-        dark: "#212121ff",
+        sides: 5,
         bg: "#3C467B",
-        slot: "#B2B0E8",
-        valid: "#7A85C1",
+        slot: "#7A85C1",
+        valid: "#B2B0E8",
         pale: "#EAEFEF",
-        white: "#f6f6f6ff",
       }, 
       {
         name: "Negroni",
-        dark: "#212121ff",
+        sides: 4,
         bg: "#4C3A51",
         slot: "#774360",
         valid: "#B25068",
         pale: "#E7AB79",
-        white: "#f6f6f6ff",
       }, 
     ];
+
+    this.colors = colors;
 
     this.btns = [];
 
@@ -71,7 +68,7 @@ export class ThemeSelector extends Rectangle {
   draw() {
     super.draw();
 
-    this.ctx.fillStyle = this.themes[0].white;
+    this.ctx.fillStyle = this.colors.white;
     this.ctx.font = "30px Helvetica";
     this.ctx.fillText("Themes", 
       this.x, (this.dy + this.titleSpace / 2));
@@ -88,6 +85,7 @@ export class ThemeSelector extends Rectangle {
           this.dy + this.titleSpace + 30 + i * (this.themeSpace + this.gap),
           this.w, 40,
           theme,
+          this.colors,
           this.setTheme
         )
       )

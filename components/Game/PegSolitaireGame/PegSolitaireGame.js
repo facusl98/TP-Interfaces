@@ -21,6 +21,11 @@ class PegSolitaireGame extends BaseComponent {
     this.centerY = this.height / 2;
 
     this.colors = {}
+    this.generalColors = {
+      dark: "#212121",
+      white: "#f6f6f6",
+      transparent: "#00000000"
+    }
 
     this.canvas = document.createElement("canvas"); 
     this.canvas.width = this.width; this.canvas.height = this.height; 
@@ -84,7 +89,9 @@ class PegSolitaireGame extends BaseComponent {
 
   // Utils
   setTheme(theme) {
-    this.colors = theme;
+    this.colors = this.generalColors;
+    let keys = Object.keys(theme);
+    keys.forEach(k => { this.colors[k] = theme[k] });
     if (this.board)
       this.board.setTheme(this.colors);
   }
@@ -106,6 +113,7 @@ class PegSolitaireGame extends BaseComponent {
     const selector = new ThemeSelector(
       this.ctx, "selector",
       x, y, w,
+      this.generalColors,
       this.setTheme.bind(this)
     );
     this.selector = selector;

@@ -1,30 +1,33 @@
 import { Poligon } from "./Poligon.js";
 
 export class Piece extends Poligon {
-  constructor(ctx, col, row, x, y, r, colors) {
+  constructor(ctx, col, row, x, y, r, theme) {
     super(
       ctx, `${col}-${row}`, x, y, r, 7, 270, 
-      colors.pale, 
-      colors.dark, 1
+      theme.pale, 
+      theme.dark, 1
     );
 
-    this.setTheme(colors);
+    this.setTheme(theme);
 
     this.col = col;
     this.row = row;
-    this.colors = colors;
+    this.theme = theme;
   }
 
-  setTheme(colors) {
+  setTheme(theme) {
     this.default = {
-      fill: colors.pale,
-      stroke: colors.dark
+      fill: theme.pale,
+      stroke: theme.dark
     };
 
     this.active = {
-      fill: colors.white,
-      stroke: colors.bg
+      fill: theme.white,
+      stroke: theme.bg
     };
+
+    this.sides = theme.sides;
+    this.generateEdges();
 
     this.setDefault();
   }

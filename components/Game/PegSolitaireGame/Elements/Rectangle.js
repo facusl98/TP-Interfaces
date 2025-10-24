@@ -15,8 +15,9 @@ export class Rectangle extends Figure {
     super.draw();
     this.ctx.beginPath();
     this.ctx.rect(this.dx, this.dy, this.w, this.h)
-    if (this.fill) this.ctx.fill();
-    if (this.stroke) this.ctx.stroke();
+    this.ctx.closePath();
+    this.ctx.fill();
+    this.ctx.stroke();
   }
 
   isPointerInside(x, y) {
