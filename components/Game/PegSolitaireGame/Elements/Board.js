@@ -4,11 +4,13 @@ import { Slot } from "./Slot.js";
 import { TextFigure } from "./TextFigure.js";
 
 export class Board extends Rectangle {
-  constructor(ctx, id, x, y, w, h, pad, gap, colors, fill, stroke, line) {
+  constructor(ctx, id, x, y, w, h, pad, gap, colors, fill, stroke, line, stopTimer) {
     super(ctx, id, x, y, w, h, fill, stroke, line);
     this.colors = colors;
     this.pad = pad;
     this.gap = gap;
+    this.stopTimer = stopTimer;
+
     this.boardSize = 7;
     
     const gapSpace = (this.boardSize - 1) * gap;
@@ -24,16 +26,29 @@ export class Board extends Rectangle {
     this.selected = null;
     this.jumps = [];
 
-    this.endgameText = new TextFigure(
-      ctx, x, y, "Game Over", 50, undefined, "transparent"
+    this.gameOverText = new TextFigure(
+      ctx, x, y - 40, "Game Over", 50, undefined, "transparent"
+    );
+    this.gameOverMessage = new TextFigure(
+      ctx, x, y + 40, "", 30, undefined, "transparent"
+    );
+    this.winText1 = new TextFigure(
+      ctx, x, y - 70, "Congratulations", 40, undefined, "transparent"
+    )
+    this.winText2 = new TextFigure(
+      ctx, x, y + 70, "You Won!", 40, undefined, "transparent"
     )
   }
 
+  // Drawing
   draw() {
     super.draw();
     this.drawSlots();
     this.drawPieces();
-    this.endgameText.draw();
+    this.gameOverText.draw();
+    this.gameOverMessage.draw();
+    this.winText1.draw();
+    this.winText2.draw();
   }
 
   drawSlots() {
@@ -127,15 +142,7 @@ export class Board extends Rectangle {
     }
     return slot;
   }
-
-  // Assigns new theme to pieces and slots
-  setTheme(theme) {
-    this.fill = theme.bg;
-    this.stroke = theme.pale;
-    this.slots.forEach(s => s.setTheme(theme));
-    this.pieces.forEach(p => p.setTheme(theme));
-  }
-
+  
   // Returns piece based on col & grid
   pieceByGrid(col, row) {
     let piece = null;
@@ -148,6 +155,15 @@ export class Board extends Rectangle {
     return piece;
   }
 
+  // Assigns new theme to pieces and slots
+  setTheme(theme) {
+    this.colors = theme;
+    this.fill = theme.bg;
+    this.stroke = theme.pale;
+    this.slots.forEach(s => s.setTheme(theme));
+    this.pieces.forEach(p => p.setTheme(theme));
+  }
+  
   // Get slots at the right distance from the piece
   getJumps(piece) {
     const { col, row } = piece;
@@ -173,7 +189,7 @@ export class Board extends Rectangle {
       const p = this.pieceByGrid(piece.col + colDiff, piece.row + rowDiff);
       if (p != null && this.isAvailable(jump)) 
         filtered.push({slot: jump, piece: p});
-    })
+    });
     return filtered;
   }
 
@@ -195,10 +211,19 @@ export class Board extends Rectangle {
     return softlock;
   }
 
+  checkWinCondition() {
+    if (
+      this.pieces.length == 1 && 
+      this.pieces[0].col == 3 &&
+      this.pieces[0].row == 3
+    ) return true;
+    else return false;
+  }
+
+  // Game Loop Controls //
   // Locks pieces in place and apply game over effects
-  gameOver() {
+  gameOver(message) {
     this.running = false;
-    console.log("Game over");
 
     const pieceDelete = setInterval(() => {
       this.pieces.splice(Math.floor(Math.random() * this.pieces.length), 1);
@@ -207,12 +232,45 @@ export class Board extends Rectangle {
 
     const slotDelete = setInterval(() => {
       this.slots.splice(Math.floor(Math.random() * this.slots.length), 1);
-      if (this.slots.length == 0) clearInterval(slotDelete);
+      if (this.slots.length == 0) {
+        clearInterval(slotDelete);
+        setTimeout(() => {
+          this.gameOverText.fill = this.colors.white;
+          this.gameOverMessage.text = message;
+          this.gameOverMessage.fill = this.colors.white;
+          this.stopTimer();
+        }, 100);
+      }
     }, 200);
+  }
 
-    setTimeout(() => {
-      this.endgameText.fill = this.colors.white;
-    }, this.slots.length * 200 + 500);
+  win(){
+    this.running = false;
+    const centerSlot = this.slotByGrid(3, 3);
+    const slotDelete = setInterval(() => {
+      let random = Math.floor(Math.random() * this.slots.length);
+      if (random != this.slots.indexOf(centerSlot)) 
+        this.slots.splice(random, 1);
+      if (this.slots.length == 1) {
+        clearInterval(slotDelete);
+        setTimeout(() => {
+          this.winText1.fill = this.colors.white;
+          this.winText2.fill = this.colors.white;
+          this.stopTimer();
+        }, 100);
+      }
+    }, 200);
+  }
+
+  reset() {
+    this.gameOverText.fill = "transparent";
+    this.gameOverMessage.fill = "transparent";
+    this.winText1.fill = "transparent";
+    this.winText2.fill = "transparent";
+    this.running = true;
+    this.createSlots();
+    this.createPieces();
+    console.log(this.colors)
   }
 
   // Event Handlers
@@ -224,7 +282,7 @@ export class Board extends Rectangle {
     piece.setActive();
 
     this.jumps = this.getValidJumps(piece);
-    this.jumps?.forEach(jump => jump.slot.setActive());
+    this.jumps?.forEach(jump => { jump.slot.setActive() });
 
     this.selected = piece;
   }
@@ -232,14 +290,14 @@ export class Board extends Rectangle {
   onMouseUp(x, y) {
     if (!this.selected) return;
     const selected = this.selected;
-
+    
     selected.setDefault();
     this.jumps?.forEach(jump => jump.slot.setDefault());
-
+    
     const slot = this.findSlot(selected.x, selected.y);
-
+    
     let valid = false;
-    let removed = null
+    let removed = null;
     this.jumps?.forEach(jump => { 
       if (jump.slot == slot) {
         valid = true;
@@ -255,7 +313,8 @@ export class Board extends Rectangle {
     } 
     
     this.selected = null;
-    if (this.isSoftlock()) this.gameOver();
+    if (this.checkWinCondition()) this.win();
+    else if (this.isSoftlock()) this.gameOver("No more valid movements");
   }
 
   onMouseMove(x, y) {
@@ -275,6 +334,7 @@ export class Board extends Rectangle {
       ["X", "X", "1", "1", "1", "X", "X"],
     ];
 
+    this.slots = [];
     for (let i = 0; i < board.length; i++) {
       for (let j = 0; j < board[0].length; j++) { 
         if (board[i][j] != "X") {
@@ -304,6 +364,7 @@ export class Board extends Rectangle {
       ["X", "X", "1", "1", "1", "X", "X"],
     ];
 
+    this.pieces = [];
     for (let i = 0; i < pieces.length; i++) {
       for (let j = 0; j < pieces[0].length; j++) { 
         if (pieces[i][j] == "1") {

@@ -1,9 +1,7 @@
 import { BaseComponent } from "../../BaseComponent.js";
 import { CanvasToolkit } from "../CanvasToolkit.js";
 import { Board } from "./Elements/Board.js";
-import { Circle } from "./Elements/Circle.js";
-import { Poligon } from "./Elements/Poligon.js";
-import { Rectangle } from "./Elements/Rectangle.js";
+import { TextFigure } from "./Elements/TextFigure.js";
 import { ThemeSelector } from "./Elements/ThemeSelector.js";
 import { Timer } from "./Elements/Timer.js";
 
@@ -54,6 +52,12 @@ class PegSolitaireGame extends BaseComponent {
     let h = 50;
     this.createTimer(this.width - 120, this.boardPad + h / 2, 200, h);
 
+    this.resetText = this.createText(
+      this.width - 120, this.boardPad + h + 50,
+      "Press 'R' to restart",
+      24, this.colors.white
+    );
+
   }
 
   async render() {
@@ -78,6 +82,12 @@ class PegSolitaireGame extends BaseComponent {
       const y = e.offsetY;
       this.board.onMouseUp(x, y);
     });
+
+    window.addEventListener("keydown", (e) => {
+      if (!(e.key === "r" || e.key === "R")) return;
+      this.board?.reset();
+      this.timer?.reset();
+    });
   }
 
   // Screen Handlers
@@ -86,6 +96,7 @@ class PegSolitaireGame extends BaseComponent {
     this.board?.draw();
     this.selector?.draw();
     this.timer?.draw();
+    this.resetText?.draw();
   }
 
   clearScreen() {
@@ -99,8 +110,12 @@ class PegSolitaireGame extends BaseComponent {
     this.timer?.setTheme(this.colors);
   }
 
-  gameOver() {
-    this.board?.gameOver();
+  gameOver(message) {
+    this.board?.gameOver(message);
+  }
+
+  stopTimer() {
+    this.timer?.stopTimer();
   }
 
   // Create Figures
@@ -110,7 +125,8 @@ class PegSolitaireGame extends BaseComponent {
       x, y, w, h, 
       pad, gap,
       this.colors,
-      fill, stroke, line
+      fill, stroke, line,
+      this.stopTimer.bind(this)
     );
     this.board = board;
     return board;
@@ -133,6 +149,16 @@ class PegSolitaireGame extends BaseComponent {
       this.gameOver.bind(this)
     );
     this.timer = timer;
+  }
+
+  createText(x, y, text, fontSize, fill, stroke, line) {
+    const txt = new TextFigure(
+      this.ctx, 
+      x, y, 
+      text, fontSize, undefined,
+      fill, stroke, line
+    )
+    return txt;
   }
   
 }

@@ -20,16 +20,17 @@ export class Timer extends Rectangle {
     );
     this.loadingBar.dx = this.dx;
     
-    const timeIncrease = () => {
+    this.timeIncrease = () => {
       this.time++;
       const m = Math.floor(this.time / 60);
       const s = this.time % 60;
       this.timerText.text = `${m}:${s < 10 ? `0${s}` : s}`;
       this.loadingBar.w = this.w / this.timeLimit * this.time;
-      if (this.time < this.timeLimit) setTimeout(timeIncrease, 1000);
-      else gameOver();
+      if (this.time < this.timeLimit) 
+        this.timeout = setTimeout(this.timeIncrease, 1000);
+      else gameOver("You ran out of time");
     }
-    timeIncrease();
+    this.timeIncrease();
   }
 
   draw() {
@@ -46,5 +47,15 @@ export class Timer extends Rectangle {
     this.timerText.stroke = colors.bg;
     this.loadingBar.fill = colors.slot;
     this.loadingBar.stroke = colors.valid;
+  }
+
+  stopTimer() {
+    clearInterval(this.timeout);
+  }
+
+  reset() {
+    this.time = -1;
+    this.stopTimer();
+    this.timeIncrease();
   }
 }
