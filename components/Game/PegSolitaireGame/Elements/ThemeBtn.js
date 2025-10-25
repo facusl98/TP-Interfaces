@@ -3,7 +3,7 @@ import { TextFigure } from "./TextFigure.js";
 
 export class ThemeBtn extends Rectangle {
   constructor(ctx, id, x, y, w, h, theme, colors, setTheme) {
-    super(ctx, id, x, y, w, h, "transparent", "transparent", 0);
+    super(ctx, id, x, y, w, h, "transparent", theme.pale, 1);
     this.theme = theme;
     this.setTheme = setTheme;
     this.colors = colors;

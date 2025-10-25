@@ -2,15 +2,15 @@ import { Rectangle } from "./Rectangle.js";
 import { TextFigure } from "./TextFigure.js";
 
 export class Timer extends Rectangle {
-  constructor(ctx, id, x, y, w, h, colors) {
-    super(ctx, id, x, y, w, h, colors.slot, colors.white, 1);
+  constructor(ctx, id, x, y, w, h, colors, gameOver) {
+    super(ctx, id, x, y, w, h, colors.bg, colors.slot, 1);
     this.colors = colors;
 
     this.timerText = new TextFigure(
       ctx, x, y, "0:00", 30, undefined, colors.white, colors.bg, 5
     );
 
-    this.time = 149;
+    this.time = 0;
     this.timeLimit = 300;
     
     this.loadingBar = new Rectangle(
@@ -27,6 +27,7 @@ export class Timer extends Rectangle {
       this.timerText.text = `${m}:${s < 10 ? `0${s}` : s}`;
       this.loadingBar.w = this.w / this.timeLimit * this.time;
       if (this.time < this.timeLimit) setTimeout(timeIncrease, 1000);
+      else gameOver();
     }
     timeIncrease();
   }
@@ -40,8 +41,10 @@ export class Timer extends Rectangle {
 
   setTheme(colors) {
     this.colors = colors;
-    this.fill = colors.slot;
+    this.fill = colors.bg;
+    this.stroke = colors.slot;
     this.timerText.stroke = colors.bg;
-    this.loadingBar.fill = colors.valid;
+    this.loadingBar.fill = colors.slot;
+    this.loadingBar.stroke = colors.valid;
   }
 }

@@ -1,6 +1,7 @@
 import { Piece } from "./Piece.js";
 import { Rectangle } from "./Rectangle.js";
 import { Slot } from "./Slot.js";
+import { TextFigure } from "./TextFigure.js";
 
 export class Board extends Rectangle {
   constructor(ctx, id, x, y, w, h, pad, gap, colors, fill, stroke, line) {
@@ -19,14 +20,20 @@ export class Board extends Rectangle {
     this.createSlots();
     this.createPieces();
 
+    this.running = true;
     this.selected = null;
     this.jumps = [];
+
+    this.endgameText = new TextFigure(
+      ctx, x, y, "Game Over", 50, undefined, "transparent"
+    )
   }
 
   draw() {
     super.draw();
     this.drawSlots();
     this.drawPieces();
+    this.endgameText.draw();
   }
 
   drawSlots() {
@@ -124,6 +131,7 @@ export class Board extends Rectangle {
   // Assigns new theme to pieces and slots
   setTheme(theme) {
     this.fill = theme.bg;
+    this.stroke = theme.pale;
     this.slots.forEach(s => s.setTheme(theme));
     this.pieces.forEach(p => p.setTheme(theme));
   }
@@ -173,9 +181,43 @@ export class Board extends Rectangle {
   removePiece(piece) {
     this.pieces = this.pieces.filter((p) => (p != piece));
   }
+ 
+  // Check if there are any valid moves
+  isSoftlock() {
+    let softlock = true;
+    for (let i = 0; i < this.pieces.length; i++) {
+      let jumps = this.getValidJumps(this.pieces[i]);
+      if (jumps.length != 0) {
+        softlock = false;
+        break;
+      }
+    }
+    return softlock;
+  }
+
+  // Locks pieces in place and apply game over effects
+  gameOver() {
+    this.running = false;
+    console.log("Game over");
+
+    const pieceDelete = setInterval(() => {
+      this.pieces.splice(Math.floor(Math.random() * this.pieces.length), 1);
+      if (this.pieces.length == 0) clearInterval(pieceDelete);
+    }, 200)
+
+    const slotDelete = setInterval(() => {
+      this.slots.splice(Math.floor(Math.random() * this.slots.length), 1);
+      if (this.slots.length == 0) clearInterval(slotDelete);
+    }, 200);
+
+    setTimeout(() => {
+      this.endgameText.fill = this.colors.white;
+    }, this.slots.length * 200 + 500);
+  }
 
   // Event Handlers
   onMouseDown(x, y) {
+    if (!this.running) return;
     const piece = this.findPiece(x, y); 
     if (!piece) return;
     this.relocaFirst(piece);
@@ -213,6 +255,7 @@ export class Board extends Rectangle {
     } 
     
     this.selected = null;
+    if (this.isSoftlock()) this.gameOver();
   }
 
   onMouseMove(x, y) {

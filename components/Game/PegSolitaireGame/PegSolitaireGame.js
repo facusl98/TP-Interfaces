@@ -48,7 +48,7 @@ class PegSolitaireGame extends BaseComponent {
       this.centerX, this.centerY,
       this.boardSize, this.boardSize, 
       this.boardPad, this.boardGap,
-      this.colors.bg, this.colors.light, 1
+      this.colors.bg, this.colors.slot, 2
     )
 
     let h = 50;
@@ -99,6 +99,10 @@ class PegSolitaireGame extends BaseComponent {
     this.timer?.setTheme(this.colors);
   }
 
+  gameOver() {
+    this.board?.gameOver();
+  }
+
   // Create Figures
   createBoard(x, y, w, h, pad, gap, fill = null, stroke = null, line = null) {
     const board = new Board(
@@ -125,7 +129,8 @@ class PegSolitaireGame extends BaseComponent {
   createTimer(x, y, w, h) {
     const timer = new Timer(
       this.ctx, "timer",
-      x, y, w, h, this.colors
+      x, y, w, h, this.colors,
+      this.gameOver.bind(this)
     );
     this.timer = timer;
   }
