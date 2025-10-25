@@ -11,6 +11,7 @@ export class ThemeSelector extends Rectangle {
       {
         name: "Green Tea",
         sides: 7,
+        img: "/assets/images/peg_solitaire/tea.jpg",
         bg: "#819A91",
         slot: "#A7C1A8",
         valid: "#D1D8BE",
@@ -19,6 +20,7 @@ export class ThemeSelector extends Rectangle {
       {
         name: "Wine",
         sides: 6,
+        img: "/assets/images/peg_solitaire/wine.jpg",
         bg: "#6B3F69",
         slot: "#8D5F8C",
         valid: "#A376A2",
@@ -27,6 +29,7 @@ export class ThemeSelector extends Rectangle {
       {
         name: "Coffee",
         sides: 8,
+        img: "/assets/images/peg_solitaire/coffee.jpg",
         bg: "#37353E",
         slot: "#715A5A",
         valid: "#AB886D",
@@ -35,6 +38,7 @@ export class ThemeSelector extends Rectangle {
       {
         name: "Blueberry Juice",
         sides: 5,
+        img: "/assets/images/peg_solitaire/blueberry.jpg",
         bg: "#3C467B",
         slot: "#7A85C1",
         valid: "#B2B0E8",
@@ -43,6 +47,7 @@ export class ThemeSelector extends Rectangle {
       {
         name: "Negroni",
         sides: 4,
+        img: "/assets/images/peg_solitaire/negroni.jpg",
         bg: "#4C3A51",
         slot: "#774360",
         valid: "#B25068",
