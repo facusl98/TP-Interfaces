@@ -25,6 +25,7 @@ export class ThemeBtn extends Rectangle {
     this.fill = grad;
 
     this.colorSpace = w / this.colors.length;
+    
     this.text = new TextFigure(
       ctx, x, y, 
       theme.name, 18, undefined, 

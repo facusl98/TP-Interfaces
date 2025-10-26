@@ -36,7 +36,7 @@ export class Board extends Rectangle {
       ctx, x, y - 70, "Congratulations", 40, undefined, "transparent"
     )
     this.winText2 = new TextFigure(
-      ctx, x, y + 70, "You Won!", 40, undefined, "transparent"
+      ctx, x, y + 70, "You won!", 40, undefined, "transparent"
     )
   }
 
@@ -51,12 +51,14 @@ export class Board extends Rectangle {
     this.winText2.draw();
   }
 
+  // Make every slot on this.slots draw itself
   drawSlots() {
     this.slots.forEach(slot => {
       slot.draw();
     })
   }
 
+  // Make every slot on this.pieces draw itself
   drawPieces() {
     this.pieces.forEach(piece => {
       piece.draw();
@@ -211,6 +213,7 @@ export class Board extends Rectangle {
     return softlock;
   }
 
+  // Checks if only a piece remains and it is in the center
   checkWinCondition() {
     if (
       this.pieces.length == 1 && 
@@ -244,6 +247,7 @@ export class Board extends Rectangle {
     }, 200);
   }
 
+  // Executes win animation
   win(){
     this.running = false;
     const centerSlot = this.slotByGrid(3, 3);
@@ -262,6 +266,7 @@ export class Board extends Rectangle {
     }, 200);
   }
 
+  // Resets slots, pieces and texts to default.
   reset() {
     this.gameOverText.fill = "transparent";
     this.gameOverMessage.fill = "transparent";
@@ -270,10 +275,15 @@ export class Board extends Rectangle {
     this.running = true;
     this.createSlots();
     this.createPieces();
-    console.log(this.colors)
   }
 
-  // Event Handlers
+  // Event Handlers //
+  /* 
+    Executes while clicking 
+    Checks if clicking a piece
+    Sets that piece as active
+    Generate valid jumps for that piece 
+  */
   onMouseDown(x, y) {
     if (!this.running) return;
     const piece = this.findPiece(x, y); 
@@ -287,6 +297,15 @@ export class Board extends Rectangle {
     this.selected = piece;
   }
 
+  /* 
+    Resets piece colors
+    Resets slots style
+    Check piece current position
+    Find hovered slot, checks if valid
+    Removes middle piece and sets piece to new position
+    If not valid, resets position
+    Check if its win or game over
+  */
   onMouseUp(x, y) {
     if (!this.selected) return;
     const selected = this.selected;
@@ -317,12 +336,14 @@ export class Board extends Rectangle {
     else if (this.isSoftlock()) this.gameOver("No more valid movements");
   }
 
+  // Set piece new position based on pointer position
   onMouseMove(x, y) {
     if (!this.selected) return;
     this.selected.setPos(x, y);
   }
 
   // Creators 
+  // Generate slots based on a map-like matrix
   createSlots() {
     const board = [  
       ["X", "X", "1", "1", "1", "X", "X"],
@@ -353,6 +374,7 @@ export class Board extends Rectangle {
     }
   }
 
+  // Generate pieces based on a map-like matrix
   createPieces() {
     const pieces = [
       ["X", "X", "1", "1", "1", "X", "X"],

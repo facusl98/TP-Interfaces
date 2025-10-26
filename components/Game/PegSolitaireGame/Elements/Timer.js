@@ -20,6 +20,9 @@ export class Timer extends Rectangle {
     );
     this.loadingBar.dx = this.dx;
     
+    // Refresh text value, increase time
+    // Executes itself if time is not yet past the limit
+    // Executes game over if it ran out of time
     this.timeIncrease = () => {
       this.time++;
       const m = Math.floor(this.time / 60);
@@ -40,6 +43,7 @@ export class Timer extends Rectangle {
     this.timerText.draw();
   }
 
+  // Assigns theme colors to BG, text stroke and loading bar.
   setTheme(colors) {
     this.colors = colors;
     this.fill = colors.bg;
@@ -53,6 +57,8 @@ export class Timer extends Rectangle {
     clearInterval(this.timeout);
   }
 
+  // Sets timer to -1 (0)
+  // Stops current timer and starts a new one;
   reset() {
     this.time = -1;
     this.stopTimer();

@@ -13,6 +13,9 @@ export class Slot extends Rectangle {
     this.row = row;
   }
 
+  /*
+    Assign colors to attributes containing the default and active values
+  */
   setTheme(colors) {
     this.default = {
       fill: colors.slot,
@@ -27,12 +30,14 @@ export class Slot extends Rectangle {
     this.setDefault();
   }
 
+  // Assign default styles
   setDefault() {
     this.fill = this.default.fill;
     this.stroke = this.default.stroke;
     this.line = 1;
   }
 
+  // Assign default styles
   setActive() {
     this.fill = this.active.fill;
     this.stroke = this.active.stroke;

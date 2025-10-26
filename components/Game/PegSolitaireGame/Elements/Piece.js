@@ -19,6 +19,11 @@ export class Piece extends Poligon {
     );
   }
 
+  /* 
+    Draws piece itself
+    Draws inner piece manually
+    Then clips it and paste the image inside
+  */
   draw() {
     super.draw();
 
@@ -40,10 +45,15 @@ export class Piece extends Poligon {
       );
     }
     ctx.strokeStyle = inner.stroke;
-      ctx.stroke();
+    ctx.stroke();
     ctx.restore();
   }
 
+  /*
+    Assign colors to attributes containing the default and active values
+    Fetch theme image
+    Generate new corners for itself and inner piece based on theme's amount
+  */
   setTheme(theme) {
     this.imgReady = false;
 
@@ -74,23 +84,27 @@ export class Piece extends Poligon {
     this.setDefault();
   }
 
+  // Assign default styles
   setDefault() {
     this.fill = this.default.fill;
     this.stroke = this.default.stroke;
     this.line = 1;
   }
 
+  // Assign default styles
   setActive() {
     this.fill = this.active.fill;
     this.stroke = this.active.stroke;
     this.line = 1;
   }
 
+  // Assigns col and row for coords calculation
   setGridPos(col, row) {
     this.col = col;
     this.row = row;
   }
 
+  // Asigns position both for itself and its inner poligon 
   setPos(x, y) {
     super.setPos(x, y);
     this.inner.setPos(x, y);

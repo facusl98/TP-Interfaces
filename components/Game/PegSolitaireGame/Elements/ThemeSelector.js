@@ -85,6 +85,7 @@ export class ThemeSelector extends Rectangle {
     this.btns.forEach((btn) => btn.draw());
   }
 
+  // Creates a ThemeBtn for each theme on this.themes
   createBtns() {
     this.themes.forEach((theme, i) => {
       this.btns.push(

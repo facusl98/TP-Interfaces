@@ -110,6 +110,7 @@ class PegSolitaireGame extends BaseComponent {
     this.timer?.setTheme(this.colors);
   }
 
+  // Makes board play game over animation
   gameOver(message) {
     this.board?.gameOver(message);
   }
@@ -118,7 +119,7 @@ class PegSolitaireGame extends BaseComponent {
     this.timer?.stopTimer();
   }
 
-  // Create Figures
+  // Create Figures //
   createBoard(x, y, w, h, pad, gap, fill = null, stroke = null, line = null) {
     const board = new Board(
       this.ctx, "Board",

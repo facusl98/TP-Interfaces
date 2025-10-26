@@ -23,12 +23,14 @@ export class Poligon extends Figure {
     if (this.stroke) this.ctx.stroke();
   }
 
+  // Asigns coords and generates new relative edges
   setPos(x, y) {
     this.x = x;
     this.y = y;
     this.generateEdges();
   }
 
+  // Generates edges positions using Cos & Sin following a circle pattern
   generateEdges() {
     this.edges = [];
     const step = (2 * Math.PI) / this.sides;
@@ -40,11 +42,15 @@ export class Poligon extends Figure {
     }
   }
 
+  // Translates angle to radians & reasigns edge positions accordingly
   setAngle(angle) {
     this.angle = (angle * this.rad) % (2 * Math.PI);
     this.generateEdges();
   }
 
+  // Uses ray casting to calculate if inside
+  // If it crosses any side an odd number of times, the point is inside.
+  // Otherwise outside
   isPointerInside(x, y) {
     let inside = false;
     const n = this.edges.length;
@@ -53,6 +59,9 @@ export class Poligon extends Figure {
       const xj = this.edges[j].x, yj = this.edges[j].y;
 
       const betweenYs = ((yi > y) !== (yj > y));
+      // Gets % position of pointer Y in relation to the 
+      // vertical difference of two edges
+      // Then translates that % position to X.
       const betweenXs = (x < (xj - xi) * (y - yi) / (yj - yi) + xi)
       const intersect = betweenYs &&  betweenXs;
       if (intersect) inside = !inside;
