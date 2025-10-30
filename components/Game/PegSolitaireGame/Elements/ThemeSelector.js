@@ -1,13 +1,25 @@
-import { Rectangle } from "./Rectangle.js";
-import { TextFigure } from "./TextFigure.js";
+import { Rectangle } from "../Figures/Rectangle.js";
+import { TextFigure } from "../Figures/TextFigure.js";
 import { ThemeBtn } from "./ThemeBtn.js";
 
 export class ThemeSelector extends Rectangle {
-  constructor(ctx, id, x, y, w, colors, setTheme) {
-    super(ctx, id, x, 0, w, 0, "transparent", "transparent", 0);
+  constructor(ctx, colors, setTheme) {
+    const y = 20;
+    const x = 120;
+    const w = 200;
+    super(ctx, "Theme Selector", x, 0, w, 0, "transparent", "transparent", 0);
     this.setTheme = setTheme;
 
     this.themes = [
+      {
+        name: "Coffee",
+        sides: 8,
+        img: "/assets/images/peg_solitaire/coffee.jpg",
+        bg: "#37353E",
+        slot: "#715A5A",
+        valid: "#AB886D",
+        pale: "#D3DAD9",
+      }, 
       {
         name: "Green Tea",
         sides: 7,
@@ -25,15 +37,6 @@ export class ThemeSelector extends Rectangle {
         slot: "#8D5F8C",
         valid: "#A376A2",
         pale: "#DDC3C3",
-      }, 
-      {
-        name: "Coffee",
-        sides: 8,
-        img: "/assets/images/peg_solitaire/coffee.jpg",
-        bg: "#37353E",
-        slot: "#715A5A",
-        valid: "#AB886D",
-        pale: "#D3DAD9",
       }, 
       {
         name: "Blueberry Juice",

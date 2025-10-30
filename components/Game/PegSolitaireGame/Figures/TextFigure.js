@@ -1,4 +1,4 @@
-import { Figure } from "./Figure.js";
+import { Figure } from "../Figures/Figure.js";
 
 export class TextFigure extends Figure {
   constructor(ctx, x, y, text, fontSize = 16, fontFamily = "Helvetica", fill = "transparent", stroke = "transparent", line = 0) {

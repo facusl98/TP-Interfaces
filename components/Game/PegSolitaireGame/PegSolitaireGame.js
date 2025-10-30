@@ -1,7 +1,7 @@
 import { BaseComponent } from "../../BaseComponent.js";
 import { CanvasToolkit } from "../CanvasToolkit.js";
 import { Board } from "./Elements/Board.js";
-import { TextFigure } from "./Elements/TextFigure.js";
+import { TextFigure } from "./Figures/TextFigure.js";
 import { ThemeSelector } from "./Elements/ThemeSelector.js";
 import { Timer } from "./Elements/Timer.js";
 
@@ -11,13 +11,6 @@ class PegSolitaireGame extends BaseComponent {
 
     this.width = 1080;
     this.height = 480;
-    
-    this.boardSize = this.height - 30;
-    this.boardPad = 20;
-    this.boardGap = 5;
-
-    this.centerX = this.width / 2;
-    this.centerY = this.height / 2;
 
     this.colors = {}
     this.generalColors = {
@@ -40,20 +33,27 @@ class PegSolitaireGame extends BaseComponent {
 
     this.refresh = setInterval(this.drawScreen.bind(this), 50);
 
-    this.createThemeSelector(120, this.boardPad, 200); 
-
-    this.createBoard(
-      this.centerX, this.centerY,
-      this.boardSize, this.boardSize, 
-      this.boardPad, this.boardGap,
-      this.colors.bg, this.colors.slot, 2
-    )
+    this.selector = new ThemeSelector(
+      this.ctx,
+      this.generalColors,
+      this.setTheme.bind(this)
+    );; 
+    
+    this.board = new Board(
+      this.ctx,
+      this.colors,
+      this.stopTimer.bind(this)
+    );
 
     let h = 50;
-    this.createTimer(this.width - 120, this.boardPad + h / 2, 200, h);
+    this.timer = new Timer(
+      this.ctx,
+      this.colors,
+      this.gameOver.bind(this)
+    );
 
     this.resetText = this.createText(
-      this.width - 120, this.boardPad + h + 50,
+      this.width - 120, 20 + h + 20,
       "Press 'R' to restart",
       24, this.colors.white
     );
@@ -119,30 +119,8 @@ class PegSolitaireGame extends BaseComponent {
     this.timer?.stopTimer();
   }
 
-  // Create Figures //
-  createBoard(x, y, w, h, pad, gap, fill = null, stroke = null, line = null) {
-    const board = new Board(
-      this.ctx, "Board",
-      x, y, w, h, 
-      pad, gap,
-      this.colors,
-      fill, stroke, line,
-      this.stopTimer.bind(this)
-    );
-    this.board = board;
-    return board;
-  }
 
-  createThemeSelector(x, y, w) {
-    const selector = new ThemeSelector(
-      this.ctx, "selector",
-      x, y, w,
-      this.generalColors,
-      this.setTheme.bind(this)
-    );
-    this.selector = selector;
-  }
-
+  // Figure Creators
   createTimer(x, y, w, h) {
     const timer = new Timer(
       this.ctx, "timer",

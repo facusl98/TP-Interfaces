@@ -1,9 +1,11 @@
-import { Rectangle } from "./Rectangle.js";
-import { TextFigure } from "./TextFigure.js";
+import { Rectangle } from "../Figures/Rectangle.js";
+import { TextFigure } from "../Figures/TextFigure.js";
 
 export class Timer extends Rectangle {
-  constructor(ctx, id, x, y, w, h, colors, gameOver) {
-    super(ctx, id, x, y, w, h, colors.bg, colors.slot, 1);
+  constructor(ctx, colors, gameOver) {
+    const x = 1080 - 120; const y = 15 + 50 / 2;
+    const h = 50; const w = 200;
+    super(ctx, "Timer", x, y, w, h, colors.bg, colors.slot, 1);
     this.colors = colors;
 
     this.timerText = new TextFigure(

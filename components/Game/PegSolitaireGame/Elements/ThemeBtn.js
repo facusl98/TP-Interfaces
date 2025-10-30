@@ -1,5 +1,5 @@
-import { Rectangle } from "./Rectangle.js";
-import { TextFigure } from "./TextFigure.js";
+import { Rectangle } from "../Figures/Rectangle.js";
+import { TextFigure } from "../Figures/TextFigure.js";
 
 export class ThemeBtn extends Rectangle {
   constructor(ctx, id, x, y, w, h, theme, colors, setTheme) {
@@ -15,9 +15,8 @@ export class ThemeBtn extends Rectangle {
       theme.pale
     ];
 
-
     const grad = this.ctx.createLinearGradient(
-      this.dx, this.dy, this.dx + this.w, this.dy + this.h
+      this.dx, this.dy, this.dx + this.w, this.dy + this.h, 
     );
     this.themeColors.forEach((c, i) => {
       grad.addColorStop((1 / this.themeColors.length) * i, c);
