@@ -15,7 +15,7 @@ class GamePage extends BaseComponent {
         img1: "/TP-Interfaces/TP4/assets/images/peg_solitaire/solitaire-1.png",
         img2: "/TP-Interfaces/TP4/assets/images/peg_solitaire/solitaire-2.png",
         import: async () => await import("./PegSolitaireGame/PegSolitaireGame.js"),
-        component: `<peg-solitaire-game id="game" class=""></peg-solitaire-game>`
+        component: `<peg-solitaire-game id="game" class="hidden"></peg-solitaire-game>`
       },
       "blocka": {
         title: "Blocka",
@@ -56,7 +56,7 @@ class GamePage extends BaseComponent {
       </div>
       <div class="game-area-container">
         ${this._game.component}
-        <div class="game-area hidden" id="play">
+        <div class="game-area" id="play">
           <custom-button
           icon="/TP-Interfaces/TP4/assets/icons/common/Play.svg"
           width="120px"

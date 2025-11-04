@@ -125,7 +125,7 @@ class HeroCard extends BaseComponent {
     });
 
     this.shadowRoot.querySelector(".info").addEventListener("click", () => {
-      if (this._activeIndex == 3)
+      if (this._activeIndex == 4)
         window.location.hash = "#/game/blocka"
       else 
         window.location.hash = "#/game/peg-solitaire"
