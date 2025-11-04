@@ -42,8 +42,8 @@ class CarouselCard extends BaseComponent {
         <div class="rating  desktop">
           <p>${this._rating}</p> 
           <changeable-icon 
-            firstIcon="../../../assets/icons/common/FavoriteEmpty.svg"
-            secondIcon="../../../assets/icons/common/FavoriteFull.svg"
+            firstIcon="/TP-Interfaces/TP4/assets/icons/common/FavoriteEmpty.svg"
+            secondIcon="/TP-Interfaces/TP4/assets/icons/common/FavoriteFull.svg"
             alt="Favorite"
             size="18px"
           ></changeable-icon>
