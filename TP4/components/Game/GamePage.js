@@ -9,11 +9,11 @@ class GamePage extends BaseComponent {
       "peg-solitaire": {
         title: "Peg Solitaire",
         genres: ["Strategy", "Indie"],
-        guide: "Command your knights in this strategic challenge! Select a knight and leap over another to defeat it, landing on the empty space beyond. Each defeated knight is removed from the battlefield. Keep striking until only one brave warrior remains standing in the center. Victory belongs to the last knight!",
-        lore: "Peg Solitaire, reimagined here as a medieval clash, has its origins in 17th century France, where it was played in royal courts. Over time, the game spread through Europe, much like epic tales of knights and battles. Though the battlefield has changed, the goal remains timeless: reduce the army until one champion is left.",
+        guide: "Your goal is to leave only one piece on the board before time runs out. Select a drink theme to set the game's look and feel, then begin. Jump one piece over another into an empty space (horizontally or vertically) to remove the piece that was jumped. Each move must follow this rule. Plan carefully: when no more moves remain or five minutes have passed, the game ends. Precision, timing, and a bit of intuition are all you need to serve the perfect result.",
+        lore: "Some say the best drinks aren't served, they're crafted through balance and patience. In a quiet corner café, hidden from the noise of the world, mixologists once practiced a ritual of focus: the art of finding harmony in simplicity. Each drink told a different story: coffee for warmth, green tea for clarity, blueberry juice for calm, wine for depth, and negroni for spirit. Inspired by that idea, this game invites you to rediscover the rhythm of thought and motion. Choose your flavor, let its colors set the mood, and see if you can distill chaos into a single, perfect drop.",
         video: "/TP-Interfaces/TP4/assets/images/VideoPegSolitaire.png",
-        img1: "/TP-Interfaces/TP4/assets/images/PegSolitaire.png",
-        img2: "/TP-Interfaces/TP4/assets/images/EjPegSolitaire.png",
+        img1: "/TP-Interfaces/TP4/assets/images/peg_solitaire/solitaire-1.png",
+        img2: "/TP-Interfaces/TP4/assets/images/peg_solitaire/solitaire-2.png",
         import: async () => await import("./PegSolitaireGame/PegSolitaireGame.js"),
         component: `<peg-solitaire-game id="game" class=""></peg-solitaire-game>`
       },

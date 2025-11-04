@@ -16,6 +16,14 @@ class HeroCard extends BaseComponent {
   importGames() {
     this._games = gameService.getRandom(7);
     this._games[3] = {
+      name: "Peg Solitaire",
+      background_image: "/TP-Interfaces/TP4/assets/images/peg_solitaire/solitaire.png",
+      genres: [
+        {name: "Puzzle"}, 
+        {name: "Strategy"}, 
+        {name: "Indie"}]
+    }
+    this._games[4] = {
       name: "Blocka",
       background_image: "/TP-Interfaces/TP4/assets/images/blocka/blocka.jpg",
       genres: [
