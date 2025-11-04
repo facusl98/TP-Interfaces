@@ -1,0 +1,49 @@
+:host {
+  min-height: 226px;
+  padding: 5px 25px 0px 25px;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+}
+
+:host([placeholder]) {
+  opacity: 0;
+}
+
+:host(:not[placeholder]) {
+  opacity: 1;
+  transition: opacity 0.3s ease-in;
+}
+
+carousel-card:not(:last-child) {
+  margin-right: 10px;
+}
+
+.outer {
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.outer::-webkit-scrollbar {
+  display: none;
+}
+
+.inner {
+  width: max-content;
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+:host(.default) {
+  min-height: 160px;
+}
+
+@media screen and (max-width: 600px) {
+  :host {
+    min-height: 0px;
+  }
+}
