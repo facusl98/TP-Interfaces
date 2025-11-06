@@ -1,0 +1,10 @@
+:host, img {
+    display:flex;
+    align-items: center;
+    width: 20px; 
+    height: 20px;
+}
+
+:host(.dark) img {
+    filter: invert(1);
+}

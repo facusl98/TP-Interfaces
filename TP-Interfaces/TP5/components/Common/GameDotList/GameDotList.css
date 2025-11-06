@@ -1,0 +1,21 @@
+:host {
+    display:flex; 
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+:host h2 {
+    font-family: var(--title-font);
+    font-size: 20px;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+.games {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
