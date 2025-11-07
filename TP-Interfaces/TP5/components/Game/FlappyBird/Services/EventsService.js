@@ -1,3 +1,4 @@
+import { BGManager } from "../Singletons/BGManager.js";
 import { Map } from "../Singletons/Map.js";
 import { Player } from "../Singletons/Player.js";
 
@@ -15,6 +16,7 @@ class _EventsService {
         case "r":
           Player.reset();
           Map.reset();
+          BGManager.reset();
       } 
     });
   }

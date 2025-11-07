@@ -17,8 +17,8 @@ export class Figure {
   };
 
   isPast() {
-    const { dx } = this;
-    return (dx + 200 < 0)
+    const { dx, w } = this;
+    return (dx + w  < 0)
   }
 
   get dx() {

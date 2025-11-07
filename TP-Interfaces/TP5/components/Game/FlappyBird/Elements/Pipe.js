@@ -67,7 +67,9 @@ export class Pipe extends Rectangle {
     ];
 
     const tiles = Math.floor(h/w) / 2;
+
     for (let i = 0; i < tiles; i++) {
+
       if (i == 0 && !upper) {
         this.tileSprites[i] = top;
       } else if (i == tiles - 1 && upper) {

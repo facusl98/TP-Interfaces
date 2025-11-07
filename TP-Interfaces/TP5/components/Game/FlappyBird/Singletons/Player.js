@@ -5,7 +5,9 @@ import { Camera } from "./Camera.js";
 
 class _Player extends Circle {
   constructor() {
-    super(0, 0, 32);
+    const spriteSize = 32;
+    const r = spriteSize - 4;
+    super(0, 0, r);
 
     this.defaultSpeed = {x: 8, y: -6};
     this.speed = { x: 0, y: 0 }
@@ -58,6 +60,7 @@ class _Player extends Circle {
     const { width, height } = CanvasService;
     this.x = width / 4;
     this.y = height / 2;
+    this.jumps = 0;
     Camera.coords = this.coords;
   }
 
@@ -87,12 +90,13 @@ class _Player extends Circle {
   }
 
   jump() {
-    if (!this.over)
+    if (!this.over) {
       this.jumps += 5;
+      this.spriteJump.play();
+    }
+
     if (!this.running) 
       this.start();
-
-    this.spriteJump.play();
   }
 }
 

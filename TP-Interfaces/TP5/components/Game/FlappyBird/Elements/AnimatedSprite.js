@@ -3,10 +3,11 @@ import { Sprite } from "./Sprite.js";
 
 export class AnimatedSprite extends Sprite {
   constructor(src, size, duration, frames, loop = true) {
-    super(src, size);
+    super(src);
     this.duration = duration;
     this.frames = [...frames];
     this.loop = loop;
+    this.size = size;
 
     this.startTime = null;
     this.finished = !loop;
@@ -36,11 +37,12 @@ export class AnimatedSprite extends Sprite {
     if (i >= frames.length) i = frames.length - 1;
 
     const rel = this.relative({x: x, y: y});
+    const scaled = size * scale;
 
     ctx.drawImage(
       sprite,
       0, size * i, size, size,
-      rel.x, rel.y, size * scale, size * scale
+      rel.x, rel.y, scaled, scaled
     );
 
 

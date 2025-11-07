@@ -1,6 +1,7 @@
 import { BaseComponent } from "../../BaseComponent.js";
 import { CanvasService } from "./Services/CanvasService.js";
 import { EventsService } from "./Services/EventsService.js";
+import { BGManager } from "./Singletons/BGManager.js";
 import { Map } from "./Singletons/Map.js";
 import { Player } from "./Singletons/Player.js";
 
@@ -15,6 +16,7 @@ class FlappyBirdGame extends BaseComponent {
 
     Player.setUp();
     EventsService.hear();
+    BGManager.build();
   }
 
   connectedCallback() {
@@ -24,6 +26,7 @@ class FlappyBirdGame extends BaseComponent {
 
   draw() {
     CanvasService.clear();
+    BGManager.draw();
     Map.draw();
 
     requestAnimationFrame(this.draw.bind(this));
