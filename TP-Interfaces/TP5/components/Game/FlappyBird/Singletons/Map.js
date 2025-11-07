@@ -1,7 +1,5 @@
 import { Pipe } from "../Elements/Pipe.js";
-import { Rectangle } from "../Figures/Rectangle.js";
 import { CanvasService } from "../Services/CanvasService.js";
-import { Colors } from "./Colors.js";
 import { Player } from "./Player.js";
 
 class _Map {

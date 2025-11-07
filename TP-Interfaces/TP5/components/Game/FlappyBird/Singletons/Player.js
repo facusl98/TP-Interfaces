@@ -22,7 +22,7 @@ class _Player extends Circle {
 
     this.spriteJump = new AnimatedSprite(
       "/TP-Interfaces/TP5/assets/images/flappy_bird/Player/Player_Jump.png",
-      32, 200, [0, 5, 10, 100, 150, 180], false
+      32, 200, [0, 5, 10, 20, 30, 35, 60, 180], false
     );
   }
 
@@ -32,7 +32,6 @@ class _Player extends Circle {
     const dx = x - r;
     const dy = y - r;
 
-    console.log(spriteJump.finished)
     if (spriteJump.finished)
       spriteIdle.draw(dx, dy, 2);
     else 
