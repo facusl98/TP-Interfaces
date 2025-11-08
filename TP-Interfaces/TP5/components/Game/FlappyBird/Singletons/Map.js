@@ -1,5 +1,6 @@
 import { Pipe } from "../Elements/Pipe.js";
-import { CanvasService } from "../Services/CanvasService.js";
+import { Canvas } from "./Canvas.js";
+import { GameManager } from "./GameManager.js";
 import { Player } from "./Player.js";
 
 class _Map {
@@ -23,12 +24,12 @@ class _Map {
     if (this.pipes.size > 18) 
       this.purgePipes();
 
-    if (Player.running)
+    if (GameManager.isRunning())
       this.checkCollisions();
   }
 
   createPipe() {
-    const { height } = CanvasService;
+    const { height } = Canvas;
     const startX = 300;
     const rangeX = 200;
     const pipes = [...this.pipes];
@@ -64,7 +65,7 @@ class _Map {
     const pipes = [...this.pipes];
     for (let i = 0; i < this.pipes.size / 2; i++) {
       if (pipes[i].isColliding()){
-        Player.halt();
+        GameManager.hit(pipes[i]);
       }
     }
   }

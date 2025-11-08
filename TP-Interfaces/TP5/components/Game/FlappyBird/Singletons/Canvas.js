@@ -1,6 +1,6 @@
-import { Colors } from "../Singletons/Colors.js";
+import { Colors } from "./Colors.js";
 
-class _CanvasService {
+class _Canvas {
   constructor() {
     this.canvas = null;
     this.ctx = null;
@@ -25,4 +25,4 @@ class _CanvasService {
   }
 }
 
-export const CanvasService = new _CanvasService();
+export const Canvas = new _Canvas();

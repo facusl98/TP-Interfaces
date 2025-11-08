@@ -1,4 +1,4 @@
-import { CanvasService } from "../Services/CanvasService.js";
+import { Canvas } from "../Singletons/Canvas.js";
 import { Player } from "../Singletons/Player.js";
 import { Figure } from "./Figure.js";
 
@@ -10,7 +10,7 @@ export class Circle extends Figure {
 
   draw() {
     super.draw();
-    const { ctx } = CanvasService;
+    const { ctx } = Canvas;
     const { dx, dy, r } = this;
     ctx.beginPath();
     ctx.arc(dx, dy, r, 0, 2 * Math.PI);

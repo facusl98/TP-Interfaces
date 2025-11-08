@@ -1,5 +1,4 @@
-import { BGManager } from "../Singletons/BGManager.js";
-import { Map } from "../Singletons/Map.js";
+import { GameManager } from "../Singletons/GameManager.js";
 import { Player } from "../Singletons/Player.js";
 
 class _EventsService {
@@ -14,9 +13,7 @@ class _EventsService {
           Player.jump();
           break;
         case "r":
-          Player.reset();
-          Map.reset();
-          BGManager.reset();
+          GameManager.reset();
       } 
     });
   }

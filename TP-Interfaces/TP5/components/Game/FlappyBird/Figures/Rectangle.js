@@ -1,4 +1,4 @@
-import { CanvasService } from "../Services/CanvasService.js";
+import { Canvas } from "../Singletons/Canvas.js";
 import { Player } from "../Singletons/Player.js";
 import { Figure } from "./Figure.js";
 
@@ -11,7 +11,7 @@ export class Rectangle extends Figure {
 
   draw() {
     super.draw();
-    const { ctx } = CanvasService;
+    const { ctx } = Canvas;
     const { dx, dy, w, h } = this;
 
     ctx.fillRect(dx - w/2, dy - h/2, w, h);

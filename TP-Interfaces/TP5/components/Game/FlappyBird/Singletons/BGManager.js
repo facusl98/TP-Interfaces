@@ -1,5 +1,5 @@
 import { BGLayer } from "../Elements/BGLayer.js";
-import { CanvasService } from "../Services/CanvasService.js";
+import { Canvas } from "./Canvas.js";
 import { Player } from "./Player.js";
 
 class _BGManager {
@@ -15,7 +15,6 @@ class _BGManager {
     const playerSpeed = Player.defaultSpeed.x;
     for (let i = 0; i <= cant; i++) {
       const speed = cant - i * cant / playerSpeed * multiplier; 
-      console.log(speed)
       this.layers.push(
         new BGLayer(url + i + ".png", speed )
       )

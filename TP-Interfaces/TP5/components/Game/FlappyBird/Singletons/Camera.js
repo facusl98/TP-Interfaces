@@ -1,4 +1,4 @@
-import { CanvasService } from "../Services/CanvasService.js";
+import { Canvas } from "./Canvas.js";
 
 class _Camera {
   constructor() {
@@ -7,7 +7,7 @@ class _Camera {
   }
   
   set coords(coords) {
-    const { width } = CanvasService;
+    const { width } = Canvas;
     this.x = coords.x - width / 4;
   }
 

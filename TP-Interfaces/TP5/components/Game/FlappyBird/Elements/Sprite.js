@@ -1,4 +1,4 @@
-import { CanvasService } from "../Services/CanvasService.js";
+import { Canvas } from "../Singletons/Canvas.js";
 import { Camera } from "../Singletons/Camera.js";
 
 export class Sprite {
@@ -9,19 +9,17 @@ export class Sprite {
     this.w = w;
     this.h = h || w;
     
-    this.ctx = CanvasService.ctx;
     this.ready = false;
 
     this.sprite.onload = () => {
-      this.w = this.sprite.width;
-      this.h = this.sprite.height;
       this.ready = true
     };
   }
 
   draw(x, y, scale = 1, dw = null, dh = null) {
     if (!this.ready) return;
-    const { ctx, sprite, w, h } = this;
+    const { sprite, w, h } = this;
+    const { ctx } = Canvas;
     if (dw == null || dh == null) {
       dw = w * scale;
       dh = h * scale;

@@ -1,16 +1,16 @@
-import { CanvasService } from "../Services/CanvasService.js";
+import { Canvas } from "../Singletons/Canvas.js";
 import { Camera } from "../Singletons/Camera.js";
 import { Sprite } from "./Sprite.js";
 
 export class Background {
   constructor(src, x, y) {
-    this.sprite = new Sprite(src); 
+    this.sprite = new Sprite(src, 928, 793); 
     this.x = x;
     this.y = y;
   }
 
   draw() {
-    const { width, height } = CanvasService;
+    const { width, height } = Canvas;
     const {x, y} = this;
     this.sprite.draw(x, y, 1, width, height);
   }

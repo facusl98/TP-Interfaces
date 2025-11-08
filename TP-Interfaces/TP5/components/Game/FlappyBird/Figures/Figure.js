@@ -1,4 +1,4 @@
-import { CanvasService } from "../Services/CanvasService.js";
+import { Canvas } from "../Singletons/Canvas.js";
 import { Camera } from "../Singletons/Camera.js";
 
 export class Figure {
@@ -9,7 +9,7 @@ export class Figure {
   }
 
   draw() {
-    CanvasService.ctx.fillStyle = this.fill;
+    Canvas.ctx.fillStyle = this.fill;
   }
 
   isColliding() {

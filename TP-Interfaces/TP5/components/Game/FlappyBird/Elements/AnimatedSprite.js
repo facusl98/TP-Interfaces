@@ -1,13 +1,14 @@
-import { CanvasService } from "../Services/CanvasService.js";
+import { Canvas } from "../Singletons/Canvas.js";
 import { Sprite } from "./Sprite.js";
 
 export class AnimatedSprite extends Sprite {
-  constructor(src, size, duration, frames, loop = true) {
-    super(src);
+  constructor(src, w, h, duration, frames, loop = true) {
+    super(src, w, h);
     this.duration = duration;
     this.frames = [...frames];
     this.loop = loop;
-    this.size = size;
+    this.w = w;
+    this.h = h;
 
     this.startTime = null;
     this.finished = !loop;
@@ -23,8 +24,8 @@ export class AnimatedSprite extends Sprite {
     if (!ready) return;
     if (!loop && finished) return;
 
-    const { sprite, size, frames, duration, startTime } = this;
-    const { ctx } = CanvasService;
+    const { sprite, w, h, frames, duration, startTime } = this;
+    const { ctx } = Canvas;
 
     const elapsed = performance.now() - startTime;
 
@@ -37,12 +38,13 @@ export class AnimatedSprite extends Sprite {
     if (i >= frames.length) i = frames.length - 1;
 
     const rel = this.relative({x: x, y: y});
-    const scaled = size * scale;
+    const sw = w * scale;
+    const sh = h * scale;
 
     ctx.drawImage(
       sprite,
-      0, size * i, size, size,
-      rel.x, rel.y, scaled, scaled
+      0, h * i, w, h,
+      rel.x, rel.y, sw, sh
     );
 
 

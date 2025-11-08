@@ -1,4 +1,4 @@
-import { CanvasService } from "../Services/CanvasService.js";
+import { Canvas } from "../Singletons/Canvas.js";
 import { Player } from "../Singletons/Player.js";
 import { Background } from "./Background.js";
 
@@ -14,7 +14,7 @@ export class BGLayer {
   build() {
     this.bgs = [];
     const {src} = this;
-    const {width, height} = CanvasService;
+    const {width, height} = Canvas;
     for (let i = 0; i < 3; i++) {
       this.bgs.push(
         new Background(src, i * width, 0)
@@ -32,7 +32,7 @@ export class BGLayer {
   }
 
   purge() {
-    const {width} = CanvasService;
+    const {width} = Canvas;
     const {bgs, src} = this;
     if (bgs[0].isPast()) {
       const last = bgs[bgs.length - 1];

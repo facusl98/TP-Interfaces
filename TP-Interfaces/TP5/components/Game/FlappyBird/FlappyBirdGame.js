@@ -1,18 +1,19 @@
 import { BaseComponent } from "../../BaseComponent.js";
-import { CanvasService } from "./Services/CanvasService.js";
+import { Canvas } from "./Singletons/Canvas.js";
 import { EventsService } from "./Services/EventsService.js";
 import { BGManager } from "./Singletons/BGManager.js";
 import { Map } from "./Singletons/Map.js";
 import { Player } from "./Singletons/Player.js";
+import { UIManager } from "./Singletons/UIManager.js";
 
 class FlappyBirdGame extends BaseComponent {
   constructor() {
     super();
   
-    CanvasService.createCanvas(720, 480);
+    Canvas.createCanvas(720, 480);
 
-    this.canvas = CanvasService.canvas;  
-    this.ctx = CanvasService.ctx;
+    this.canvas = Canvas.canvas;  
+    this.ctx = Canvas.ctx;
 
     Player.setUp();
     EventsService.hear();
@@ -25,9 +26,10 @@ class FlappyBirdGame extends BaseComponent {
   }
 
   draw() {
-    CanvasService.clear();
+    Canvas.clear();
     BGManager.draw();
     Map.draw();
+    UIManager.draw();
 
     requestAnimationFrame(this.draw.bind(this));
   }

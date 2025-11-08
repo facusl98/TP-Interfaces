@@ -15,6 +15,7 @@ export class Pipe extends Rectangle {
       w, h,
     );
 
+    this.centerY = y;
     this.tileSize = tileSize;
     this.upper = upper;
 
@@ -39,29 +40,29 @@ export class Pipe extends Rectangle {
     const imageUrl = "/TP-Interfaces/TP5/assets/images/flappy_bird/Pipes/";
     
     const base = new Sprite(
-      imageUrl + "Pipe_Tile_Base.png", tileSize
+      imageUrl + "Pipe_Tile_Base.png", tileSize, tileSize
     );
     const top = new Sprite(
-      imageUrl + "Pipe_Tile_Top.png", tileSize
+      imageUrl + "Pipe_Tile_Top.png", tileSize, tileSize
     )
     const bottom = new Sprite(
-      imageUrl + "Pipe_Tile_Bottom.png", tileSize
+      imageUrl + "Pipe_Tile_Bottom.png", tileSize, tileSize
     )
 
     const sprites = [
       new AnimatedSprite(
-        imageUrl + "Pipe_Tile_01.png", tileSize,
+        imageUrl + "Pipe_Tile_01.png", tileSize, tileSize,
         1000, [0, 400, 600], true
       ),
       new AnimatedSprite(
-        imageUrl + "Pipe_Tile_02.png", tileSize,
+        imageUrl + "Pipe_Tile_02.png", tileSize, tileSize,
         1000, [0, 400, 600], true
       ),
       new Sprite(
-        imageUrl + "Pipe_Tile_03.png", tileSize
+        imageUrl + "Pipe_Tile_03.png", tileSize, tileSize
       ),
       new AnimatedSprite(
-        imageUrl + "Pipe_Tile_04.png", tileSize,
+        imageUrl + "Pipe_Tile_04.png", tileSize, tileSize,
         1000, [0, 500], true
       )
     ];
