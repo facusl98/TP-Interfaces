@@ -33,11 +33,6 @@ class _GameManager {
     Player.start();
   }
 
-  hit(collision) {
-    console.log(collision)
-    Player.hit(collision)
-  }
-
   canStart() {
     return this._state == "PAUSED" || this._state == "INITIAL"
   }

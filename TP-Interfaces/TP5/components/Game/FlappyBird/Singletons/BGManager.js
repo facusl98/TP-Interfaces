@@ -11,10 +11,11 @@ class _BGManager {
     this.layers = [];
     const url = "/TP-Interfaces/TP5/assets/images/flappy_bird/Background/Layer_";
     const cant = 9;
-    const multiplier = .5;
-    const playerSpeed = Player.defaultSpeed.x;
+    const exponent = 2.5;
+    const playerSpeed = Player.baseSpeed.x;
     for (let i = 0; i <= cant; i++) {
-      const speed = cant - i * cant / playerSpeed * multiplier; 
+      const t = i / cant;
+      const speed = playerSpeed - (playerSpeed * Math.pow(t, exponent) / 2);
       this.layers.push(
         new BGLayer(url + i + ".png", speed )
       )

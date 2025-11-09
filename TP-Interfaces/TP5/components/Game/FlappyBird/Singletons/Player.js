@@ -13,19 +13,23 @@ class _Player extends Circle {
     this.maxHP = 3;
     this.hp = 3;
 
-    this.defaultSpeed = {x: 8, y: -6};
+    this.defX = 180;
+    this.defY = 240;
+    this.baseSpeed = {x: 5, y: -6};
     this.speed = { x: 0, y: 0 }
     this.jumps = 0;
 
     this.spriteIdle = new AnimatedSprite(
       "/TP-Interfaces/TP5/assets/images/flappy_bird/Player/Player_Idle.png",
-      32, 32, 1000, [0, 300, 500, 700], true
+      128, 128, 1000, [0, 300, 600], true, false
     );
 
     this.spriteJump = new AnimatedSprite(
       "/TP-Interfaces/TP5/assets/images/flappy_bird/Player/Player_Jump.png",
-      32, 32, 200, [0, 5, 10, 20, 30, 35, 60, 180], false
+      128, 128, 100, [0, 1, 10, 20, 30], false, false
     );
+
+    this.moves = 0;
   }
 
   draw() {
@@ -35,9 +39,9 @@ class _Player extends Circle {
     const dy = y - r;
 
     if (spriteJump.finished)
-      spriteIdle.draw(dx, dy, 2);
+      spriteIdle.draw(dx, dy, 64, 64);
     else 
-      spriteJump.draw(dx, dy, 2);
+      spriteJump.draw(dx, dy, 64, 64, false);
   }
 
   move() {
@@ -48,9 +52,14 @@ class _Player extends Circle {
       this.jumps--;
     }
 
-    this.x += this.speed.x;
+    this.moves++;
 
+    this.x += this.speed.x;
     Camera.coords = this.coords;
+    
+    this.speed.x = Math.min(
+      this.baseSpeed.x * 2, 
+      this.baseSpeed.x + (this.moves / 100));
 
     if (GameManager.isRunning())
       requestAnimationFrame(this.move.bind(this));
@@ -58,8 +67,8 @@ class _Player extends Circle {
 
   setUp() {
     const { width, height } = Canvas;
-    this.x = width / 4;
-    this.y = height / 2;
+    this.x = this.defX;
+    this.y = this.defY;
     this.jumps = 0;
     this.hp = this.maxHP;
     Camera.coords = this.coords;
@@ -73,12 +82,13 @@ class _Player extends Circle {
     this.over = true;
     this.speed.x = 0;
     this.speed.y = 0;
+    this.moves = 0;
   }
   
   start() {
     this.speed = {
-      x: this.defaultSpeed.x,
-      y: this.defaultSpeed.y 
+      x: this.baseSpeed.x,
+      y: this.baseSpeed.y 
     }
     this.move();
   }
@@ -102,7 +112,7 @@ class _Player extends Circle {
     this.hp--;
     if (this.hp > 0) {
       this.y = collision.centerY;
-      this.x = collision.x + 25;
+      this.x = collision.x + 50;
       GameManager.pause();
     } else {
       GameManager.stop();

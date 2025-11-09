@@ -1,4 +1,5 @@
 import { Canvas } from "../Singletons/Canvas.js";
+import { GameManager } from "../Singletons/GameManager.js";
 import { Player } from "../Singletons/Player.js";
 import { Background } from "./Background.js";
 
@@ -26,7 +27,7 @@ export class BGLayer {
     const {bgs, speed} = this;
     bgs.forEach((bg) => {
       bg.draw();
-      if (Player.running) bg.x += speed
+      if (GameManager.isRunning()) bg.x += speed
     });
     this.purge();
   }

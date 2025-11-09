@@ -4,7 +4,7 @@ import { Sprite } from "./Sprite.js";
 
 export class Background {
   constructor(src, x, y) {
-    this.sprite = new Sprite(src, 928, 793); 
+    this.sprite = new Sprite(src, 928, 572); 
     this.x = x;
     this.y = y;
   }
@@ -12,7 +12,7 @@ export class Background {
   draw() {
     const { width, height } = Canvas;
     const {x, y} = this;
-    this.sprite.draw(x, y, 1, width, height);
+    this.sprite.draw(x, y, width, height);
   }
 
   isPast() {

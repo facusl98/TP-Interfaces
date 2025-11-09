@@ -19,9 +19,9 @@ class _Map {
   }
 
   update() {
-    if (this.pipes.size < 20) 
+    if (this.pipes.size < 10) 
       this.createPipe();
-    if (this.pipes.size > 18) 
+    if (this.pipes.size > 9) 
       this.purgePipes();
 
     if (GameManager.isRunning())
@@ -65,7 +65,7 @@ class _Map {
     const pipes = [...this.pipes];
     for (let i = 0; i < this.pipes.size / 2; i++) {
       if (pipes[i].isColliding()){
-        GameManager.hit(pipes[i]);
+        Player.hit(pipes[i]);
       }
     }
   }

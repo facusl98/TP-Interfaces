@@ -2,11 +2,12 @@ import { Canvas } from "../Singletons/Canvas.js";
 import { Sprite } from "./Sprite.js";
 
 export class AnimatedSprite extends Sprite {
-  constructor(src, w, h, duration, frames, loop = true) {
+  constructor(src, w, h, duration, frames, loop = true, stay = true) {
     super(src, w, h);
     this.duration = duration;
     this.frames = [...frames];
     this.loop = loop;
+    this.stay = stay;
     this.w = w;
     this.h = h;
 
@@ -19,10 +20,10 @@ export class AnimatedSprite extends Sprite {
     this.finished = false;
   }
 
-  draw(x, y, scale) {
-    const { ready, finished, loop } = this;
+  draw(x, y, dw, dh) {
+    const { ready, stay, finished, loop } = this;
     if (!ready) return;
-    if (!loop && finished) return;
+    if (!loop && finished && !stay) return;
 
     const { sprite, w, h, frames, duration, startTime } = this;
     const { ctx } = Canvas;
@@ -38,19 +39,15 @@ export class AnimatedSprite extends Sprite {
     if (i >= frames.length) i = frames.length - 1;
 
     const rel = this.relative({x: x, y: y});
-    const sw = w * scale;
-    const sh = h * scale;
 
     ctx.drawImage(
       sprite,
       0, h * i, w, h,
-      rel.x, rel.y, sw, sh
+      rel.x, rel.y, dw, dh
     );
 
-
-
     if (elapsed > duration) {
-      this.startTime = performance.now();
+      if (!stay) this.startTime = performance.now();
       if (!loop) this.finished = true;
     }
   }

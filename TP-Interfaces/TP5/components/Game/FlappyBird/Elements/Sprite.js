@@ -16,14 +16,12 @@ export class Sprite {
     };
   }
 
-  draw(x, y, scale = 1, dw = null, dh = null) {
+  play() {}
+
+  draw(x, y, dw, dh) {
     if (!this.ready) return;
     const { sprite, w, h } = this;
     const { ctx } = Canvas;
-    if (dw == null || dh == null) {
-      dw = w * scale;
-      dh = h * scale;
-    }
     
     const rel = this.relative({x: x, y: y});
     ctx.drawImage(

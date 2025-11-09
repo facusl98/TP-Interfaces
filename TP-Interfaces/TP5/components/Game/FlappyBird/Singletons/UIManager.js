@@ -1,14 +1,17 @@
-import { HPBar } from "../Elements/HPBar.js";
+import { HPBar } from "../UI/HPBar.js";
+import { Score } from "../UI/Score.js";
 
 class _UIManager {
   constructor() {
-    this.pad = 20;
+    this.pad = 10;
     this.HPBar = new HPBar(this.pad, this.pad);
+    this.Score = new Score(this.pad, this.pad + 48 + 5)
   }
 
   draw() {
-    const { HPBar } = this;
+    const { HPBar, Score } = this;
     HPBar.draw();
+    Score.draw();
   }
 }
 

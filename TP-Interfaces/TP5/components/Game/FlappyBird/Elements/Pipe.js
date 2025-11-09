@@ -4,9 +4,8 @@ import { Sprite } from "./Sprite.js";
 
 export class Pipe extends Rectangle {
   constructor(x, y, upper) {
-    const tileSize = 32;
-    const w = tileSize;
-    const h = tileSize * 10; 
+    const w = 64;
+    const h = w * 10; 
     const direction = upper ? -1 : 1;
     const displacement = 125;
     const offset = (displacement + h/2) * direction; 
@@ -16,11 +15,11 @@ export class Pipe extends Rectangle {
     );
 
     this.centerY = y;
-    this.tileSize = tileSize;
     this.upper = upper;
 
     this.tileSprites = [];
     this.generateTiles();
+    this.tileSprites.forEach((t) => t.play());
   }
 
   draw() {
@@ -28,46 +27,47 @@ export class Pipe extends Rectangle {
     const { x, y, h, w, tileSprites } = this;
     const dx = x - w/2;
     const dy = y - h/2;
+
     tileSprites.forEach((tile, i) => {
       tile.draw(
-        dx, dy + i * w * 2, 2
+        dx, dy + i * w , w, w
       )
     })
   }
 
   generateTiles() {
-    const { tileSize, h, w, upper } = this;
+    const { h, w, upper } = this;
     const imageUrl = "/TP-Interfaces/TP5/assets/images/flappy_bird/Pipes/";
     
+    const sprite = 128;
     const base = new Sprite(
-      imageUrl + "Pipe_Tile_Base.png", tileSize, tileSize
+      imageUrl + "Pipe_Tile_Base.png", sprite, sprite
     );
     const top = new Sprite(
-      imageUrl + "Pipe_Tile_Top.png", tileSize, tileSize
+      imageUrl + "Pipe_Tile_Top.png", sprite, sprite
     )
     const bottom = new Sprite(
-      imageUrl + "Pipe_Tile_Bottom.png", tileSize, tileSize
+      imageUrl + "Pipe_Tile_Bottom.png", sprite, sprite
     )
 
     const sprites = [
       new AnimatedSprite(
-        imageUrl + "Pipe_Tile_01.png", tileSize, tileSize,
-        1000, [0, 400, 600], true
+        imageUrl + "Pipe_Tile_01.png", sprite, sprite,
+        1000, [0, 250, 500, 750], true, false
       ),
       new AnimatedSprite(
-        imageUrl + "Pipe_Tile_02.png", tileSize, tileSize,
-        1000, [0, 400, 600], true
+        imageUrl + "Pipe_Tile_02.png", sprite, sprite,
+        2000, [0, 1000, 1200, 1300], false, true
       ),
       new Sprite(
-        imageUrl + "Pipe_Tile_03.png", tileSize, tileSize
+        imageUrl + "Pipe_Tile_03.png", sprite, sprite
       ),
-      new AnimatedSprite(
-        imageUrl + "Pipe_Tile_04.png", tileSize, tileSize,
-        1000, [0, 500], true
+      new Sprite(
+        imageUrl + "Pipe_Tile_04.png", sprite, sprite,
       )
     ];
 
-    const tiles = Math.floor(h/w) / 2;
+    const tiles = Math.floor(h/w);
 
     for (let i = 0; i < tiles; i++) {
 
