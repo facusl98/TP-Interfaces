@@ -76,7 +76,7 @@ export class Pipe extends Rectangle {
       } else if (i == tiles - 1 && upper) {
         this.tileSprites[i] = bottom;
       } else {
-        const basic = Math.random() > .5;
+        const basic = Math.random() > .2;
         const spriteIndex = Math.floor(Math.random() * sprites.length);
         this.tileSprites[i] = basic ? base : sprites[spriteIndex];
       }

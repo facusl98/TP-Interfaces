@@ -5,6 +5,17 @@ import { Player } from "./Player.js";
 class _GameManager {
   constructor() {
     this._state = "INITIAL";
+    this._prev = "";
+  }
+
+  set state(s) {
+    this._prev = this._state;
+    this._state = s;
+  
+    if (s == "RUNNING")
+      Player.start()
+    else
+      Player.pause();
   }
 
   get state() {
@@ -12,33 +23,50 @@ class _GameManager {
   }
   
   pause() {
-    this._state = "PAUSED";
-    Player.pause();
+    this.state = "PAUSED";
+  }
+
+  wait() {
+    this.state = "WAITING";
   }
 
   stop() {
-    this._state = "STOPPED";
-    Player.stop();
+    this.state = "OVER";
   }
 
   reset() {
-    this._state = "INITIAL"
+    this.state = "INITIAL"
     Player.reset();
     Map.reset();
     BGManager.reset();
   }
 
+  initialize() {
+    this.state = "INITIAL";
+  }
+
   start() {
-    this._state = "RUNNING"
-    Player.start();
+    this.state = "RUNNING"
+  }
+
+  resume() {
+    this.state = this._prev;
   }
 
   canStart() {
-    return this._state == "PAUSED" || this._state == "INITIAL"
+    return this._state === "INITIAL"
   }
 
   isRunning() {
-    return this._state == "RUNNING";
+    return this._state === "RUNNING";
+  }
+
+  isOver() {
+    return this._state === "OVER"
+  }
+
+  isPaused() {
+    return this._state === "PAUSED"
   }
 }
 

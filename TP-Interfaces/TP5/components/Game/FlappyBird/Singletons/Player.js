@@ -17,31 +17,76 @@ class _Player extends Circle {
     this.defY = 240;
     this.baseSpeed = {x: 5, y: -6};
     this.speed = { x: 0, y: 0 }
-    this.jumps = 0;
-
+    
     this.spriteIdle = new AnimatedSprite(
       "/TP-Interfaces/TP5/assets/images/flappy_bird/Player/Player_Idle.png",
       128, 128, 1000, [0, 300, 600], true, false
     );
-
+    
     this.spriteJump = new AnimatedSprite(
       "/TP-Interfaces/TP5/assets/images/flappy_bird/Player/Player_Jump.png",
       128, 128, 100, [0, 1, 10, 20, 30], false, false
     );
+    
+    this.spriteIdleIframe = new AnimatedSprite(
+      "/TP-Interfaces/TP5/assets/images/flappy_bird/Player/Player_Idle_Iframe.png",
+      128, 128, 1000, [0, 300, 600], true, false
+    );
+    
+    this.spriteJumpIframe = new AnimatedSprite(
+      "/TP-Interfaces/TP5/assets/images/flappy_bird/Player/Player_Jump_Iframe.png",
+      128, 128, 100, [0, 1, 10, 20, 30], false, false
+    );
 
+    this.spriteDeath = new AnimatedSprite(
+      "/TP-Interfaces/TP5/assets/images/flappy_bird/Player/Player_Death.png",
+      128, 128, 2000, [0, 100, 200, 300, 500, 700, 1000, 1300, 1500, 1800, 1950], false, true
+    );
+    
+    this.jumps = 0;
     this.moves = 0;
+    this.iframes = 0;
+    this.dead = false;
   }
-
+  
   draw() {
     super.draw();
-    const { x, y, r, spriteIdle, spriteJump } = this;
-    const dx = x - r;
-    const dy = y - r;
+    const { x, y, r } = this;
+    
 
-    if (spriteJump.finished)
-      spriteIdle.draw(dx, dy, 64, 64);
+    this.playAnimation();
+  }
+
+  playAnimation() {
+    const {
+      x, y, r,
+      iframes, dead,
+      spriteDeath,
+      spriteIdle, spriteIdleIframe,
+      spriteJump, spriteJumpIframe
+    } = this;
+
+      const dx = x - r;
+      const dy = y - r;
+
+    if (this.dead){
+      spriteDeath.draw(dx, dy, 64, 64);
+      return;
+    }
+
+    if (iframes <= 0) {
+      if (spriteJump.finished) {
+        spriteIdle.draw(dx, dy, 64, 64);
+      } else {
+        spriteJump.draw(dx, dy, 64, 64)
+      }
+      return;
+    }
+
+    if (spriteJumpIframe.finished)
+      spriteIdleIframe.draw(dx, dy, 64, 64);
     else 
-      spriteJump.draw(dx, dy, 64, 64, false);
+      spriteJumpIframe.draw(dx, dy, 64, 64);
   }
 
   move() {
@@ -54,69 +99,100 @@ class _Player extends Circle {
 
     this.moves++;
 
+    if (this.iframes > 0)
+      this.iframes--;
+
+    if (this.y < 0 || this.y > Canvas.height)
+      GameManager.stop();
+
     this.x += this.speed.x;
     Camera.coords = this.coords;
     
-    this.speed.x = Math.min(
-      this.baseSpeed.x * 2, 
-      this.baseSpeed.x + (this.moves / 100));
+    this.calcSpeed();
 
     if (GameManager.isRunning())
       requestAnimationFrame(this.move.bind(this));
   }
 
+  calcSpeed() {
+    this.speed.x = Math.min(
+      this.baseSpeed.x * 2, 
+      this.baseSpeed.x + (this.moves / 100));
+  }
+
   setUp() {
-    const { width, height } = Canvas;
     this.x = this.defX;
     this.y = this.defY;
     this.jumps = 0;
+    this.moves = 0;
+    this.dead = false;
     this.hp = this.maxHP;
     Camera.coords = this.coords;
-  }
-
-  stop() {
-    this.pause();
   }
 
   pause() {
     this.over = true;
     this.speed.x = 0;
     this.speed.y = 0;
-    this.moves = 0;
+    this.iframes = 0;
   }
   
   start() {
-    this.speed = {
-      x: this.baseSpeed.x,
-      y: this.baseSpeed.y 
-    }
+    this.speed.y = this.baseSpeed.y;
+    this.calcSpeed();
     this.move();
   }
 
   reset() {
-    this.stop();
+    this.pause();
     this.setUp();
+    clearTimeout(this.hitPause);
   }
 
   jump() {
     if (GameManager.canStart()) 
       GameManager.start();
 
+    
     if (GameManager.isRunning()) {
       this.jumps += 5;
-      this.spriteJump.play();
+      if (!this.iframes)
+        this.spriteJump.play();
+      else
+        this.spriteJumpIframe.play();
     }
   }
 
   hit(collision) {
+    if (this.iframes > 0) return;
     this.hp--;
+    GameManager.wait();
     if (this.hp > 0) {
-      this.y = collision.centerY;
-      this.x = collision.x + 50;
-      GameManager.pause();
+      this.hitPause = setTimeout(() => {
+        this.y = collision.centerY;
+        this.x = collision.x + 50;
+        this.jumps = 0;
+        this.moves = 0;
+        Camera.coords = Player.coords;
+        GameManager.initialize();
+      }, 1000);
     } else {
-      GameManager.stop();
+      this.dead = true;
+      this.spriteDeath.play();
+      setTimeout(() => {
+        GameManager.stop();
+      }, 2200)
+      
     }
+  }
+
+  heal() {
+    if (this.hp < this.maxHP) 
+      this.hp++;
+  }
+
+  addIframes(iframes) {
+    this.iframes += iframes;
   }
 }
 

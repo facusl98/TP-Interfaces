@@ -16,8 +16,8 @@ class FlappyBirdGame extends BaseComponent {
     this.ctx = Canvas.ctx;
 
     Player.setUp();
-    EventsService.hear();
     BGManager.build();
+    EventsService.hear();
   }
 
   connectedCallback() {
