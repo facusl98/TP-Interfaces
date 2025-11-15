@@ -21,7 +21,16 @@ class HeroCard extends BaseComponent {
       genres: [
         {name: "Puzzle"}, 
         {name: "Strategy"}, 
-        {name: "Indie"}]
+        {name: "Indie"}
+      ]
+    };
+    this._games[3] = {
+      name: "Wisp Away",
+      background_image: "/TP-Interfaces/TP5/assets/images/flappy_bird/wisp-away.png",
+      genres: [
+        {name: "Arcade"}, 
+        {name: "Indie"}
+      ]
     }
     this._games[4] = {
       name: "Blocka",
@@ -29,7 +38,8 @@ class HeroCard extends BaseComponent {
       genres: [
         {name: "Puzzle"}, 
         {name: "Casual"}, 
-        {name: "Indie"}]
+        {name: "Indie"}
+      ]
     }
     this._setShown();
     this.render();
@@ -130,7 +140,7 @@ class HeroCard extends BaseComponent {
       else if (this._activeIndex == 2)
         window.location.hash = "#/game/peg-solitaire"
       else 
-        window.location.hash = "#/game/flappy-bird"
+        window.location.hash = "#/game/wisp-away"
     });
 
     const arrows = this.shadowRoot.querySelectorAll(".arrow");

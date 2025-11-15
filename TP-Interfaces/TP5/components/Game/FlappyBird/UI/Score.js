@@ -1,5 +1,6 @@
 import { StaticSprite } from "../Elements/StaticSprite.js";
 import { Writer } from "../Services/Writer.js";
+import { GameManager } from "../Singletons/GameManager.js";
 import { Player } from "../Singletons/Player.js";
 import { UIBox } from "./UIBox.js";
 import { UIElement } from "./UIElement.js";
@@ -22,6 +23,9 @@ export class Score extends UIElement {
     bg.draw();
     icon.draw(x, y, h, h);
     Writer.write(x + w/2, y + h/2, `${score}m`, 30, "DARK", true);
+
+    if (score > 600) 
+      GameManager.win();
   }
   
 }

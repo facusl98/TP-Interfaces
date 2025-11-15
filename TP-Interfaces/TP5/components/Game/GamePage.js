@@ -28,11 +28,11 @@ class GamePage extends BaseComponent {
         import: async () => await import("./BlockaGame/BlockaGame.js"),
         component: `<blocka-game id="game" class="hidden"></blocka-game>`
       },
-      "flappy-bird": {
-        title: "Flappy Bird",
+      "wisp-away": {
+        title: "Wisp Away",
         genres: ["Arcade", "Indie"],
-        guide: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus fugiat sunt voluptatibus corrupti culpa ad maxime adipisci harum natus alias quam, sint laboriosam, earum pariatur dignissimos obcaecati ipsam ipsum totam!",
-        lore: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus fugiat sunt voluptatibus corrupti culpa ad maxime adipisci harum natus alias quam, sint laboriosam, earum pariatur dignissimos obcaecati ipsam ipsum totam!",
+        guide: "You're a soul, but if you want to stay alive, you shall avoid the ancient pillars while advancing forward. Press space to gain vertical impulse and pass through the gaps while staying on screne, and collect power ups to help you flee the forest. If you run out of HP, you'll die and start over.",
+        lore: "A lost soul, a will 'o' wisp, has long lost its way inside the enchanted forest. Before vanishing gracelessly, the poor spirit decided to leave the damned forest. Help this pitiful soul flee from this macabre place, avoiding the ruins of a long lost civilization.",
         video: "/TP-Interfaces/TP5/assets/images/VideoPegSolitaire.png",
         img1: "/TP-Interfaces/TP5/assets/images/peg_solitaire/solitaire-1.png",
         img2: "/TP-Interfaces/TP5/assets/images/peg_solitaire/solitaire-2.png",

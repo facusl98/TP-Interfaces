@@ -46,14 +46,13 @@ class _Player extends Circle {
     this.jumps = 0;
     this.moves = 0;
     this.iframes = 0;
+    this.maxIframes = 400;
     this.dead = false;
   }
   
   draw() {
     super.draw();
     const { x, y, r } = this;
-    
-
     this.playAnimation();
   }
 
@@ -69,7 +68,7 @@ class _Player extends Circle {
       const dx = x - r;
       const dy = y - r;
 
-    if (this.dead){
+    if (dead){
       spriteDeath.draw(dx, dy, 64, 64);
       return;
     }
@@ -192,7 +191,9 @@ class _Player extends Circle {
   }
 
   addIframes(iframes) {
-    this.iframes += iframes;
+    let i = this.iframes + iframes;
+    i = Math.min(i, this.maxIframes);
+    this.iframes = i;
   }
 }
 
