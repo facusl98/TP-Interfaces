@@ -1,5 +1,4 @@
 import { Writer } from "../Services/Writer.js";
-import { Canvas } from "../Singletons/Canvas.js";
 import { UIBox } from "./UIBox.js";
 import { UIElement } from "./UIElement.js";
 
@@ -15,9 +14,12 @@ export class GameOver extends UIElement {
     this.bg = new UIBox(rx, ry, tileSize, cols, rows, false, false);
   }
 
-  draw() {
+  draw(win) {
     const {x, y} = this;
     this.bg.draw();
-    Writer.write(x, y, "Game Over", 48, "DARK", true);
+    Writer.write(x, y, 
+      win ? "You escaped succesfully" : "Game Over", 
+      win ? 36 :  48, 
+      "DARK", true);
   }
 }

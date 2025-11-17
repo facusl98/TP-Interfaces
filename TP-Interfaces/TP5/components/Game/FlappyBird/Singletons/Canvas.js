@@ -1,5 +1,3 @@
-import { Colors } from "./Colors.js";
-
 class _Canvas {
   constructor() {
     this.canvas = null;
@@ -20,7 +18,7 @@ class _Canvas {
 
   clear() {
     const { ctx, width, height } = this;
-    ctx.fillStyle = Colors.bg;
+    ctx.fillStyle = "#000000";
     ctx.fillRect(0, 0, width, height); 
   }
 }

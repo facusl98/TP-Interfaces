@@ -39,6 +39,7 @@ class _GameManager {
     Player.reset();
     Map.reset();
     BGManager.reset();
+    this._win = false;
   }
 
   initialize() {
@@ -67,6 +68,11 @@ class _GameManager {
 
   isPaused() {
     return this._state === "PAUSED"
+  }
+
+  win() {
+    this._win = true;
+    this.stop();
   }
 }
 
