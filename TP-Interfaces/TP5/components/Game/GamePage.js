@@ -33,9 +33,9 @@ class GamePage extends BaseComponent {
         genres: ["Arcade", "Indie"],
         guide: "You're a soul, but if you want to stay alive, you shall avoid the ancient pillars while advancing forward. Press space to gain vertical impulse and pass through the gaps while staying on screne, and collect power ups to help you flee the forest. If you run out of HP, you'll die and start over.",
         lore: "A lost soul, a will 'o' wisp, has long lost its way inside the enchanted forest. Before vanishing gracelessly, the poor spirit decided to leave the damned forest. Help this pitiful soul flee from this macabre place, avoiding the ruins of a long lost civilization.",
-        video: "/TP-Interfaces/TP5/assets/images/VideoPegSolitaire.png",
-        img1: "/TP-Interfaces/TP5/assets/images/peg_solitaire/solitaire-1.png",
-        img2: "/TP-Interfaces/TP5/assets/images/peg_solitaire/solitaire-2.png",
+        video: "/TP-Interfaces/TP5/assets/images/flappy_bird/videoWisp.png",
+        img1: "/TP-Interfaces/TP5/assets/images/flappy_bird/wisp1.png",
+        img2: "/TP-Interfaces/TP5/assets/images/flappy_bird/wisp2.png",
         import: async () => await import("./FlappyBird/FlappyBirdGame.js"),
         component: `<flappy-bird-game id="game" class=""></flappy-bird-game>`
       },

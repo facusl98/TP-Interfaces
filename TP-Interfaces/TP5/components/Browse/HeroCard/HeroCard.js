@@ -17,7 +17,7 @@ class HeroCard extends BaseComponent {
     this._games = gameService.getRandom(7);
     this._games[2] = {
       name: "Peg Solitaire",
-      background_image: "/TP-Interfaces/TP5/assets/images/peg_solitaire/solitaire.png",
+      background_image: "/TP-Interfaces/TP5/assets/images/peg_solitaire/SolitaireCard.png",
       genres: [
         {name: "Puzzle"}, 
         {name: "Strategy"}, 
