@@ -1,0 +1,152 @@
+:host {
+    padding: 10px 20px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: var(--dark-1);
+    border-top: 1px solid var(--purple-2);
+    color: var(--white); 
+}
+
+
+a, p {
+  font-family: var(--text-font);
+  margin: 0px;
+}
+h2 {
+  font-family: var(--title-font);
+  color: var(--white);
+  margin: 0px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.footer-containers-rows {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.footer-containers-rows > div {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--white);
+  margin-bottom: 6px;
+  font-size: 0.98em;
+  transition: color 0.2s;
+}
+
+a:hover {   
+    color: var(--blue-0);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 0px 5px;
+}
+
+.newsletter {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.subscribe {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+input[type="mail"] {
+  box-sizing: border-box;
+  height: 34px;
+  width: 100%;
+  background: var(--pale);
+  border: 1px solid var(--purple-2);
+  border-radius: 5px;
+  color: var(--black);
+  padding: 5px;
+  font-size: 16px;
+  outline: none;
+}
+
+.games-today {
+  display: flex;
+  flex-direction: column;
+}
+
+.ubiImg {
+  width: 100%;
+  height: 150px;
+}
+
+.us {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+p {
+  margin: 0;
+  color: var(--white);
+  font-size: 1em;
+}
+
+.us img {
+  height: 48px;
+  margin-left: 24px;
+}
+
+@media screen and (max-width: 600px) {
+  :host {
+    gap: 0;
+  }
+
+  .footer-containers-rows {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+  .footer-containers-rows > div {
+    gap: 10px;
+    padding-bottom: 10px;
+  }
+  .footer-containers-rows .invisible {
+    display: none;
+  }
+  .list {
+    gap: 5px;
+    padding: 0;
+  }
+  .us {
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    padding-top: 0px;
+  }
+  .us img {
+    display: none;
+  }
+  input[type="mail"] {
+    font-size: 13px;
+  }
+  h2 {
+    font-size: 15px;
+  }
+  a, p {
+    font-size: 12px;
+  }
+}

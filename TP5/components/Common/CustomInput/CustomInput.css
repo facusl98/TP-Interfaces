@@ -1,0 +1,43 @@
+:host {
+    color: var(--light);
+}
+
+p {
+    margin: 0px;
+    padding: 0px;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-family: var(--title-font);
+    font-size: 20px;
+}
+
+span {
+    color: var(--purple-3);
+}
+
+:host(.required) span {
+    color: var(--error);
+    font-size: 14px;
+}
+
+input {
+    height: 34px;
+    font-family: var(--text-font);
+    font-size: 16px;
+    padding: 5px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid var(--purple-2);
+}
+
+:host(.required) input {
+    border: 1px solid var(--error);
+}
+
+input:focus {
+    outline: 0px;
+}
